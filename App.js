@@ -1,6 +1,5 @@
 
 import React from 'react'
-import {StyleSheet} from 'react-native';
 import {NavigationContainer}  from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -13,12 +12,14 @@ import ResetPassword from './pages/resetPassword';
 import LandingPage from './pages/landingPage';
 import PaymentMethod from './pages/paymentMethod';
 import NewCreditCardForm from './pages/newCreditCardForm';
+import Profile from './pages/profile';
+import Cgu from './pages/cgu';
 
 export default function App() {
   const Stack = createStackNavigator()
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='NewCreditCardForm'>
+      <Stack.Navigator initialRouteName='Profile'>
         <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib' }} component={SignIn}/>
         <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib' }} component={SignUp}/>
         <Stack.Screen name="Parameters" options={{ title: 'Paramètres' }} component={Parameters}/>
@@ -28,6 +29,8 @@ export default function App() {
         <Stack.Screen name="LandingPage" options={{ title: 'Bienvenue' }} component={LandingPage}/>
         <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/>
         <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/>
+        <Stack.Screen name="Profile" options={{ title: 'Mon profil' }} component={Profile}/>
+        <Stack.Screen name="CGU" options={{ title: 'CGU' }} component={Cgu}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
