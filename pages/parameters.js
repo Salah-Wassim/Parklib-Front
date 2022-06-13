@@ -36,6 +36,7 @@ const Parameters = ({navigation}) => {
                     style={styles.logoutButton}
                     variant="outlined"
                     title="Me déconnecter"
+                    onPress={() => navigation.navigate("SignIn")}
                 />
             </View>
         </Stack>
@@ -44,7 +45,7 @@ const Parameters = ({navigation}) => {
 
 const styles = StyleSheet.create({
     parametersContainer:{
-        height:'100%',
+        height:'95%',
         justifyContent:'space-between'
     },
     buttonContainer: {

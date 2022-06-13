@@ -15,7 +15,7 @@ const SignIn = ({navigation}) => {
                 <Image
                     style={styles.logo}
                     source={require('../assets/logoWithoutText.png')}
-                ></Image>
+                />
             </View>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Connexion</Text>
@@ -33,13 +33,12 @@ const SignIn = ({navigation}) => {
                         style={styles.formInput}
                         placeholder='nom@exemple.com'
                         autoCorrect={true}
-                        autoCapitalize='none'
                         autoCompleteType='email'
-                        keyboardType='email-adress'
-                        textContentType='emailAdress'
+                        keyboardType="email-address"
+                        textContentType="emailAddress"
                         variant="outlined"
-                        onChange={onChangeEmail}
-                    ></TextInput>
+                        onChangeText={onChangeEmail}
+                    />
                 </View>
                 <View style={styles.formContainer}>
                     <View style={styles.pwdContainer}>
@@ -52,13 +51,14 @@ const SignIn = ({navigation}) => {
                         style={styles.formInput}
                         placeholder='Entrer votre mot de passe'
                         secureTextEntry={true}
-                        textContentType='password'
+                        textContentType="password"
                         variant="outlined"
-                        onChange={onChangePassword}
-                    ></TextInput>
+                        keyboardType="default"
+                        onChangeText={onChangePassword}
+                    />
                 </View>
                 <View style={styles.submitButtonContainer}>
-                    <Button style={styles.submitButton} title="Connexion" color="#157575"></Button>
+                    <Button style={styles.submitButton} title="Connexion" color="#157575"/>
                 </View>
             </View>
             <View style={styles.socialMultiBox}>
@@ -73,13 +73,13 @@ const SignIn = ({navigation}) => {
                     <Button
                         style={styles.socialButton}
                         trailing={<Icon style={styles.iconSocialButton} name="gmail"/>}
-                    ></Button>
+                    />
                 </View>
                 <View style={styles.socialButtonContainer}>
                     <Button
                         style={styles.socialButton}
                         trailing={<Icon style={styles.iconSocialButton} name="facebook"/>}
-                    ></Button>
+                    />
                 </View>
             </View>
         </Stack>
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     },
     titleContainer:{
         textAlign:'center',
+        alignItems:'center'
     },
     titleText:{
         fontSize:30,
