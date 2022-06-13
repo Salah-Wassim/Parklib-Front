@@ -1,3 +1,4 @@
+
 import React from 'react'
 import {StyleSheet, View} from 'react-native';
 import {NavigationContainer}  from '@react-navigation/native';
@@ -11,6 +12,10 @@ import Contact from './pages/contact';
 import ContactForm from './pages/contactForm';
 import ResetPassword from './pages/resetPassword';
 import LandingPage from './pages/landingPage';
+import PaymentMethod from './pages/paymentMethod';
+import NewCreditCardForm from './pages/newCreditCardForm';
+import Profile from './pages/profile';
+import Cgu from './pages/cgu';
 import CheckoutScreen from './pages/checkoutScreen';
 import PaymentScreen from './pages/paymentScreen';
 
@@ -32,6 +37,10 @@ export default function App() {
         <Stack.Screen name="ContactForm" options={{ title: 'Nous contacter' }} component={ContactForm}/>
         <Stack.Screen name="ResetPassword" options={{ title: 'Park\'Lib' }} component={ResetPassword}/>
         <Stack.Screen name="LandingPage" options={{ title: 'Bienvenue' }} component={LandingPage}/>
+        <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/>
+        <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/>
+        <Stack.Screen name="Profile" options={{ title: 'Mon profil' }} component={Profile}/>
+        <Stack.Screen name="CGU" options={{ title: 'CGU' }} component={Cgu}/>
         <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
         <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
         {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
@@ -40,12 +49,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
