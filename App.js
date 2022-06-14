@@ -12,12 +12,13 @@ import ResetPassword from './pages/resetPassword';
 import LandingPage from './pages/landingPage';
 import PaymentMethod from './pages/paymentMethod';
 import NewCreditCardForm from './pages/newCreditCardForm';
+import Reservation from './pages/reservation';
 
 export default function App() {
   const Stack = createStackNavigator()
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='NewCreditCardForm'>
+      <Stack.Navigator initialRouteName='Reservation'>
         <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib' }} component={SignIn}/>
         <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib' }} component={SignUp}/>
         <Stack.Screen name="Parameters" options={{ title: 'Paramètres' }} component={Parameters}/>
@@ -27,6 +28,7 @@ export default function App() {
         <Stack.Screen name="LandingPage" options={{ title: 'Bienvenue' }} component={LandingPage}/>
         <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/>
         <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/>
+        <Stack.Screen name="Reservation" options={{title: 'Reservation'}} component={Reservation}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
