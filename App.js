@@ -12,7 +12,7 @@ import ContactForm from './pages/contactForm';
 import ResetPassword from './pages/resetPassword';
 import LandingPage from './pages/landingPage';
 import PaymentMethod from './pages/paymentMethod';
-import NewCreditCardForm from './pages/newCreditCardForm';
+// import NewCreditCardForm from './pages/newCreditCardForm';
 import EditCreditCard from './pages/editCreditCard';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import History from './pages/History';
@@ -42,11 +42,9 @@ export default function App() {
         <Stack.Screen name="ResetPassword" options={{ title: 'Park\'Lib' }} component={ResetPassword}/>
         <Stack.Screen name="LandingPage" options={{ title: 'Bienvenue' }} component={LandingPage}/>
         <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/>
-        <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/>
         <Stack.Screen name="EditCreditCard" options={{ title: 'Modifier une carte bancaire' }} component={EditCreditCard}/>
         <Stack.Screen name="History" options={{ title: 'Historique' }} component={History}/>
         <Stack.Screen name="PrivacyPolicy" options={{ title: 'Politique de confidentialité' }} component={PrivacyPolicy}/>
-        {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
         <Stack.Screen name="Profile" options={{ title: 'Mon profil' }} component={Profile}/>
         <Stack.Screen name="CGU" options={{ title: 'CGU' }} component={Cgu}/>
         <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
