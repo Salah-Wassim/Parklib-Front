@@ -1,7 +1,7 @@
 import React from "react";
-import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {Text, Button} from '@react-native-material/core';
-import { Stack} from 'react-native-flex-layout';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, Button } from '@react-native-material/core';
+import { Stack } from 'react-native-flex-layout';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const Parameters = ({navigation}) => {
