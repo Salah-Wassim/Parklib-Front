@@ -65,7 +65,7 @@ const ContactForm = () => {
 
 const styles = StyleSheet.create({
     contactFormContainer:{
-        height:'100%',
+        height:'95%',
         justifyContent:'space-between'
     },
     logoContainer:{

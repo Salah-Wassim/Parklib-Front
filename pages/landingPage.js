@@ -19,7 +19,7 @@ const LandingPage = ({navigation}) => {
                 <Image
                     style={styles.logo}
                     source={require('../assets/logoWithText.png')}
-                ></Image>
+                />
             </View>
             <View style={styles.spinnerContainer}>
                 <ActivityIndicator style={styles.spinner} size="small" color="#264CE1" />
