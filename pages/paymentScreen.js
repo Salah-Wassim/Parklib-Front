@@ -1,7 +1,5 @@
 import React from 'react';
 import {View, Button} from 'react-native';
-import { CardField } from '@stripe/stripe-react-native';
-import { useConfirmPayment } from '@stripe/stripe-react-native';
 
 const PaymentScreen = ({navigation}) => {
 

@@ -1,8 +1,7 @@
 import React from 'react'
-import { useStripe } from '@stripe/stripe-react-native';
 
 const CheckoutScreen = () => {
-    const { initPaymentSheet, presentPaymentSheet } = useStripe();
+    // const { initPaymentSheet, presentPaymentSheet } = useStripe();
     const [loading, setLoading] = useState(false);
   
     const fetchPaymentSheetParams = async () => {

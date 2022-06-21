@@ -1,9 +1,7 @@
 
 import React from 'react'
-import {StyleSheet, View} from 'react-native';
 import {NavigationContainer}  from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {StripeProvider} from '@stripe/stripe-react-native';
 
 import SignUp from './pages/signUp'
 import SignIn from './pages/signIn';
@@ -38,7 +36,7 @@ export default function App() {
         <Stack.Screen name="ResetPassword" options={{ title: 'Park\'Lib' }} component={ResetPassword}/>
         <Stack.Screen name="LandingPage" options={{ title: 'Bienvenue' }} component={LandingPage}/>
         <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/>
-        <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/>
+        {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
         <Stack.Screen name="Profile" options={{ title: 'Mon profil' }} component={Profile}/>
         <Stack.Screen name="CGU" options={{ title: 'CGU' }} component={Cgu}/>
         <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
