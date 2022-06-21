@@ -18,7 +18,7 @@ export default function App() {
   const Stack = createStackNavigator()
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='NewCreditCardForm'>
+      <Stack.Navigator initialRouteName='LandingPage'>
         <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib' }} component={SignIn}/>
         <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib' }} component={SignUp}/>
         <Stack.Screen name="Parameters" options={{ title: 'Paramètres' }} component={Parameters}/>
