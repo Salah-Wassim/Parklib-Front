@@ -11,12 +11,12 @@ const SignUp = ({navigation}) => {
     const [cPassword, onChangeCPassword] = React.useState('');
 
     return (
-        <Stack m={20} spacing={20}>
+        <Stack m={20} spacing={10}>
             <View style={styles.logoContainer}>
                 <Image
                     style={styles.logo}
                     source={require('../assets/logoWithoutText.png')}
-                ></Image>
+                />
             </View>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Inscription</Text>
@@ -32,15 +32,14 @@ const SignUp = ({navigation}) => {
                     <Text style={styles.formText}>Email</Text>
                     <TextInput
                         style={styles.formInput}
-                        placeholder='nom@exemple.com'
+                        placeholder="nom@exemple.com"
                         autoCorrect={true}
-                        autoCapitalize='none'
-                        autoCompleteType='email'
-                        keyboardType='email-adress'
-                        textContentType='emailAdress'
+                        autoCompleteType="email"
+                        keyboardType="email-adress"
+                        textContentType="emailAddress"
                         variant="outlined"
                         onChange={onChangeEmail}
-                    ></TextInput>
+                    />
                 </View>
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Mot de passe</Text>
@@ -49,9 +48,10 @@ const SignUp = ({navigation}) => {
                         placeholder='Enter votre mot de passe'
                         secureTextEntry={true}
                         textContentType='password'
+                        keyboardType="default"
                         variant="outlined"
                         onChange={onChangePassword}
-                    ></TextInput>
+                    />
                 </View>
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Confirmez votre mot de passe</Text>
@@ -59,13 +59,13 @@ const SignUp = ({navigation}) => {
                         style={styles.formInput}
                         placeholder='Enter votre mot de passe'
                         secureTextEntry={true}
-                        textContentType='password'
+                        textContentType="password"
                         variant="outlined"
                         onChange={onChangeCPassword}
-                    ></TextInput>
+                    />
                 </View>
                 <View style={styles.submitButtonContainer}>
-                    <Button style={styles.submitButton} title="Inscription" color="#157575"></Button>
+                    <Button style={styles.submitButton} title="Inscription" color="#157575"/>
                 </View>
             </View>
             <View style={styles.socialMultiBox}>
@@ -80,13 +80,13 @@ const SignUp = ({navigation}) => {
                     <Button
                         style={styles.socialButton}
                         trailing={<Icon style={styles.iconSocialButton} name="gmail"/>}
-                    ></Button>
+                    />
                 </View>
                 <View style={styles.socialButtonContainer}>
                     <Button
                         style={styles.socialButton}
                         trailing={<Icon style={styles.iconSocialButton} name="facebook"/>}
-                    ></Button>
+                    />
                 </View>
             </View>
         </Stack>
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     },
     titleContainer:{
         textAlign:'center',
+        alignItems:'center'
     },
     titleText:{
         fontSize:30,

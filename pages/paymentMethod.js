@@ -1,10 +1,31 @@
 import React from "react";
 import {View, StyleSheet} from 'react-native';
 import { Stack} from 'react-native-flex-layout';
+import { FlatList } from "react-native-gesture-handler";
 
 import CreditCard from "../components/creditCard";
 
 const PaymentMethod = () => {
+
+    const creditCards = [
+        {
+            id:'',
+            image: '',
+            typeText: '',
+            lasDigits: '',
+            expiresDate: '',
+        }
+    ]
+
+    const renderItem = ({creditCard}) => {
+        <CreditCard 
+            image={creditCard.image} 
+            typeText={creditCard.typeText} 
+            lastDigits={creditCard.lasDigits} 
+            expiresDate={creditCard.expiresDate}
+        />
+    }
+
     return (
         <Stack spacing={20} m={20} style={styles.mainNewCreditCardContainer}>
             <View>
@@ -16,9 +37,11 @@ const PaymentMethod = () => {
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Ma carte bancaire</Text>
                     </View>
-                    <View>
-                        <CreditCard/>
-                    </View>
+                    <FlatList
+                        data={creditCards}
+                        renderItem={renderItem}
+                        keyExtractor={(creditCard) => creditCard.id}
+                    />
                 </View>
             </View>
             <View>

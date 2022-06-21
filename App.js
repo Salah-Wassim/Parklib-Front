@@ -1,5 +1,5 @@
+
 import React from 'react'
-import {StyleSheet} from 'react-native';
 import {NavigationContainer}  from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -16,11 +16,21 @@ import NewCreditCardForm from './pages/newCreditCardForm';
 import EditCreditCard from './pages/editCreditCard';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import History from './pages/History';
+import Profile from './pages/profile';
+import Cgu from './pages/cgu';
+import CheckoutScreen from './pages/checkoutScreen';
+import PaymentScreen from './pages/paymentScreen';
 
 export default function App() {
   const Stack = createStackNavigator()
 
   return (
+    // <View>
+    //   {/* <StripeProvider
+    //     publishableKey = "pk_test_51L9oguIlXTacjWaPeWIxNBY6n5iYRVJJ4tEws8rIgsgvCJwD0CbfV22OKxoxzIOe8EChORrDWTVTAEZMogSQOKBj00Ui7SgTpF"
+    //   >
+    //   </StripeProvider>
+    // </View> */}
     <NavigationContainer>
       <Stack.Navigator initialRouteName='home'>
         <Stack.Screen name="Home" options={{ title: 'Park\'Lib', headerShown: false }} component={Home} />
@@ -36,16 +46,16 @@ export default function App() {
         <Stack.Screen name="EditCreditCard" options={{ title: 'Modifier une carte bancaire' }} component={EditCreditCard}/>
         <Stack.Screen name="History" options={{ title: 'Historique' }} component={History}/>
         <Stack.Screen name="PrivacyPolicy" options={{ title: 'Politique de confidentialité' }} component={PrivacyPolicy}/>
+        {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
+        <Stack.Screen name="Profile" options={{ title: 'Mon profil' }} component={Profile}/>
+        <Stack.Screen name="CGU" options={{ title: 'CGU' }} component={Cgu}/>
+        <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
+        <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
+        {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
+        {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
       </Stack.Navigator>
     </NavigationContainer>
     
     );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
