@@ -32,7 +32,7 @@ export default function App() {
     //   </StripeProvider>
     // </View> */}
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='home'>
+      <Stack.Navigator initialRouteName='LandingPage'>
         <Stack.Screen name="Home" options={{ title: 'Park\'Lib', headerShown: false }} component={Home} />
         <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib' }} component={SignIn}/>
         <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib' }} component={SignUp}/>

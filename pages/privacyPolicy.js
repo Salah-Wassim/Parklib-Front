@@ -6,7 +6,7 @@ import { Stack} from 'react-native-flex-layout';
 
 
 
-export default function PrivacyPolicy(navigation) {
+export default function PrivacyPolicy({navigation}) {
   return (
     <Stack m={20} spacing={40} style={styles.container}>
       <StatusBar style="auto" />
