@@ -20,18 +20,12 @@ import Profile from './pages/profile';
 import Cgu from './pages/cgu';
 import CheckoutScreen from './pages/checkoutScreen';
 import PaymentScreen from './pages/paymentScreen';
-import Map from './pages/map';
+//import Map from './pages/map';
 
 export default function App() {
   const Stack = createStackNavigator()
 
   return (
-    // <View>
-    //   {/* <StripeProvider
-    //     publishableKey = "pk_test_51L9oguIlXTacjWaPeWIxNBY6n5iYRVJJ4tEws8rIgsgvCJwD0CbfV22OKxoxzIOe8EChORrDWTVTAEZMogSQOKBj00Ui7SgTpF"
-    //   >
-    //   </StripeProvider>
-    // </View> */}
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Contact'>
         <Stack.Screen name="Home" options={{ title: 'Park\'Lib', headerShown: false }} component={Home} />
