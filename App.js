@@ -20,19 +20,14 @@ import Profile from './pages/profile';
 import Cgu from './pages/cgu';
 import CheckoutScreen from './pages/checkoutScreen';
 import PaymentScreen from './pages/paymentScreen';
+//import Map from './pages/map';
 
 export default function App() {
   const Stack = createStackNavigator()
 
   return (
-    // <View>
-    //   {/* <StripeProvider
-    //     publishableKey = "pk_test_51L9oguIlXTacjWaPeWIxNBY6n5iYRVJJ4tEws8rIgsgvCJwD0CbfV22OKxoxzIOe8EChORrDWTVTAEZMogSQOKBj00Ui7SgTpF"
-    //   >
-    //   </StripeProvider>
-    // </View> */}
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='LandingPage'>
+      <Stack.Navigator initialRouteName='Contact'>
         <Stack.Screen name="Home" options={{ title: 'Park\'Lib', headerShown: false }} component={Home} />
         <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib' }} component={SignIn}/>
         <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib' }} component={SignUp}/>
@@ -49,6 +44,7 @@ export default function App() {
         <Stack.Screen name="CGU" options={{ title: 'CGU' }} component={Cgu}/>
         <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
         <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
+        {/* <Stack.Screen name="map" options={{title: 'Map'}} component={Map}/> */}
         {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
         {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
       </Stack.Navigator>
