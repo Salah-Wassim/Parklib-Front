@@ -37,7 +37,7 @@ export default props => {
         <Text style={{marginBottom: 10}}>CGU</Text>
         <Text style={{marginBottom: "auto"}}>V1.0</Text>
         <View style={styles.deleteContain}>
-        <Text style={styles.deleteBtn}>Supprimer</Text>
+        <Text style={styles.deleteBtn}>Déconnecter</Text>
       </View>
       </TouchableOpacity>
       </div>
