@@ -8,7 +8,7 @@ import ParkingItem from "../components/parkingItem";
 
 const Map = ({navigation, route}) => {
     const {
-        films, 
+        parkings, 
         isLoading, 
         page, 
         totalPage, 
@@ -33,7 +33,7 @@ const Map = ({navigation, route}) => {
         <View style={styles.page}>
             {/* <Text>{JSON.stringify(text)}</Text> */}
             <FlatList
-                data={films}
+                data={parkings}
                 keyExtractor = {(item) => item.id.toString()}
                 renderItem={({item}) => <ParkingItem parking={item} displayDetailParking={displayDetailParking}/> }
                 onEndReachedThreshold={0.5}

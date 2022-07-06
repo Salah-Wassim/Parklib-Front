@@ -63,7 +63,7 @@ export default function Home({navigation}) {
             <Button title="rechercher" onPress={() => {
               loadParkingResult();
               navigation.navigate('Map', {
-                films : state.parkings,
+                parkings : state.parkings,
                 isLoading : state.isLoading,
                 page : page,
                 totalPage : totalPage,
