@@ -20,22 +20,22 @@ import Profile from './pages/profile';
 import Cgu from './pages/cgu';
 import CheckoutScreen from './pages/checkoutScreen';
 import PaymentScreen from './pages/paymentScreen';
-//import Map from './pages/map';
+import Map from './pages/map';
 
 export default function App() {
   const Stack = createStackNavigator()
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Contact'>
+      <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen name="Home" options={{ title: 'Park\'Lib', headerShown: false }} component={Home} />
-        <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib' }} component={SignIn}/>
-        <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib' }} component={SignUp}/>
+        <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib', headerShown: false }} component={SignIn}/>
+        <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib', headerShown: false }} component={SignUp}/>
         <Stack.Screen name="Parameters" options={{ title: 'Paramètres' }} component={Parameters}/>
         <Stack.Screen name="Contact" options={{ title: 'Contact' }} component={Contact}/>
         <Stack.Screen name="ContactForm" options={{ title: 'Nous contacter' }} component={ContactForm}/>
         <Stack.Screen name="ResetPassword" options={{ title: 'Park\'Lib' }} component={ResetPassword}/>
-        <Stack.Screen name="LandingPage" options={{ title: 'Bienvenue' }} component={LandingPage}/>
+        <Stack.Screen name="LandingPage" options={{ title: 'Bienvenue', headerShown: false }} component={LandingPage}/>
         <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/>
         <Stack.Screen name="EditCreditCard" options={{ title: 'Modifier une carte bancaire' }} component={EditCreditCard}/>
         <Stack.Screen name="History" options={{ title: 'Historique' }} component={History}/>
@@ -44,12 +44,11 @@ export default function App() {
         <Stack.Screen name="CGU" options={{ title: 'CGU' }} component={Cgu}/>
         <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
         <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
-        {/* <Stack.Screen name="map" options={{title: 'Map'}} component={Map}/> */}
+        <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
         {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
         {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
       </Stack.Navigator>
     </NavigationContainer>
-    
     );
 }
 
