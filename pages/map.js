@@ -1,5 +1,5 @@
 import React from "react";
-import {View, StyleSheet, Text, ActivityIndicator, FlatList} from 'react-native';
+import {View, StyleSheet, Text, ActivityIndicator, FlatList, ViewComponent} from 'react-native';
 
 import {getParkingSearchedText} from '../api/api'
 
@@ -57,17 +57,17 @@ const Map = ({navigation, route}) => {
 
     return(
         <View style={styles.page}>
-            {parkings.length > 0 ? <Text>COUCOU</Text> : <Text>Erreur</Text> }
+            {parkings ? <List/> : <ActivityIndicator size="large"/>}
         </View>
-    )            
-}
-
-function List(){
-
-    return(
-        <Text>PARKINGS TROUVE</Text>
-    )
-
+    ) 
+    
+    function List(){
+        return (
+            <View>
+                <Text>{JSON.stringify({parkings})}</Text>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
