@@ -1,11 +1,8 @@
 import React from "react";
 import {View, StyleSheet, Text, ActivityIndicator, FlatList} from 'react-native';
 
-
 import {getParkingSearchedText} from '../api/api'
-import ParkingItem from "../components/parkingItem";
 // import MapboxGL from "@rnmapbox/maps";
-
 // MapboxGL.setAccessToken("pk.eyJ1Ijoic3R5dmVsaW91bWJhIiwiYSI6ImNsNTN2bGtlMzB0NTEzYnFxeHZuMnRmajcifQ.-y76qVK6qz-9BmgA5sthYw");
 
 const Map = ({navigation, route}) => {
@@ -14,10 +11,7 @@ const Map = ({navigation, route}) => {
     } = route.params;
     const [parkings, setParkings ] = React.useState([])
     const [loading, setloading] = React.useState(false)
-    //const [state, setState] = React.useState({
-    //    parkings: [],
-    //    isLoading: false
-    //})
+
     React.useEffect(() => {
         if(text.length > 0){
             setloading(true)
@@ -48,7 +42,6 @@ const Map = ({navigation, route}) => {
         }
     }, [])
         
-
     //const displayLoading = () => {
     //        return(
     //            <View>
@@ -75,7 +68,6 @@ function List(){
     )
 
 }
-
 
 const styles = StyleSheet.create({
 
