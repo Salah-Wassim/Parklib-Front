@@ -11,41 +11,62 @@ import {getParkingSearchedText} from '../api/api'
 export default function Home({navigation}) {
 
   const [SearchText, onSearchText] = React.useState('');
-  const page = 0;
-  const totalPage = 0
+  //const page = 0;
+  //const totalPage = 0
   const [state, setState] = React.useState({
       parkings: [],
       isLoading: false
   })
 
   const loadParkingResult =  () => {
+    console.log(SearchText)
     if(SearchText.length > 0){
-        setState({isLoading : true})
-        getParkingSearchedText(SearchText, page+1).then(data => {
-            page = data.page
-            totalPage = data.total_pages
-            setState = {
-                parkings : [...state.parkings, ...data.results],
-                isLoading : false
+      setState({isLoading : true})
+      getParkingSearchedText(SearchText).then(data => {
+          //page = data.page
+          //totalPage = data.total_pages
+          const resultParking = data.features.map(feature => {
+            return {
+              geometry : {
+                coordinates : []
+              },
+              properties : {
+                gid : feature.properties.gid,
+                nom : feature.properties.nom,
+                libres : feature.properties.libres,
+                total : feature.properties.total,
+                etat : feature.properties.etat,
+                url : feature.properties.url,
+                adresse : feature.properties.adresse,
+                infor : feature.properties.infor,
+                secteur : feature.properties.secteur,
+                ta_type : feature.properties.ta_type,
+              }
             }
-        })
+          })
+          console.log(typeof resultParking)
+          setState({
+            parkings : [...state.parkings, ...resultParking],
+            isLoading : false
+          })
+          console.log(state.parkings)
+      })
     }
   }
 
   const searchParkings = () => {
-      page = 0
-      totalPage = 0
+      //page = 0
+      //totalPage = 0
       setState({
           parkings : []
       }, () => {
-          _loadParkingResult()
+          loadParkingResult()
       })
   }
 
-  const searchTextInputChanged = (text) => {
-      SearchText = text
-  }
-
+  //const searchTextInputChanged = (text) => {
+  //  SearchText = text;
+  //}
 
   return (
   <View style={styles.container} className="App" id="outer-container">
@@ -57,17 +78,18 @@ export default function Home({navigation}) {
           <TouchableOpacity style={styles.destinationBtn}>
             <TextInput
               label='Rechercher'
-              onChangeText={(text) => searchTextInputChanged(text)}
+              //onChangeText={(text) => searchTextInputChanged(text)}
+              onChangeText={onSearchText}
               onSubmitEditing = {() => searchParkings()}
             />
             <Button title="rechercher" onPress={() => {
-              loadParkingResult();
+              loadParkingResult()
               navigation.navigate('Map', {
                 parkings : state.parkings,
                 isLoading : state.isLoading,
-                page : page,
-                totalPage : totalPage,
-                loadParkings : loadParkingResult()
+                //page : page,
+                //totalPage : totalPage,
+                //loadParkings : loadParkingResult(),
               }
             )}}/>
           </TouchableOpacity>

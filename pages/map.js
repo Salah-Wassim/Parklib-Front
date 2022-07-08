@@ -10,9 +10,9 @@ const Map = ({navigation, route}) => {
     const {
         parkings, 
         isLoading, 
-        page, 
-        totalPage, 
-        loadParkings
+        //page, 
+        //totalPage, 
+        //loadParkings
     } = route.params;
 
     const displayLoading = () => {
@@ -36,12 +36,12 @@ const Map = ({navigation, route}) => {
                 data={parkings}
                 keyExtractor = {(item) => item.id.toString()}
                 renderItem={({item}) => <ParkingItem parking={item} displayDetailParking={displayDetailParking}/> }
-                onEndReachedThreshold={0.5}
-                onEndReached={() => {
-                    if(page < totalPage){
-                        loadParkings
-                    }
-                }}
+                //onEndReachedThreshold={0.5}
+                //onEndReached={() => {
+                //    if(page < totalPage){
+                //        loadParkings
+                //    }
+                //}}
             />
             {displayLoading()}
         </View>
