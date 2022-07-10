@@ -1,7 +1,8 @@
 import React from "react";
 import {View, StyleSheet, Text, ActivityIndicator, FlatList, ViewComponent} from 'react-native';
+import {MapOpenData}  from '../components/map';
+import {getParkingSearchedText, getParkingMap } from '../api/api'
 
-import {getParkingSearchedText} from '../api/api'
 // import MapboxGL from "@rnmapbox/maps";
 // MapboxGL.setAccessToken("pk.eyJ1Ijoic3R5dmVsaW91bWJhIiwiYSI6ImNsNTN2bGtlMzB0NTEzYnFxeHZuMnRmajcifQ.-y76qVK6qz-9BmgA5sthYw");
 
@@ -39,6 +40,12 @@ const Map = ({navigation, route}) => {
                 setParkings(parking => parking.push({...resultParking}))
                 console.log(parkings)
             })
+            getParkingMap().then(
+                // CUB.ready(function() {
+                //     CUB.init('map_area');
+                // })
+            )
+            .catch(error => {console.log(error)})
         }
     }, [])
         
@@ -57,6 +64,7 @@ const Map = ({navigation, route}) => {
     return(
         <View style={styles.page}>
             {parkings ? <List/> : <ActivityIndicator size="large"/>}
+            <MapOpenData/>
         </View>
     ) 
     
