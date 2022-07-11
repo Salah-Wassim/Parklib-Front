@@ -2,9 +2,11 @@ import React from "react";
 import {View, StyleSheet, Text, ActivityIndicator, FlatList, ViewComponent} from 'react-native';
 
 import {getParkingSearchedText} from '../api/api'
+import ParkingItem from '../components/parkingItem'
 
 // import MapboxGL from "@rnmapbox/maps";
 // MapboxGL.setAccessToken("pk.eyJ1Ijoic3R5dmVsaW91bWJhIiwiYSI6ImNsNTN2bGtlMzB0NTEzYnFxeHZuMnRmajcifQ.-y76qVK6qz-9BmgA5sthYw");
+//st_park_p
 
 const Map = ({navigation, route}) => {
     const {
@@ -38,7 +40,8 @@ const Map = ({navigation, route}) => {
                     }
                 })
                 setParkings(parking => parking.push({...resultParking}))
-                console.log(parkings)
+                //setParkings()
+                console.log(typeof resultParking)
             })
         }
     }, [])
@@ -50,10 +53,13 @@ const Map = ({navigation, route}) => {
     //            </View>
     //        )
     //} 
-    // st_park_p
+    // 
     //const displayDetailParking = (id) => {
     //    navigation.navigate('FicheParking', {id : id})
     //}
+    const renderProperties = (item) => {
+        <ParkingItem properties={item.properties} />
+    }
 
     return(
         <View style={styles.page}>
@@ -64,7 +70,11 @@ const Map = ({navigation, route}) => {
     function List(){
         return (
             <View>
-                <Text>{JSON.stringify({parkings})}</Text>
+                <FlatList
+                    data={parkings}
+                    renderItem={renderProperties}
+                    keyExtractor={(item) => {item.gid}}
+                />
             </View>
         )
     }
