@@ -1,13 +1,13 @@
 const API_TOKEN = "238HINNOST";
 
-export function getParkingSearchedText (text, page) {
+export const getParkingSearchedText = async (text, page) =>{
     const url  = 'https://data.bordeaux-metropole.fr/geojson?' + 'key=' + API_TOKEN + '&typename=' + text
-    return fetch(url)
+    return await fetch(url)
     .then(response => response.json())
     .catch(error => {console.log(error)})
 }
 
-export async function getParkingMap() {
+export const getParkingMap = async () => {
     const url  = 'https://data.bordeaux-metropole.fr/api/cub.xjs?' + 'key=' + API_TOKEN 
     return await fetch(url, {mode: 'no-cors'})
     .then(function(response) {

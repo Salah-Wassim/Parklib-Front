@@ -1,84 +1,68 @@
-import React from "react";
-import {View, StyleSheet, Text, ActivityIndicator, FlatList, ViewComponent} from 'react-native';
-import {MapOpenData}  from '../components/map';
-import {getParkingSearchedText, getParkingMap } from '../api/api'
-
-// import MapboxGL from "@rnmapbox/maps";
-// MapboxGL.setAccessToken("pk.eyJ1Ijoic3R5dmVsaW91bWJhIiwiYSI6ImNsNTN2bGtlMzB0NTEzYnFxeHZuMnRmajcifQ.-y76qVK6qz-9BmgA5sthYw");
+import React, { useEffect, useState } from "react";
+import {View, StyleSheet, Text,FlatList} from 'react-native';
+import { Flex,ActivityIndicator } from "@react-native-material/core";
+import {getParkingSearchedText } from '../api/api'
+import ParkingItem from "../components/parkingItem";
 
 const Map = ({navigation, route}) => {
-    const {
-        text
-    } = route.params;
-    const [parkings, setParkings ] = React.useState([])
-    const [loading, setloading] = React.useState(false)
+    const {text} = route.params;
+    const [parkings, setParkings ] = useState([])
+    const [isLoading, setLoading] = useState(true)
 
-    React.useEffect(() => {
+    useEffect(() => {
         if(text.length > 0){
-            setloading(true)
             getParkingSearchedText(text).then(data => {
-                //console.log(data)
-                const resultParking = data.features.map(feature => {
-                    return {
+                setLoading(false);
+                data.features.map(_feature => {
+                    const feature =   {
                         geometry : {
-                            coordinates : []
+                            coordinates : _feature.geometry.coordinates
                         },
                         properties : {
-                            gid : feature.properties.gid,
-                            nom : feature.properties.nom,
-                            libres : feature.properties.libres,
-                            total : feature.properties.total,
-                            etat : feature.properties.etat,
-                            url : feature.properties.url,
-                            adresse : feature.properties.adresse,
-                            infor : feature.properties.infor,
-                            secteur : feature.properties.secteur,
-                            ta_type : feature.properties.ta_type,
+                            gid : _feature.properties.gid,
+                            nom : _feature.properties.nom,
+                            libres : _feature.properties.libres,
+                            total : _feature.properties.total,
+                            etat : _feature.properties.etat,
+                            url : _feature.properties.url,
+                            adresse : _feature.properties.adresse,
+                            infor : _feature.properties.infor,
+                            secteur : _feature.properties.secteur,
+                            ta_type : _feature.properties.ta_type,
                         }
                     }
+                    setParkings(parkings =>[...parkings,feature]);
                 })
-                setParkings(parking => parking.push({...resultParking}))
-                console.log(parkings)
             })
-            getParkingMap().then(
-                // CUB.ready(function() {
-                //     CUB.init('map_area');
-                // })
-            )
-            .catch(error => {console.log(error)})
         }
     }, [])
         
-    //const displayLoading = () => {
-    //        return(
-    //            <View>
-    //                <ActivityIndicator size="large"/>
-    //            </View>
-    //        )
-    //} 
-    // st_park_p
-    //const displayDetailParking = (id) => {
-    //    navigation.navigate('FicheParking', {id : id})
-    //}
-
-    return(
-        <View style={styles.page}>
-            {parkings ? <List/> : <ActivityIndicator size="large"/>}
-            <MapOpenData/>
-        </View>
-    ) 
-    
-    function List(){
+    const FeatureList = () =>{
         return (
-            <View>
-                <Text>{JSON.stringify({parkings})}</Text>
-            </View>
+            <FlatList
+                data={parkings}
+                keyExtractor={({ properties }) => properties.gid.toString()}
+                renderItem={({ item }) => <ParkingItem item={item}/>}
+            />
         )
     }
+
+    return(
+        <Flex fill style={styles.page}>
+            <Text style={styles.header}>Résultat de votre recherche : {parkings.length} {parkings.length>1?  'Elements trouvés':'Element trouvé' } </Text>
+            {isLoading ? <ActivityIndicator size="large"/> : <FeatureList/>}
+        </Flex>
+    ) 
+    
+   
 }
 
 const styles = StyleSheet.create({
-
+    header:{
+        padding:5
+    },
+    page:{
+    }
 })
 
 export default Map;

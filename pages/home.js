@@ -5,12 +5,13 @@ import { Stack } from 'react-native-flex-layout';
 import SideBar  from '../components/sideBar';
 import ToolBar  from '../components/ToolBar';
 import { Button } from "react-native-web";
+import showToast from '../components/toast.components'
 
 //import {getParkingSearchedText} from '../api/api'
 
 export default function Home({navigation}) {
 
-  const [SearchText, onSearchText] = React.useState('');
+  const [SearchText, onSearchText] = React.useState('st_park_p');
 
   //const searchParkings = () => {
   //setState({
@@ -35,10 +36,11 @@ export default function Home({navigation}) {
               //onSubmitEditing = {() => searchParkings()}
             />
             <Button title="rechercher" onPress={() => {
-              navigation.navigate('Map', {
-                text : SearchText
+                navigation.navigate('Map', {
+                  text : SearchText
+                })
               }
-            )}}/>
+            }/>
           </TouchableOpacity>
       </View>
   </Stack>    
