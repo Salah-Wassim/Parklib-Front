@@ -1,51 +1,80 @@
 import React from "react";
-import {View, StyleSheet, Text, ActivityIndicator, FlatList} from 'react-native';
+import {View, StyleSheet, Text, ActivityIndicator, FlatList, ViewComponent} from 'react-native';
+import {MapOpenData}  from '../components/map';
+import {getParkingSearchedText, getParkingMap } from '../api/api'
 
-import ParkingItem from "../components/parkingItem";
 // import MapboxGL from "@rnmapbox/maps";
-
 // MapboxGL.setAccessToken("pk.eyJ1Ijoic3R5dmVsaW91bWJhIiwiYSI6ImNsNTN2bGtlMzB0NTEzYnFxeHZuMnRmajcifQ.-y76qVK6qz-9BmgA5sthYw");
 
 const Map = ({navigation, route}) => {
     const {
-        parkings, 
-        isLoading, 
-        //page, 
-        //totalPage, 
-        //loadParkings
+        text
     } = route.params;
+    const [parkings, setParkings ] = React.useState([])
+    const [loading, setloading] = React.useState(false)
 
-    const displayLoading = () => {
-        if(isLoading){
-            return(
-                <View>
-                    <ActivityIndicator size="large"/>
-                </View>
+    React.useEffect(() => {
+        if(text.length > 0){
+            setloading(true)
+            getParkingSearchedText(text).then(data => {
+                //console.log(data)
+                const resultParking = data.features.map(feature => {
+                    return {
+                        geometry : {
+                            coordinates : []
+                        },
+                        properties : {
+                            gid : feature.properties.gid,
+                            nom : feature.properties.nom,
+                            libres : feature.properties.libres,
+                            total : feature.properties.total,
+                            etat : feature.properties.etat,
+                            url : feature.properties.url,
+                            adresse : feature.properties.adresse,
+                            infor : feature.properties.infor,
+                            secteur : feature.properties.secteur,
+                            ta_type : feature.properties.ta_type,
+                        }
+                    }
+                })
+                setParkings(parking => parking.push({...resultParking}))
+                console.log(parkings)
+            })
+            getParkingMap().then(
+                // CUB.ready(function() {
+                //     CUB.init('map_area');
+                // })
             )
+            .catch(error => {console.log(error)})
         }
-    }
-
-    const displayDetailParking = (id) => {
-        navigation.navigate('FicheParking', {id : id})
-    }
+    }, [])
+        
+    //const displayLoading = () => {
+    //        return(
+    //            <View>
+    //                <ActivityIndicator size="large"/>
+    //            </View>
+    //        )
+    //} 
+    // st_park_p
+    //const displayDetailParking = (id) => {
+    //    navigation.navigate('FicheParking', {id : id})
+    //}
 
     return(
         <View style={styles.page}>
-            {/* <Text>{JSON.stringify(text)}</Text> */}
-            <FlatList
-                data={parkings}
-                keyExtractor = {(item) => item.id.toString()}
-                renderItem={({item}) => <ParkingItem parking={item} displayDetailParking={displayDetailParking}/> }
-                //onEndReachedThreshold={0.5}
-                //onEndReached={() => {
-                //    if(page < totalPage){
-                //        loadParkings
-                //    }
-                //}}
-            />
-            {displayLoading()}
+            {parkings ? <List/> : <ActivityIndicator size="large"/>}
+            <MapOpenData/>
         </View>
-    )            
+    ) 
+    
+    function List(){
+        return (
+            <View>
+                <Text>{JSON.stringify({parkings})}</Text>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({

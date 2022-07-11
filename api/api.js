@@ -6,3 +6,13 @@ export function getParkingSearchedText (text, page) {
     .then(response => response.json())
     .catch(error => {console.log(error)})
 }
+
+export async function getParkingMap() {
+    const url  = 'https://data.bordeaux-metropole.fr/api/cub.xjs?' + 'key=' + API_TOKEN 
+    return await fetch(url, {mode: 'no-cors'})
+    .then(function(response) {
+      console.log(response); 
+    }).catch(function(error) {  
+      console.log('Request failed', error)  
+    });
+}
