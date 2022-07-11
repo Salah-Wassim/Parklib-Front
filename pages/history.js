@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { Flex } from "@react-native-material/core";
 import BoxHistory  from '../components/boxHistory';
-import ToolBar  from '../components/ToolBar';
+import ToolBar  from '../components/toolBar';
 
 
 export default function History() {

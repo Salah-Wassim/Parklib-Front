@@ -41,7 +41,9 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       height: hp('6%'), // 70% of height device screen
       width: wp('35%'),   // 80% of width device screen
-      border: "1px solid #e6e6e6"
+      borderWidth: 1,
+      borderColor: "black"
+
     },
     textItemBar: {
       display: "flex",

@@ -1,11 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
-import {TextInput} from "@react-native-material/core";
+import {TextInput, Button} from "@react-native-material/core";
 import { Stack } from 'react-native-flex-layout';
-import SideBar  from '../components/sideBar';
-import ToolBar  from '../components/ToolBar';
-import { Button } from "react-native-web";
-import showToast from '../components/toast.components'
+// import SideBar  from '../components/sideBar';
+import ToolBar  from '../components/toolBar';
+
 
 //import {getParkingSearchedText} from '../api/api'
 
@@ -23,7 +22,7 @@ export default function Home({navigation}) {
 
   return (
   <View style={styles.container} className="App" id="outer-container">
-    <SideBar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
+    {/* <SideBar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> */}
       <Stack style={styles.container}>
         <View style={styles.containerView}>
           <Text style={styles.textPrimary}>Bonjour !</Text>
@@ -63,7 +62,8 @@ const styles = StyleSheet.create({
   destinationBtn: {
     alignItems: 'center',
     flexDirection:'row',
-    border: "1px solid black",
+    borderWidth: 1,
+    borderColor: "black",
     padding: 10,
     borderRadius: 20,
   },

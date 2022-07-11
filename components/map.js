@@ -1,9 +1,16 @@
 import React from "react";
 import { StyleSheet, View } from 'react-native';
+import { WebView } from 'react-native-webview';
 
-export const MapOpenData = ()=>{
+const MapOpenData = ()=>{
     return (
         <View style={styles.map} nativeID="map_area">
+            <WebView
+                source={{
+                uri: 'https://github.com/facebook/react-native'
+                }}
+                style={{ marginTop: 20 }}
+            />
         </View>
     );
 }

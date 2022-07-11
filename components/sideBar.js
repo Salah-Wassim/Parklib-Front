@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { slide as Menu } from 'react-burger-menu';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import '../css/App.module.css';
+// import '../css/app.module.css';
 
 
 export default props => {

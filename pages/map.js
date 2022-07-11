@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {View, StyleSheet, Text,FlatList} from 'react-native';
 import { Flex,ActivityIndicator } from "@react-native-material/core";
-import {getParkingSearchedText } from '../api/api'
+import {getParkingSearchedText, getParkingMap } from '../api/api'
 import ParkingItem from "../components/parkingItem";
+import MapOpenData from "../components/map";
 
 const Map = ({navigation, route}) => {
+    console.log(route)
     const {text} = route.params;
     const [parkings, setParkings ] = useState([])
     const [isLoading, setLoading] = useState(true)
@@ -34,6 +36,13 @@ const Map = ({navigation, route}) => {
                     setParkings(parkings =>[...parkings,feature]);
                 })
             })
+            console.log(route)
+            getParkingMap().then(
+                // CUB.ready(function() {
+                //     CUB.init('map_area');
+                // })
+            )
+            .catch(error => {console.log(error)})
         }
     }, [])
         
@@ -49,6 +58,7 @@ const Map = ({navigation, route}) => {
 
     return(
         <Flex fill style={styles.page}>
+            <MapOpenData/>
             <Text style={styles.header}>Résultat de votre recherche : {parkings.length} {parkings.length>1?  'Elements trouvés':'Element trouvé' } </Text>
             {isLoading ? <ActivityIndicator size="large"/> : <FeatureList/>}
         </Flex>
