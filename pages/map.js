@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {View, StyleSheet, Text,FlatList} from 'react-native';
+import {StyleSheet,FlatList} from 'react-native';
 import { Flex,ActivityIndicator } from "@react-native-material/core";
-import {getParkingSearchedText, getParkingMap } from '../api/api'
+import {getParkingSearchedText } from '../api/api'
 import ParkingItem from "../components/parkingItem";
-import MapView, {Marker} from "react-native-maps";
+import MapCard from "../components/mapCard";
 
-const Map = ({navigation, route}) => {
+const Map = ({route}) => {
     const {text} = route.params;
     const [parkings, setParkings ] = useState([])
     const [isLoading, setLoading] = useState(true)
@@ -51,31 +51,15 @@ const Map = ({navigation, route}) => {
 
     return(
         <Flex fill style={styles.page}>
-            <MapCard/>
             {/*<Text style={styles.header}>Résultat de votre recherche : {parkings.length} {parkings.length>1?  'Elements trouvés':'Element trouvé' } </--Text>
-            {isLoading ? <ActivityIndicator size="large"/> : <FeatureList/>}*/}
+            */}
+            {isLoading ? <ActivityIndicator size="large"/> : <MapCard datas={parkings}/>}
         </Flex>
     ) 
     
    
 }
 
-const MapCard = ()=>{
-    return  (<MapView
-        style={styles.map}
-        region={this.state.region}
-        onRegionChange={this.onRegionChange}>
-
-        {this.state.markers.map((marker, index) => (
-            <Marker
-                key={index}
-                coordinate={marker.latlng}
-                title={marker.title}
-                description={marker.description}
-            />
-        ))}
-    </MapView>);
-}
 const styles = StyleSheet.create({
     header:{
         padding:5

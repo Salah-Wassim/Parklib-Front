@@ -1,24 +1,19 @@
 import React from "react";
 import {Dimensions, StyleSheet, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import {Text} from "@react-native-material/core";
 
-const MapCard = (props)=>{
-    console.log("mapOpenData  " , props.data)
+const MapCard = ({datas})=>{
     return (
         <View style={styles.container}>
-            <Text>Props :{props.data}  </Text>
             <MapView
-                style={styles.map}
-                region={this.state.region}
-                onRegionChange={this.onRegionChange}>
+                style={styles.map}>
 
-                {this.state.markers.map((marker, index) => (
+                {datas.map((data, index) => (
                     <Marker
                         key={index}
-                        coordinate={marker.latlng}
-                        title={marker.title}
-                        description={marker.description}
+                        coordinate={{ latitude : data.geometry.coordinates[1] , longitude : data.geometry.coordinates[0] }}
+                        title={data.properties.nom}
+                        description={data.properties.infor}
                     />
                 ))}
             </MapView>
