@@ -3,22 +3,11 @@ import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {TextInput, Button} from "@react-native-material/core";
 import { Stack } from 'react-native-flex-layout';
 // import SideBar  from '../components/sideBar';
-import ToolBar  from '../components/toolBar';
-
-
-//import {getParkingSearchedText} from '../api/api'
+import BottomNavigationBar  from '../components/bottomNavigationBar';
 
 export default function Home({navigation}) {
 
   const [SearchText, onSearchText] = React.useState('st_park_p');
-
-  //const searchParkings = () => {
-  //setState({
-  //      parkings : []
-  //  }, () => {
-  //      loadParkingResult()
-  //  })
-  //}
 
   return (
   <View style={styles.container} className="App" id="outer-container">
@@ -30,9 +19,7 @@ export default function Home({navigation}) {
           <TouchableOpacity style={styles.destinationBtn}>
             <TextInput
               label='Rechercher'
-              //onChangeText={(text) => searchTextInputChanged(text)}
               onChangeText={onSearchText}
-              //onSubmitEditing = {() => searchParkings()}
             />
             <Button title="rechercher" onPress={() => {
                 navigation.navigate('Map', {
@@ -43,7 +30,7 @@ export default function Home({navigation}) {
           </TouchableOpacity>
       </View>
   </Stack>    
-      <ToolBar/> 
+      <BottomNavigationBar/> 
     </View>     
   );
 }
