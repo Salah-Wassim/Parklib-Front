@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import { HStack } from "@react-native-material/core";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const bottomNavigationBar = () => {
+const BottomNavigationBar = () => {
   return (
     <HStack style={{ marginTop: 80}}>
       <View style={styles.bottomNavigationBar} > 
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
     }
 
   });
-export default bottomNavigationBar;
+export default BottomNavigationBar;
