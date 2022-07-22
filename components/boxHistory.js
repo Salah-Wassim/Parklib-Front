@@ -1,27 +1,22 @@
 import React from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Box } from "@react-native-material/core";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-class BoxHistory extends React.Component {
-  render() {
-    return (
-      <Box style={styles.box}>
+const BoxHistory = () => {
+  return (
+    <Box style={styles.box}>
       <View style={styles.row}>
         <Text>Parking Aquitaine</Text>
         <Text style={{ }}>Public / Payant</Text>
       </View>
-        <Text>5 rue Pasteur 33000 Bordeaux</Text>
-        <Text style={styles.bottomText}>6 euros</Text>
-
-   
+      <Text>5 rue Pasteur 33000 Bordeaux</Text>
+      <Text style={styles.bottomText}>6 euros</Text>
       <TouchableOpacity style={styles.deleteContain} onPress={() => navigation.navigate('History')}>
-  <Text style={styles.deleteBtn}>Supprimer</Text>
-</TouchableOpacity>
-
-      </Box>
-    );
-  }
+        <Text style={styles.deleteBtn}>Supprimer</Text>
+      </TouchableOpacity>
+    </Box>
+  );
 }
 const styles = StyleSheet.create({
   box: {

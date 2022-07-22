@@ -3,40 +3,38 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import { HStack } from "@react-native-material/core";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-class ToolBar extends React.Component {
-  render() {
-    return (
-        <HStack style={{ marginTop: 80}}>
-        <View style={styles.toolBar} > 
+const bottomNavigationBar = () => {
+  return (
+    <HStack style={{ marginTop: 80}}>
+      <View style={styles.bottomNavigationBar} > 
         <View style={styles.containerImg} > 
-        <Image
+          <Image
             style={{ width: 24, height: 24}}
             source={require('../assets/loupe.png')}
           />
-          </View>
         </View>
-        <View style={styles.toolBar} > 
+      </View>
+      <View style={styles.bottomNavigationBar} > 
         <View style={styles.containerImg} > 
-        <Image
+          <Image
             style={{ width: 24, height: 24}}
             source={require('../assets/history.png')}
           />
-          </View>
         </View>
-        <View style={styles.toolBar} > 
+      </View>
+      <View style={styles.bottomNavigationBar} > 
         <View style={styles.containerImg} > 
-        <Image
+          <Image
             style={{ width: 24, height: 24}}
             source={require('../assets/setting.png')}
           />
-          </View>
         </View>
-      </HStack>
-    );
-  }
+      </View>
+    </HStack>
+  );
 }
 const styles = StyleSheet.create({
-    toolBar: {
+    bottomNavigationBar: {
       display: "flex",
       justifyContent: "center",
       height: hp('6%'), // 70% of height device screen
@@ -56,4 +54,4 @@ const styles = StyleSheet.create({
     }
 
   });
-export default ToolBar;
+export default bottomNavigationBar;
