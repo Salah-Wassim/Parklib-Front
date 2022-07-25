@@ -4,7 +4,7 @@ const COLOR  = {
         'noir':'#002939',
         'rouge':'#C70000',
         'indigo':'#575DFB', 
-        'blanc':'#FFF'   
+        'blanc':'#FFFFFF'
 }
 
 export default COLOR;

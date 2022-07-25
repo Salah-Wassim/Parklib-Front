@@ -11,33 +11,18 @@ const Profile = ()=>{
                 <Icon name="account" size={36} color="black"/>
                 <TextInput
                     style={{width:'90%',marginLeft: 8}}
-                    placeholder='prénom'
-                    autoCorrect={true}
-                    autoCapitalize='none'
-                    autoCompleteType='text'
-                    keyboardType='default'
-                    textContentType='text'/>
+                    placeholder='prénom'/>
             </Flex>
 
             <TextInput 
                 style={{width:'90%',marginLeft: 45,marginBottom:8}}
-                placeholder='nom'
-                autoCorrect={true}
-                autoCapitalize='none'
-                autoCompleteType='text'
-                keyboardType='default'
-                textContentType='text'/>
+                placeholder='nom'/>
 
             <Flex direction='row' center style={{marginBottom:16}}>
                 <Icon name="email" size={36} color="black"/>
                 <TextInput
                     style={{width:'90%',marginLeft: 8}}
-                    placeholder='nom@exemple.com'
-                    autoCorrect={true}
-                    autoCapitalize='none'
-                    autoCompleteType='email'
-                    keyboardType='email-adress'
-                    textContentType='emailAdress'/>
+                    placeholder='nom@exemple.com'/>
             </Flex>
 
             <Flex direction='row' center style={{marginBottom:16}}>
@@ -46,8 +31,7 @@ const Profile = ()=>{
                 <TextInput
                     style={{width:'90%',marginLeft: 8}}
                     placeholder='Entrer votre mot de passe'
-                    secureTextEntry={true}
-                    textContentType='password'/>
+                    secureTextEntry={true}/>
                     
             </Flex>
         </Box>
