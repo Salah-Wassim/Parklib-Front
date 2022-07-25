@@ -3,12 +3,14 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Home from "../pages/home";
 import History from "../pages/history";
 import Contact from "../pages/contact";
+import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
 
 const Tab = createMaterialBottomTabNavigator();
 
 const BottomNavigationBar = () => {
     return (
         <Tab.Navigator
+            labeled={false}
             initialRouteName='Recherche'
             activeColor="#000000"
             inactiveColor="#C4C4CE"
@@ -17,7 +19,7 @@ const BottomNavigationBar = () => {
                         options={{
                             tabBarLabel: 'Recherche',
                             tabBarIcon: ({color}) => (
-                                <MaterialIcons name="search" size={23} color={color}/>
+                                <MaterialIcons name="search" size={25} color={color}/>
                             )
                         }}
             />
@@ -25,16 +27,16 @@ const BottomNavigationBar = () => {
                         options={{
                             tabBarLabel: 'Historique',
                             tabBarIcon: ({color}) => (
-                                <MaterialIcons name="history" size={23} color={color}/>
+                                <MaterialCommunityIcon name="calendar-check" size={25} color={color}/>
                             )
                         }}
             />
 
             <Tab.Screen name="Parametres" component={Contact}
                         options={{
-                            tabBarLabel: 'Parametres',
+                            tabBarLabel: 'Parametre',
                             tabBarIcon: ({color}) => (
-                                <MaterialIcons name="settings" size={23} color={color}/>
+                                <MaterialIcons name="settings" size={25} color={color}/>
                             )
                         }}
             />
