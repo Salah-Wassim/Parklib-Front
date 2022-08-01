@@ -10,7 +10,7 @@ const Map = ({route}) => {
     const {text} = route.params;
     const [parkings, setParkings ] = useState([]);
     const [isLoading, setLoading] = useState(true);
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState({test:false,parking:{}});
 
     useEffect(() => {
         if(text.length > 0){
@@ -55,7 +55,7 @@ const Map = ({route}) => {
             {/*<Text style={styles.header}>Résultat de votre recherche : {parkings.length} {parkings.length>1?  'Elements trouvés':'Element trouvé' } </--Text>
             */}
             {isLoading ? <ActivityIndicator size="large"/> : <MapCard parkings={parkings} isvisible={visible} setVisible={setVisible}/>}
-            {visible ? <DetailCardMarker parkings={parkings} isvisible={visible} setVisible={setVisible}/> : null}
+            {visible.test ? <DetailCardMarker parkings={parkings} isvisible={visible} setVisible={setVisible}/> : null}
         </Flex>
     ) 
 }
