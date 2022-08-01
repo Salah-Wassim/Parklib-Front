@@ -3,12 +3,14 @@ import {StyleSheet,FlatList} from 'react-native';
 import { Flex,ActivityIndicator } from "@react-native-material/core";
 import {getParkingSearchedText } from '../api/api'
 import ParkingItem from "../components/parkingItem";
-import MapCard from "../components/mapCard";
+import MapCard from "../components/mapCard"
+import DetailCardMarker from "../components/detailCardMarker";
 
 const Map = ({route}) => {
     const {text} = route.params;
-    const [parkings, setParkings ] = useState([])
-    const [isLoading, setLoading] = useState(true)
+    const [parkings, setParkings ] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    const [visible, setVisible] = React.useState(true);     
 
     useEffect(() => {
         if(text.length > 0){
@@ -39,7 +41,7 @@ const Map = ({route}) => {
     }, [])
         
     const FeatureList = () =>{
-        return (
+        return (    
             <FlatList
                 data={parkings}
                 keyExtractor={({ properties }) => properties.gid.toString()}
@@ -47,17 +49,15 @@ const Map = ({route}) => {
             />
         )
     }
-
-
+    
     return(
         <Flex fill style={styles.page}>
             {/*<Text style={styles.header}>Résultat de votre recherche : {parkings.length} {parkings.length>1?  'Elements trouvés':'Element trouvé' } </--Text>
             */}
-            {isLoading ? <ActivityIndicator size="large"/> : <MapCard datas={parkings}/>}
+            {isLoading ? <ActivityIndicator size="large"/> : <MapCard parkings={parkings} visible={visible} setVisible={setVisible}/>}
+            {visible ? <DetailCardMarker parkings={parkings} visible={visible} setVisible={setVisible}/> : null}
         </Flex>
     ) 
-    
-   
 }
 
 const styles = StyleSheet.create({
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         padding:5
     },
     page:{
-    }
+    },
 })
 
 export default Map;
