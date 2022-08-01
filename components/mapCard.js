@@ -1,19 +1,22 @@
 import React from "react";
-import {Dimensions, StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 
-const MapCard = ({datas})=>{
+const MapCard = ({parkings})=>{
     return (
         <View style={styles.container}>
             <MapView
                 style={styles.map}>
-
-                {datas.map((data, index) => (
+                {parkings.map(parking => (
                     <Marker
-                        key={index}
-                        coordinate={{ latitude : data.geometry.coordinates[1] , longitude : data.geometry.coordinates[0] }}
-                        title={data.properties.nom}
-                        description={data.properties.infor}
+                        onPress={() => {
+                            // On itinitialise visible avec setVisible(!visible)
+                            // Faire passé un nouvelle objet contenant les infos qu'on veut afficher dans 
+                            // la modale
+                        }}
+                        key={parking.properties.gid}
+                        coordinate={{ latitude : parking.geometry.coordinates[1] , longitude : parking.geometry.coordinates[0] }}
+                        title={parking.properties.nom}
                     />
                 ))}
             </MapView>
@@ -32,6 +35,7 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
     },
+
 });
 
 export default MapCard;
