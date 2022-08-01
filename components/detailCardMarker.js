@@ -3,13 +3,12 @@ import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Button} from '@react-native-material/core';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
-const DetailCardMarker = ({navigation}, props) => {
-
+const DetailCardMarker = ({isvisible,setVisible}, props) => {
     return (
-        <View style={props.visible === false ? styles.hiddenDetailcard : styles.mainDetailCard}>
+        <View style={props.isvisible === false ? styles.hiddenDetailcard : styles.mainDetailCard}>
             <View style={styles.detailCard}>
                 <TouchableOpacity style={styles.icon} onPress={()=> {
-                        
+                    if (isvisible) setVisible(false)
                     }}>
                     <Icon style={styles.iconCloseBox} name="close-box"></Icon>
                 </TouchableOpacity>
