@@ -11,7 +11,11 @@ const DrawerNavigation=()=>{
             screenOptions={{
                               headerTitle:'',
                               headerShown: true,
-                              headerTransparent:false}}
+                              headerTransparent:false,
+                              drawerStyle: {
+                                backgroundColor: '#FFFFFF',
+                                width: 238,
+                              }, }}
             drawerContent={(props) => <SideBar {...props} />}>
 
             <Drawer.Screen name="BottomNav" component={BottomNavigationBar} options={{title:"Park'Lib"}} />
