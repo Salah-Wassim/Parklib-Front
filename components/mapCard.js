@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 
 const MapCard = ({isvisible,parkings,setVisible})=>{
+
+
     return (
         <View style={styles.container}>
             <MapView
@@ -13,8 +15,7 @@ const MapCard = ({isvisible,parkings,setVisible})=>{
                             // On itinitialise visible avec setVisible(!visible)
                             // Faire passé un nouvelle objet contenant les infos qu'on veut afficher dans 
                             // la modale
-                            isvisible.test = true
-                            isvisible.parking = parking
+                            isvisible = true
                             setVisible(isvisible)
                             return
                         }}
@@ -24,6 +25,7 @@ const MapCard = ({isvisible,parkings,setVisible})=>{
                     />
                 ))}
             </MapView>
+
         </View>
     );
 }
