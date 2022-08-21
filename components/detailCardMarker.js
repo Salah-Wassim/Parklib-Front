@@ -1,10 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {Button} from '@react-native-material/core';
+import {Button, Flex} from '@react-native-material/core';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import {useDispatch, useSelector} from "react-redux";
+import {deleteParking} from "../store/parking/action";
 
 const DetailCardMarker = ({isvisible,setVisible}) => {
-    console.log("detail ",isvisible)
+
+    const parkingClicked = useSelector(state => state.tasks.parking)
+
+    const dispatch = useDispatch()
+
     return (
         <View style={isvisible === false ? styles.hiddenDetailcard : styles.mainDetailCard}>
             <View style={styles.detailCard}>
@@ -13,18 +19,19 @@ const DetailCardMarker = ({isvisible,setVisible}) => {
 
                         isvisible = false
                         setVisible(isvisible)
+                        dispatch(deleteParking())
                     }
                 }}>
                     <Icon style={styles.iconCloseBox} name="close-box"></Icon>
                 </TouchableOpacity>
-                <View>
-                    <Text>{}</Text>
-                    <Text>{}</Text>
-                    <Text>{}</Text>
-                </View>
+                <Flex>
+                    <Text>{parkingClicked.properties.nom}</Text>
+                    <Text>{parkingClicked.properties.adresse}</Text>
+                    <Text>{parkingClicked.properties.secteur}</Text>
+                </Flex>
             </View>
             <View style={[styles.buttonDetailCard, styles.buttonClose]}>
-                <Button title="En savoir plus" color="#157575" onPress={() => navigation.navigate('#')}/>
+                <Button title="En savoir plus" color="#157575" onPress={() =>console.log('clicked')}/>
             </View>
         </View>
     )

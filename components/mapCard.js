@@ -2,8 +2,12 @@ import React, {useState} from "react";
 import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 
+import { useSelector ,useDispatch} from 'react-redux'
+import {addParking} from "../store/parking/action";
+
 const MapCard = ({isvisible,parkings,setVisible})=>{
 
+    const dispatch = useDispatch()
 
     return (
         <View style={styles.container}>
@@ -17,7 +21,8 @@ const MapCard = ({isvisible,parkings,setVisible})=>{
                             // la modale
                             isvisible = true
                             setVisible(isvisible)
-                            return
+                            dispatch(addParking(parking))
+
                         }}
                         key={parking.properties.gid}
                         coordinate={{ latitude : parking.geometry.coordinates[1] , longitude : parking.geometry.coordinates[0] }}
