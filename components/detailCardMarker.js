@@ -4,16 +4,12 @@ import {Button} from '@react-native-material/core';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const DetailCardMarker = ({isvisible,setVisible}) => {
-    console.log("detail ",isvisible)
     return (
-        <View style={isvisible.test === false ? styles.hiddenDetailcard : styles.mainDetailCard}>
+        <View style={isvisible === false ? styles.hiddenDetailcard : styles.mainDetailCard}>
             <View style={styles.detailCard}>
                 <TouchableOpacity style={styles.icon} onPress={()=> {
-                    if (isvisible.test){
-
-                        isvisible.test = false
-                        isvisible.parking = {}
-
+                    if (isvisible){
+                        isvisible = false
                         setVisible(isvisible)
                     }
                 }}>

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { hydrate } from "react-dom";
 import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
+import DetailCardMarker from "./detailCardMarker";
 
 const MapCard = ({isvisible,parkings,setVisible})=>{
+
     return (
         <View style={styles.container}>
             <MapView
@@ -13,10 +16,8 @@ const MapCard = ({isvisible,parkings,setVisible})=>{
                             // On itinitialise visible avec setVisible(!visible)
                             // Faire passé un nouvelle objet contenant les infos qu'on veut afficher dans 
                             // la modale
-                            isvisible.test = true
-                            isvisible.parking = parking
-                            setVisible(isvisible)
-                            return
+                            isvisible = true
+                            setVisible(isvisible);
                         }}
                         key={parking.properties.gid}
                         coordinate={{ latitude : parking.geometry.coordinates[1] , longitude : parking.geometry.coordinates[0] }}
