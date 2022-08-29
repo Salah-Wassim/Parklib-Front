@@ -13,22 +13,21 @@ const MapCard = ({isvisible,parkings,setVisible})=>{
         <View style={styles.container}>
             <MapView
                 style={styles.map}>
-                {parkings.map(parking => (
-                    <Marker
-                        onPress={() => {
-                            // On itinitialise visible avec setVisible(!visible)
-                            // Faire passé un nouvelle objet contenant les infos qu'on veut afficher dans 
-                            // la modale
-                            isvisible = true
-                            setVisible(isvisible)
-                            dispatch(addParking(parking))
-
-                        }}
-                        key={parking.properties.gid}
-                        coordinate={{ latitude : parking.geometry.coordinates[1] , longitude : parking.geometry.coordinates[0] }}
-                        title={parking.properties.nom}
-                    />
-                ))}
+                {
+                    parkings.map(parking => (
+                        <Marker
+                            onPress={() => {
+                                isvisible = true
+                                setVisible(isvisible)
+                                dispatch(addParking(parking))
+                            }}
+                            key={parking.properties.gid}
+                            coordinate={{ latitude : parking.geometry.coordinates[1] , longitude : parking.geometry.coordinates[0] }}
+                            title={parking.properties.nom}
+                            pinColor={parking.properties.etat === "LIBRE" || parking.properties.etat === "OUVERT" ? "green" : "red"}
+                        />
+                    ))
+                }
             </MapView>
 
         </View>

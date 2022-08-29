@@ -14,24 +14,31 @@ const DetailCardMarker = ({isvisible,setVisible}) => {
     return (
         <View style={isvisible === false ? styles.hiddenDetailcard : styles.mainDetailCard}>
             <View style={styles.detailCard}>
-                <TouchableOpacity style={styles.icon} onPress={()=> {
-                    if (isvisible){
+                <Flex style={[styles.parking_container, styles.parking_container_top]}>
+                    <View>
+                        <TouchableOpacity style={styles.icon} onPress={()=> {
+                            if (isvisible){
 
-                        isvisible = false
-                        setVisible(isvisible)
-                        dispatch(deleteParking())
-                    }
-                }}>
-                    <Icon style={styles.iconCloseBox} name="close-box"></Icon>
-                </TouchableOpacity>
-                <Flex>
-                    <Text>{parkingClicked.properties.nom}</Text>
-                    <Text>{parkingClicked.properties.adresse}</Text>
-                    <Text>{parkingClicked.properties.secteur}</Text>
+                                isvisible = false
+                                setVisible(isvisible)
+                                dispatch(deleteParking())
+                            }
+                        }}>
+                            <Icon style={styles.iconCloseBox} name="close-box"/>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <Text style={styles.parking_nom}>{parkingClicked.properties.nom}</Text>
+                        <Text style={styles.parking_adress}>{parkingClicked.properties.adresse}</Text>
+                    </View>
+                </Flex>
+                <Flex style={[styles.parking_container, styles.parking_container_bottom]}>
+                    <Text style={styles.parking_ta_type}>{parkingClicked.properties.ta_type}</Text>
+                    <Text>{parkingClicked.properties.etat}</Text>
                 </Flex>
             </View>
             <View style={[styles.buttonDetailCard, styles.buttonClose]}>
-                <Button title="En savoir plus" color="#157575" onPress={() =>console.log('clicked')}/>
+                <Button title="En savoir plus" color="#157575" onPress={() => console.log('clicked')}/>
             </View>
         </View>
     )
@@ -53,6 +60,26 @@ const styles = StyleSheet.create({
     detailCard : {
         height:163,
     },
+    parking_container_top: {
+        display : 'flex',
+        flexDirection: 'row-reverse',
+        justifyContent : 'space-between',
+        paddingLeft : 3,
+        paddingRight:3,
+        marginTop:10,
+    },
+    parking_container_bottom : {
+        display : 'flex',
+        flexDirection: 'row',
+        justifyContent : 'space-between',
+        marginTop : 45,
+        paddingLeft : 3,
+        paddingRight:3,
+    },
+    parking_nom : {
+        fontWeight : "bold" ,
+        fontSize : 20,
+    } ,
     icon:{
         alignItems:'flex-end'
     },
@@ -64,7 +91,8 @@ const styles = StyleSheet.create({
     },
     buttonDetailCard : {
         justifyContent:'flex-end',
-    }
+    },
+
 })
 
 export default DetailCardMarker;
