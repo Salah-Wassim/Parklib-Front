@@ -33,10 +33,7 @@ const SignUp = ({navigation}) => {
                     <TextInput
                         style={styles.formInput}
                         placeholder="nom@exemple.com"
-                        autoCorrect={true}
                         autoCompleteType="email"
-                        keyboardType="email-adress"
-                        textContentType="emailAddress"
                         variant="outlined"
                         onChange={onChangeEmail}
                     />
@@ -47,8 +44,6 @@ const SignUp = ({navigation}) => {
                         style={styles.formInput}
                         placeholder='Enter votre mot de passe'
                         secureTextEntry={true}
-                        textContentType='password'
-                        keyboardType="default"
                         variant="outlined"
                         onChange={onChangePassword}
                     />
