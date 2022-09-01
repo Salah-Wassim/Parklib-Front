@@ -1,25 +1,24 @@
 import React from 'react'
 import {NavigationContainer}  from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-
-import Home from './pages/home';
-import SignUp from './pages/signUp';
-import SignIn from './pages/signIn';
-import Parameters from './pages/parameters';
-import Contact from './pages/contact';
-import ContactForm from './pages/contactForm';
-import ResetPassword from './pages/resetPassword';
-import LandingPage from './pages/landingPage';
-import PaymentMethod from './pages/paymentMethod';
-// import NewCreditCardForm from './pages/newCreditCardForm';
-import EditCreditCard from './pages/editCreditCard';
-import PrivacyPolicy from './pages/privacyPolicy';
-import History from './pages/history';
-import Profile from './pages/profile';
-import Cgu from './pages/cgu';
-import CheckoutScreen from './pages/checkoutScreen';
-import PaymentScreen from './pages/paymentScreen';
-import Map from './pages/map';
+import SignIn from "./pages/signIn";
+import SignUp from "./pages/signUp";
+import Parameters from "./pages/parameters";
+import Contact from "./pages/contact";
+import ContactForm from "./pages/contactForm";
+import ResetPassword from "./pages/resetPassword";
+import LandingPage from "./pages/landingPage";
+import PaymentMethod from "./pages/paymentMethod";
+import EditCreditCard from "./pages/editCreditCard";
+import PrivacyPolicy from "./pages/privacyPolicy";
+import Profile from "./pages/profile";
+import Cgu from "./pages/cgu";
+import History from "./pages/history";
+import Map from "./pages/map";
+import PaymentScreen from "./pages/paymentScreen";
+import CheckoutScreen from "./pages/checkoutScreen";
+import BottomNavigationBar from "./components/bottomNavigationBar";
+import {StatusBar} from "react-native";
 
 export default function App() {
   const Stack = createStackNavigator()
@@ -27,7 +26,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name="Home" options={{ title: 'Park\'Lib', headerShown: false }} component={Home} />
+        <Stack.Screen name="Home" options={{ title: 'Park\'Lib', headerShown: false }} component={BottomNavigationBar} />
         <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib', headerShown: false }} component={SignIn}/>
         <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib', headerShown: false }} component={SignUp}/>
         <Stack.Screen name="Parameters" options={{ title: 'Paramètres' }} component={Parameters}/>
