@@ -1,42 +1,55 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image,ScrollView, TouchableOpacity } from "react-native";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import {Box, Flex} from "@react-native-material/core";
-import {DrawerContentScrollView} from "@react-navigation/drawer";
+import {DrawerContentScrollView, DrawerActions} from "@react-navigation/drawer";
+//DrawerItemList
+import { Dimensions } from 'react-native';
 
 
-const SideBar=()=> {
+const winHeight = Dimensions.get('window').height;
+
+const SideBar=({props})=> {
     return (
-        <DrawerContentScrollView>
-            <Flex fill style={{backgroundColor: '#C4C5C6'}}>
-                <Flex>
-                    <Text  className="top-title">Park'Lib</Text>
+        <DrawerContentScrollView  {...props} style={styles.drawer}> 
+            <Flex fill style={styles.section}>
+                <Flex style={styles.flexContainer}>
+                    <Text style={styles.topTitle}>Park'Lib</Text>
+                        <View style={styles.closeView}>
+                        <Image style={styles.close} label="Close drawer"
+                        onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}
+                        source={require('../assets/close.png')}/>
+                        </View>
                     <TouchableOpacity style={{marginLeft: 22}}>
-                        <Text>Profil</Text>
+                    <Text onPress={() => { navigation.navigate('Profile') }}>Profil</Text>
                     </TouchableOpacity>
                     <View>
-                        <Box className="selector-center">
-                            <Image style={styles.stretch}
+                        <Box style={styles.boxImg}>
+                            <Image style={styles.imgProfile}
                                    source={require('../assets/profil.jpg')}
                             />
                         </Box>
                     </View>
                 </Flex>
-                <Box className="div-container">
-                    <TouchableOpacity style={{marginBottom: 170}}>
+                <Box style={styles.boxContainer}>
+                    <TouchableOpacity style={{marginBottom: 130}}>
                         <Text style={styles.labels}>Tous les libellés</Text>
-                        <Text style={styles.paddingTextSideBar}>Se connecter</Text>
-                        <Text style={styles.paddingTextSideBar}>S'inscrire</Text>
-                        <Text style={styles.paddingTextSideBar}>Contactez-nous</Text>
+                        <Text style={styles.marginItems} onPress={() => {
+                              navigation.navigate('SignIn')}}>Se connecter</Text>
+                        <Text style={styles.marginItems} onPress={() => {
+                              navigation.navigate('SignUp')}}>S'inscrire</Text>
+                        <Text style={styles.marginItems} onPress={() => {
+                              navigation.navigate('Contact')}}>Contactez-nous</Text>
                     </TouchableOpacity>
                 </Box>
-                <Box className="div-container">
+                <Box>
                     <TouchableOpacity style={styles.lastContainer}>
-                        <Text className="mt-25-mb-40">Mentions légales</Text>
-                        <Text style={{marginBottom: 10}}>CGU</Text>
-                        <Text style={{marginBottom: "auto"}}>V1.0</Text>
-                        <View style={styles.deleteContain}>
-                            <Text style={styles.deleteBtn}>Déconnecter</Text>
+                        <Text style={styles.privacyPolicy} onPress={() => {
+                                navigation.navigate('PrivacyPolicy')}} >Mentions légales</Text>
+                        <Text style={styles.cguV1} onPress={() => {
+                                navigation.navigate('CGU')}}>CGU</Text>
+                        <Text style={styles.version}>V1.0</Text>
+                        <View style={styles.logoutView}>
+                            <Text style={styles.logoutBtn}>Déconnecter</Text>
                         </View>
                     </TouchableOpacity>
                 </Box>
@@ -48,14 +61,56 @@ const SideBar=()=> {
 
 
 const styles = StyleSheet.create({
-    stretch: {
-        width: 160,
-        height: 160,
+    section:{
+        backgroundColor: 'white'
+    },
+    drawer:{
+        // height: hp('50%'),
+        backgroundColor: 'white',
+        height: winHeight * 1, // 20%
+    },
+    flexContainer:{
+        // height: hp('32%'),
+        borderColor: "black",
+        borderWidth: 2
+    },
+    imgProfile: {
+        width: 100,
+        height: 100,
         resizeMode: 'stretch',
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        borderColor: "black",
+        borderWidth: 2,
+        borderRadius: 10,
+        marginTop: -10
     },
-    paddingTextSideBar: {
+    boxContainer:{
+        // height: hp('35%'),
+        borderColor: "black",
+        borderWidth: 2,
+        borderBottomColor: 'black',
+        borderTopWidth: 0,
+    },
+    topTitle:{
+        fontSize: 30,
+        marginTop: 10,
+        marginBottom: 20,
+        marginLeft: 22
+    },
+    closeView:{
+
+    },
+    close:{
+        position: 'absolute',
+        top: -51,
+        right: 10,
+        display: 'flex',
+        height: 24,
+        width: 24,
+
+    },
+    marginItems: {
         marginLeft: 22,
         marginTop: 14
     },
@@ -64,19 +119,44 @@ const styles = StyleSheet.create({
         marginTop: 14,
         fontStyle: "italic",
     },
-    deleteContain: {
+    logoutView: {
         backgroundColor: "#C70000",
-        borderRadius: 25,
+
+        marginBottom: 4
     },
-    deleteBtn: {
+    logoutBtn: {
         textAlign: "center",
         color: "white",
         padding: 10,
     },
     lastContainer: {
-        textAlign: "center",
-        height: hp('29%')
-
+        borderWidth: 2,
+        borderBottomColor: 'black',
+        borderTopWidth: 0,
+    },
+    boxImg: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 14,
+        marginBottom: 14
+    },
+    privacyPolicy:{
+        textAlign: 'center',
+        marginTop:15,
+        marginBottom:15,
+        color: 'blue',
+        textDecorationLine: 'underline',
+        fontSize: 18
+    },
+    cguV1:{
+        textAlign: 'center',
+        marginTop:10,
+    },
+    version:{
+        textAlign: 'center',
+        marginTop:10,
+        marginBottom:24,
     }
 });
 
