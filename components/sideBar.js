@@ -1,52 +1,60 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import {Box, Flex} from "@react-native-material/core";
-import {DrawerContentScrollView, DrawerActions} from "@react-navigation/drawer";
+import {Box, Flex, Spacer} from "@react-native-material/core";
+import {DrawerContentScrollView} from "@react-navigation/drawer";
 //DrawerItemList
 import { Dimensions } from 'react-native';
 
 
 const winHeight = Dimensions.get('window').height;
 
-const SideBar=({props})=> {
+const SideBar=(props)=> {
+    const {navigation} =props
+
     return (
-        <DrawerContentScrollView  {...props} style={styles.drawer}> 
-            <Flex fill style={styles.section}>
-                <Flex style={styles.flexContainer}>
-                    <Text style={styles.topTitle}>Park'Lib</Text>
-                        <View style={styles.closeView}>
-                        <Image style={styles.close} label="Close drawer"
-                        onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}
-                        source={require('../assets/close.png')}/>
+        <DrawerContentScrollView  {...props} style={styles.drawer}>
+            <Flex direction="column" style={styles.section}>
+                <Flex direction="column">
+                    <Flex direction="row" justify="between">
+                        <Text styles={{marginLeft: 22}}>Park'Lib</Text>
+                        <View>
+                            <TouchableOpacity onPress={() =>navigation.closeDrawer()}>
+                                <Image style={styles.close}  source={require('../assets/close.png')} />
+                            </TouchableOpacity>
                         </View>
+                    </Flex>
+
                     <TouchableOpacity style={{marginLeft: 22}}>
-                    <Text onPress={() => { navigation.navigate('Profile') }}>Profil</Text>
+                        <Text onPress={() => console.log("text")}>Profil</Text>
                     </TouchableOpacity>
+
                     <View>
-                        <Box style={styles.boxImg}>
+                        <Flex center>
                             <Image style={styles.imgProfile}
                                    source={require('../assets/profil.jpg')}
                             />
-                        </Box>
+                        </Flex>
                     </View>
                 </Flex>
+                <Spacer />
                 <Box style={styles.boxContainer}>
                     <TouchableOpacity style={{marginBottom: 130}}>
                         <Text style={styles.labels}>Tous les libellés</Text>
                         <Text style={styles.marginItems} onPress={() => {
-                              navigation.navigate('SignIn')}}>Se connecter</Text>
+                            navigation.navigate('SignIn')}}>Se connecter</Text>
                         <Text style={styles.marginItems} onPress={() => {
-                              navigation.navigate('SignUp')}}>S'inscrire</Text>
+                            navigation.navigate('SignUp')}}>S'inscrire</Text>
                         <Text style={styles.marginItems} onPress={() => {
-                              navigation.navigate('Contact')}}>Contactez-nous</Text>
+                            navigation.navigate('Contact')}}>Contactez-nous</Text>
                     </TouchableOpacity>
                 </Box>
+                <Spacer />
                 <Box>
                     <TouchableOpacity style={styles.lastContainer}>
                         <Text style={styles.privacyPolicy} onPress={() => {
-                                navigation.navigate('PrivacyPolicy')}} >Mentions légales</Text>
+                            navigation.navigate('PrivacyPolicy')}} >Mentions légales</Text>
                         <Text style={styles.cguV1} onPress={() => {
-                                navigation.navigate('CGU')}}>CGU</Text>
+                            navigation.navigate('CGU')}}>CGU</Text>
                         <Text style={styles.version}>V1.0</Text>
                         <View style={styles.logoutView}>
                             <Text style={styles.logoutBtn}>Déconnecter</Text>
@@ -65,9 +73,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     drawer:{
-        // height: hp('50%'),
-        backgroundColor: 'white',
-        height: winHeight * 1, // 20%
+        height: "100%",
+        backgroundColor: 'red',
+        //height: winHeight * 1, // 20%
     },
     flexContainer:{
         // height: hp('32%'),
@@ -102,10 +110,6 @@ const styles = StyleSheet.create({
 
     },
     close:{
-        position: 'absolute',
-        top: -51,
-        right: 10,
-        display: 'flex',
         height: 24,
         width: 24,
 
