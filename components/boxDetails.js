@@ -11,7 +11,7 @@ const BoxDetails = () => {
     const parkingClicked = useSelector((state) => state.tasks.parking);
     console.log(parkingClicked)
     const isPlacesInformations =
-        parkingClicked.properties.libres === "" ? false : true;
+        parkingClicked.properties.libres === "" || parkingClicked.properties.libres === null ? false : true;
 
     const isTarif = parkingClicked.properties.th_heur === null ? false : true;
 
