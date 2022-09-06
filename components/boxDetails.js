@@ -12,7 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 const BoxDetails = () => {
 
-    // const parkingClicked = useSelector(state => state.tasks.parking)
+    const parkingClicked = useSelector(state => state.tasks.parking)
 
     const dispatch = useDispatch();
 

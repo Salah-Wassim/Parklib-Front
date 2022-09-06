@@ -5,7 +5,8 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteParking} from "../store/parking/action";
 
-const DetailCardMarker = ({isvisible,setVisible}) => {
+const DetailCardMarker = ({ isvisible, setVisible, navigation }) => {
+    
 
     const parkingClicked = useSelector(state => state.tasks.parking)
 
@@ -38,7 +39,10 @@ const DetailCardMarker = ({isvisible,setVisible}) => {
                 </Flex>
             </View>
             <View style={[styles.buttonDetailCard, styles.buttonClose]}>
-                <Button title="En savoir plus" color="#157575" onPress={() => console.log('clicked')}/>
+                <Button title="En savoir plus" color="#157575" onPress={() => {
+                    navigation.navigate('ParkingDetails')
+                }
+                }/>
             </View>
         </View>
     )

@@ -8,7 +8,9 @@ import {
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-export default function ParkingDetails() {
+export default function ParkingDetails(props) {
+
+
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
@@ -55,7 +57,8 @@ const styles = StyleSheet.create({
         bottom: 15,
 
         backgroundColor: "rgb(21, 117, 117)",
-        width: wp("100%"),
+        width: wp("96%"),
+        marginLeft: wp("2%")
     },
     skipButton: {
         color: "white",

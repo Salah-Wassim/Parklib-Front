@@ -6,7 +6,8 @@ import ParkingItem from "../components/parkingItem";
 import MapCard from "../components/mapCard"
 import DetailCardMarker from "../components/detailCardMarker";
 
-const Map = ({route}) => {
+const Map = ({ route, navigation }) => {
+    
     const {text} = route.params;
     const [parkings, setParkings ] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -55,7 +56,7 @@ const Map = ({route}) => {
             {/*<Text style={styles.header}>Résultat de votre recherche : {parkings.length} {parkings.length>1?  'Elements trouvés':'Element trouvé' } </--Text>
             */}
             {isLoading ? <ActivityIndicator size="large"/> : <MapCard parkings={parkings} isvisible={visible} setVisible={setVisible}/>}
-            {visible ? <DetailCardMarker parkings={parkings} isvisible={visible} setVisible={setVisible}/> : null}
+            {visible ? <DetailCardMarker parkings={parkings} isvisible={visible} setVisible={setVisible} navigation={navigation} /> : null}
         </Flex>
     ) 
 }
