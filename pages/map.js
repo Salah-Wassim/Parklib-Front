@@ -32,7 +32,10 @@ const Map = ({ route, navigation }) => {
                             adresse : _feature.properties.adresse,
                             infor : _feature.properties.infor,
                             secteur : _feature.properties.secteur,
-                            ta_type : _feature.properties.ta_type,
+                            ta_type: _feature.properties.ta_type,
+                            th_heur: _feature.properties.th_heur,
+                            type: _feature.properties.type,
+                            
                         }
                     }
                     setParkings(parkings =>[...parkings,feature]);

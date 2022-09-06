@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
         marginBottom: 30
     },
     topImage: {
-        borderRadius: 20,
+        borderRadius: 0,
+        width: wp("100%")
     },
     skipButtonContain: {
         position: "absolute",
