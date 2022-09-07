@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const BoxDetails = () => {
     const parkingClicked = useSelector((state) => state.tasks.parking);
-    console.log(parkingClicked)
     const isPlacesInformations =
         parkingClicked.properties.libres === "" || parkingClicked.properties.libres === null ? false : true;
 
