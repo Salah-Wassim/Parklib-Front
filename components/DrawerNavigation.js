@@ -9,15 +9,15 @@ const DrawerNavigation=()=>{
         <Drawer.Navigator
             initialRouteName='BottomNav'
             screenOptions={{
-                              headerTitle:'',
-                              headerShown: true,
-                              headerTransparent:false,
-                              drawerStyle: {
-                                backgroundColor: '#FFFFFF',
-                                width: 238,
-                              }, }}
-            drawerContent={(props) => <SideBar {...props} />}>
-
+                            headerTitle:'',
+                            headerShown: true,
+                            headerTransparent:false,
+                            drawerStyle: {
+                            backgroundColor: '#FFFFFF',
+                            width: 238,
+                            }, 
+                        }}
+                        drawerContent={(props) => <SideBar {...props} />}>
             <Drawer.Screen name="BottomNav" component={BottomNavigationBar} options={{title:"Park'Lib"}} />
         </Drawer.Navigator>
     );
