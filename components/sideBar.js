@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { Box, Flex, Spacer } from "@react-native-material/core";
 
 
 const SideBar=(props)=> {
     const { navigation } = props
     return (
-        <TouchableOpacity  {...props} style={styles.drawer}>
+        <ScrollView  {...props} style={styles.drawer}>
             <Flex direction="column" style={styles.container}>
                 <Flex direction="column">
                     <Flex direction="row" justify="between">
@@ -57,7 +57,7 @@ const SideBar=(props)=> {
                     </TouchableOpacity>
                 </Box>
             </Flex>
-        </TouchableOpacity>
+        </ScrollView>
     );
 };
 
