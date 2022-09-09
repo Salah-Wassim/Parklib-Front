@@ -64,7 +64,6 @@ const SideBar=(props)=> {
 const styles = StyleSheet.create({
     drawer:{
         height: "100%",
-        backgroundColor: 'red',
         zIndex: 999
     },
     container:{
