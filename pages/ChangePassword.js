@@ -3,13 +3,13 @@ import {View, StyleSheet} from 'react-native';
 import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
 
-const ResetPassword = () => {
+const ChangePassword = () => {
     return (
         <Stack m={20} spacing={20} style={styles.resetPwdContainer}>
             <View style={styles.form}>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Reinitialisez le mot de passe</Text>
-                </View>
+                {/*<View style={styles.titleContainer}>*/}
+                {/*    <Text style={styles.title}>Reinitialisez le mot de passe</Text>*/}
+                {/*</View>*/}
                 <View>
                     <View style={styles.formContainer}>
                         <TextInput
@@ -18,7 +18,7 @@ const ResetPassword = () => {
                             secureTextEntry={true}
                             textContentType='password'
                             variant="outlined"
-                        ></TextInput>
+                        />
                     </View>
                     <View style={styles.formContainer}>
                         <TextInput
@@ -27,12 +27,12 @@ const ResetPassword = () => {
                             secureTextEntry={true}
                             textContentType='password'
                             variant="outlined"
-                        ></TextInput>
+                        />
                     </View>
                 </View>
             </View>
             <View>
-                <Button title="Réinitialiser" color="#157575"></Button>
+                <Button title="Enregistrer" color="#157575"/>
             </View>
         </Stack>
     )
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default ResetPassword;
+export default ChangePassword;
