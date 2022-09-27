@@ -19,7 +19,7 @@ const BoxDetails = () => {
     const lat = parkingClicked.geometry.coordinates[1]
     const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
     const latLng = `${lat},${lng}`;
-    const label = 'Custom Label';
+    const label = parkingClicked.properties.nom;
     const url = Platform.select({
       ios: `${scheme}${label}@${latLng}`,
       android: `${scheme}${latLng}(${label})`
