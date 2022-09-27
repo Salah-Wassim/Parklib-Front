@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Linking } from "react-native";
 import { Box } from "@react-native-material/core";
 import {
     widthPercentageToDP as wp,
@@ -13,6 +13,21 @@ const BoxDetails = () => {
         parkingClicked.properties.libres === "" || parkingClicked.properties.libres === null ? false : true;
 
     const isTarif = parkingClicked.properties.th_heur === null ? false : true;
+
+    //OPEN GPS
+    const lng = parkingClicked.geometry.coordinates[0]
+    const lat = parkingClicked.geometry.coordinates[1]
+    const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
+    const latLng = `${lat},${lng}`;
+    const label = 'Custom Label';
+    const url = Platform.select({
+      ios: `${scheme}${label}@${latLng}`,
+      android: `${scheme}${latLng}(${label})`
+    });
+    
+    
+        
+
 
     const dispatch = useDispatch();
 
@@ -70,6 +85,16 @@ const BoxDetails = () => {
                     Tarif horaire non renseigné
                 </Text>
             )}
+
+
+            <TouchableOpacity
+                style={styles.gpsButtonContain}
+                onPress={() =>
+                    Linking.openURL(url)
+                }
+            >
+                <Text style={styles.gpsTextButton}>Itinéraire</Text>
+            </TouchableOpacity>
         </Box>
     );
 };
@@ -127,6 +152,20 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 16,
         fontWeight: "bold",
+    },
+
+
+    gpsButtonContain: {
+
+        backgroundColor: "#157575",
+
+        borderRadius: 10,
+
+    },
+    gpsTextButton: {
+        color: "white",
+        padding: 10,
+        textAlign: "center",
     },
 });
 export default BoxDetails;
