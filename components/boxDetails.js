@@ -78,11 +78,11 @@ const styles = StyleSheet.create({
     parkingBox: {
         backgroundColor: "rgb(228, 207, 169)",
         // opacity: .5,
-        borderRadius: 20,
+        borderRadius: 10,
         padding: 20,
-        marginLeft: wp("5%"),
-        height: hp("40%"), // 70% of height device screen
-        width: wp("90%"), // 80% of width device screen
+        marginLeft: wp("2%"),
+        height: hp("70%"), // 70% of height device screen
+        width: wp("96%"), // 90% of width device screen
         flexDirection: "column",
         justifyContent: "space-between",
     },

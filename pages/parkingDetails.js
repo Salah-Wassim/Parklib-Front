@@ -15,23 +15,30 @@ export default function ParkingDetails(props) {
                 <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
 
                 <Flex fill>
-                    <Box style={styles.boxTopImage}>
+                    {/* <Box style={styles.boxTopImage}>
                         <Image
                             style={styles.topImage}
                             source={require("../assets/parking_default.jpg")}
                         />
-                    </Box>
+                    </Box> */}
 
                     <BoxDetails />
 
-
+                    <TouchableOpacity
+                        style={styles.favoriteButtonContain}
+                        onPress={() =>
+                            console.log('Click on button "Ajouter aux Favoris"')
+                        }
+                    >
+                        <Text style={styles.textButton}>Ajouter aux favoris</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.skipButtonContain}
                         onPress={() =>
-                            console.log('Click on button "Continuer"')
+                            console.log('Click on button "Réserver"')
                         }
                     >
-                        <Text style={styles.skipButton}>Continuer</Text>
+                        <Text style={styles.textButton}>Réserver</Text>
                     </TouchableOpacity>
                 </Flex>
             </View>
@@ -45,7 +52,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "stretch",
-        justifyContent: "center",
+        justifyContent: "space-between",
         paddingTop: 30,
     },
     boxTopImage: {
@@ -63,9 +70,20 @@ const styles = StyleSheet.create({
         backgroundColor: "rgb(21, 117, 117)",
         width: wp("96%"),
         marginLeft: wp("2%"),
-        marginVertical: 15,
+        marginVertical: 5,
+        borderRadius: 10,
+
     },
-    skipButton: {
+    favoriteButtonContain: {
+
+        backgroundColor: "#c70000",
+        width: wp("96%"),
+        marginLeft: wp("2%"),
+        marginVertical: 5,
+        borderRadius: 10,
+
+    },
+    textButton: {
         color: "white",
         padding: 10,
         textAlign: "center",
