@@ -14,16 +14,7 @@ const BoxDetails = () => {
 
     const isTarif = parkingClicked.properties.th_heur === null ? false : true;
 
-    //OPEN GPS
-    const lng = parkingClicked.geometry.coordinates[0]
-    const lat = parkingClicked.geometry.coordinates[1]
-    const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
-    const latLng = `${lat},${lng}`;
-    const label = parkingClicked.properties.nom;
-    const url = Platform.select({
-      ios: `${scheme}${label}@${latLng}`,
-      android: `${scheme}${latLng}(${label})`
-    });
+
     
     
         
@@ -90,7 +81,8 @@ const BoxDetails = () => {
             <TouchableOpacity
                 style={styles.gpsButtonContain}
                 onPress={() =>
-                    Linking.openURL(url)
+                    // Linking.openURL(url)
+                    console.log('Open GPS')
                 }
             >
                 <Text style={styles.gpsTextButton}>Itinéraire</Text>
