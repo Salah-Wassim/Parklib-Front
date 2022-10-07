@@ -4,7 +4,7 @@ import BottomNavigationBar from "./bottomNavigationBar";
 
 const Drawer = createDrawerNavigator();
 
-const DrawerNavigation=()=>{
+const MenuBurger=()=>{
     return (
         <Drawer.Navigator
             initialRouteName='BottomNav'
@@ -23,4 +23,4 @@ const DrawerNavigation=()=>{
     );
 }
 
-export default DrawerNavigation;
+export default MenuBurger;

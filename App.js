@@ -17,7 +17,7 @@ import Cgu from "./pages/cgu";
 import PaymentScreen from "./pages/paymentScreen";
 import CheckoutScreen from "./pages/checkoutScreen";
 import Map from "./pages/map";
-import DrawerNavigation from "./components/drawerNavigation";
+import MenuBurger from "./components/menuBurger";
 import {createStackNavigator} from "@react-navigation/stack";
 
 import store from './store/store';
@@ -30,7 +30,7 @@ export default function App() {
         <Provider store={store}>
             <NavigationContainer>
                 <Stack.Navigator initialRouteName='DrawerNav'>
-                    <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={DrawerNavigation} />
+                    <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={MenuBurger} />
                     <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib', headerShown: false }} component={SignIn}/>
                     <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib', headerShown: false }} component={SignUp}/>
                     <Stack.Screen name="Parameters" options={{ title: 'Paramètres' }} component={Parameters}/>
