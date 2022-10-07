@@ -14,7 +14,7 @@ export default function ParkingDetails(props) {
             <View style={styles.container}>
                 <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
 
-                <Flex fill>
+                <Flex style={styles.boxContainer}>
                     {/* <Box style={styles.boxTopImage}>
                         <Image
                             style={styles.topImage}
@@ -24,22 +24,7 @@ export default function ParkingDetails(props) {
 
                     <BoxDetails />
 
-                    <TouchableOpacity
-                        style={styles.favoriteButtonContain}
-                        onPress={() =>
-                            console.log('Click on button "Ajouter aux Favoris"')
-                        }
-                    >
-                        <Text style={styles.textButton}>Ajouter aux favoris</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.skipButtonContain}
-                        onPress={() =>
-                            console.log('Click on button "Réserver"')
-                        }
-                    >
-                        <Text style={styles.textButton}>Réserver</Text>
-                    </TouchableOpacity>
+
                 </Flex>
             </View>
         </ScrollView>
@@ -55,6 +40,11 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingTop: 30,
     },
+    boxContainer: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
     boxTopImage: {
         display: "flex",
         justifyContent: "center",
@@ -65,27 +55,5 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         width: wp("100%"),
     },
-    skipButtonContain: {
 
-        backgroundColor: "rgb(21, 117, 117)",
-        width: wp("96%"),
-        marginLeft: wp("2%"),
-        marginVertical: 5,
-        borderRadius: 10,
-
-    },
-    favoriteButtonContain: {
-
-        backgroundColor: "#c70000",
-        width: wp("96%"),
-        marginLeft: wp("2%"),
-        marginVertical: 5,
-        borderRadius: 10,
-
-    },
-    textButton: {
-        color: "white",
-        padding: 10,
-        textAlign: "center",
-    },
 });

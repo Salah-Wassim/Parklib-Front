@@ -7,6 +7,8 @@ import {
 } from "react-native-responsive-screen";
 import { useDispatch, useSelector } from "react-redux";
 
+import { Ionicons } from '@expo/vector-icons';
+
 const BoxDetails = () => {
     const parkingClicked = useSelector((state) => state.tasks.parking);
     const isPlacesInformations =
@@ -29,74 +31,107 @@ const BoxDetails = () => {
     const dispatch = useDispatch();
 
     return (
-        <Box style={styles.parkingBox}>
-            <Text style={styles.parkingNom}>
-                {parkingClicked.properties.nom}
-            </Text>
-            <Text style={styles.parkingAdresse}>
-                {parkingClicked.properties.adresse}
-            </Text>
-            <View style={styles.parkingRow}>
-                <View>
-                    <Text style={styles.parkingLabel}>Etat:</Text>
-                    <Text style={styles.parkingInfos}>
-                        {parkingClicked.properties.etat}
-                    </Text>
+        <View style={styles.container} >
+
+            <Box style={styles.parkingBox}>
+                <Text style={styles.parkingNom}>
+                    {parkingClicked.properties.nom}
+                </Text>
+                <Text style={styles.parkingAdresse}>
+                    {parkingClicked.properties.adresse}
+                </Text>
+                <View style={styles.parkingRow}>
+                    <View>
+                        <Text style={styles.parkingLabel}>Etat:</Text>
+                        <Text style={styles.parkingInfos}>
+                            {parkingClicked.properties.etat}
+                        </Text>
+                    </View>
+                    <View>
+                        <Text style={styles.parkingLabel}>Secteur:</Text>
+                        <Text style={styles.parkingInfos}>
+                            {parkingClicked.properties.secteur}
+                        </Text>
+                    </View>
+                    <View>
+                        <Text style={styles.parkingLabel}>Type:</Text>
+                        <Text style={styles.parkingInfos}>
+                            {parkingClicked.properties.type}
+                        </Text>
+                    </View>
                 </View>
-                <View>
-                    <Text style={styles.parkingLabel}>Secteur:</Text>
-                    <Text style={styles.parkingInfos}>
-                        {parkingClicked.properties.secteur}
+
+                {isPlacesInformations ? (
+                    <View>
+                        <Text style={styles.parkingPlacesLibres}>
+                            Places disponibles: {parkingClicked.properties.libres}
+                        </Text>
+                        <Text style={styles.parkingPlacesTotales}>
+                            (sur un total de {parkingClicked.properties.total}{" "}
+                            places)
+                        </Text>
+                    </View>
+                ) : (
+                    <Text style={styles.parkingAdresse}>
+                        Pas d'informations sur les places disponibles.
                     </Text>
-                </View>
-                <View>
-                    <Text style={styles.parkingLabel}>Type:</Text>
-                    <Text style={styles.parkingInfos}>
-                        {parkingClicked.properties.type}
+                )}
+
+                {isTarif ? (
+                    <Text style={styles.parkingTarif}>
+                        Tarif horaire: {parkingClicked.properties.th_heur.toFixed(2)}€
                     </Text>
-                </View>
+                ) : (
+                    <Text style={styles.parkingAdresse}>
+                        Tarif horaire non renseigné
+                    </Text>
+                )}
+
+
+                
+            </Box>
+            <View  style={styles.buttonsContain}>
+                <TouchableOpacity
+                            style={styles.favoriteButtonContain}
+                            onPress={() =>
+                                console.log('Click on button "Ajouter aux Favoris"')
+                            }
+                        >
+                    <Ionicons name="heart-outline" size={40} color="#c70000" />
+                </TouchableOpacity>
+                {/* <TouchableOpacity
+                            style={styles.favoriteButtonContain}
+                            onPress={() =>
+                                console.log('Click on button "Retirer des Favoris"')
+                            }
+                        >
+                    <Ionicons name="heart" size={40} color="#c70000" />
+                </TouchableOpacity> */}
+
+                <TouchableOpacity
+                    style={styles.gpsButtonContain}
+                    onPress={() =>
+                        Linking.openURL(url)
+                    }
+                >
+                    
+                    <Ionicons name="map-outline" size={24} color="white" />
+                    <Text style={styles.gpsTextButton}>
+                        Ouvrir le GPS
+                    </Text>
+                </TouchableOpacity>
+
             </View>
-
-            {isPlacesInformations ? (
-                <View>
-                    <Text style={styles.parkingPlacesLibres}>
-                        Places disponibles: {parkingClicked.properties.libres}
-                    </Text>
-                    <Text style={styles.parkingPlacesTotales}>
-                        (sur un total de {parkingClicked.properties.total}{" "}
-                        places)
-                    </Text>
-                </View>
-            ) : (
-                <Text style={styles.parkingAdresse}>
-                    Pas d'informations sur les places disponibles.
-                </Text>
-            )}
-
-            {isTarif ? (
-                <Text style={styles.parkingTarif}>
-                    Tarif horaire: {parkingClicked.properties.th_heur.toFixed(2)}€
-                </Text>
-            ) : (
-                <Text style={styles.parkingAdresse}>
-                    Tarif horaire non renseigné
-                </Text>
-            )}
-
-
-            <TouchableOpacity
-                style={styles.gpsButtonContain}
-                onPress={() =>
-                    Linking.openURL(url)
-                }
-            >
-                <Text style={styles.gpsTextButton}>Itinéraire</Text>
-            </TouchableOpacity>
-        </Box>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        height: hp("100%"), // 70% of height device screen
+        width: wp("100%"), // 90% of width device screen
+    },
+
     parkingBox: {
         backgroundColor: "rgb(228, 207, 169)",
         // opacity: .5,
@@ -150,13 +185,38 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
     },
+    buttonsContain: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
 
+        marginLeft: wp("2%"),
+        height: hp("10%"), // 70% of height device screen
+        width: wp("96%"), // 90% of width device screen
+    },
+    favoriteButtonContain: {
 
-    gpsButtonContain: {
-
-        backgroundColor: "#157575",
+        minWidth: wp("20%"),
+        // height: hp("6%"),
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
 
         borderRadius: 10,
+        borderColor: "#c4c8c8",
+        borderWidth: 2,
+        margin: 2
+    },
+    gpsButtonContain: {
+
+        minWidth: wp("76%"),
+        backgroundColor: "#157575",
+        borderRadius: 10,
+        borderColor: "#157575",
+        borderWidth: 2,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
 
     },
     gpsTextButton: {
