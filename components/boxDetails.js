@@ -90,36 +90,36 @@ const BoxDetails = () => {
 
                 
             </Box>
-            <View  style={styles.buttonsContain}>
-                <TouchableOpacity
-                            style={styles.favoriteButtonContain}
-                            onPress={() =>
-                                console.log('Click on button "Ajouter aux Favoris"')
-                            }
-                        >
-                    <Ionicons name="heart-outline" size={40} color="#c70000" />
-                </TouchableOpacity>
-                {/* <TouchableOpacity
-                            style={styles.favoriteButtonContain}
-                            onPress={() =>
-                                console.log('Click on button "Retirer des Favoris"')
-                            }
-                        >
-                    <Ionicons name="heart" size={40} color="#c70000" />
-                </TouchableOpacity> */}
 
-                <TouchableOpacity
-                    style={styles.gpsButtonContain}
-                    onPress={() =>
-                        Linking.openURL(url)
-                    }
-                >
-                    
-                    <Ionicons name="map-outline" size={24} color="white" />
-                    <Text style={styles.gpsTextButton}>
-                        Ouvrir le GPS
-                    </Text>
-                </TouchableOpacity>
+            <View style={styles.buttonsContain} >
+
+                <View style={styles.oneButtonContainer} >
+
+                    <TouchableOpacity
+                                style={styles.favoriteButtonContain}
+                                onPress={() =>
+                                    console.log('Click on button "Ajouter/Retirer des Favoris"')
+                                }
+                            >
+                        <Ionicons name="heart-outline" size={40} color="#c70000" />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={styles.gpsButtonContain}
+                        onPress={() =>
+                            Linking.openURL(url)
+                        }
+                    >
+                        
+                        <Ionicons name="map-outline" size={24} color="white" />
+                        <Text style={styles.gpsTextButton}>
+                            Ouvrir le GPS
+                        </Text>
+                    </TouchableOpacity>
+
+
+                </View>
+                
 
             </View>
         </View>
@@ -194,6 +194,17 @@ const styles = StyleSheet.create({
         height: hp("10%"), // 70% of height device screen
         width: wp("96%"), // 90% of width device screen
     },
+
+    oneButtonContainer: {
+        backgroundColor: "#157575",
+        borderRadius: 10,
+        borderColor: "#157575",
+        borderWidth: 2,
+        flexDirection: "row",
+        justifyContent: "center" ,
+        alignItems: "center",
+    },
+
     favoriteButtonContain: {
 
         minWidth: wp("20%"),
@@ -203,17 +214,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
 
         borderRadius: 10,
-        borderColor: "#c4c8c8",
-        borderWidth: 2,
+        // borderColor: "#c4c8c8",
+        // borderWidth: 2,
         margin: 2
     },
     gpsButtonContain: {
 
-        minWidth: wp("76%"),
+        minWidth: wp("74%"),
         backgroundColor: "#157575",
         borderRadius: 10,
-        borderColor: "#157575",
-        borderWidth: 2,
+        // borderColor: "#157575",
+        // borderWidth: 2,
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
