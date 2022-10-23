@@ -20,6 +20,9 @@ import CheckoutScreen from "./pages/checkoutScreen";
 import Map from "./pages/map";
 import {createStackNavigator} from "@react-navigation/stack";
 import DrawerNavigation from "./components/DrawerNavigation";
+import CreateAdFirstStep from "./pages/createAdFirstStep";
+import CreateAdSecondtSteps from "./pages/createAdSecondSteps";
+import CreateAdThirdtSteps from "./pages/createAdThirdSteps";
 
 import store from './store/store';
 import { Provider } from 'react-redux'
@@ -48,6 +51,9 @@ export default function App() {
                     <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
                     <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
                     <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
+                    <Stack.Screen name="CreateAdFirstStep" options={{title: 'Étape 1'}} component={CreateAdFirstStep}/>
+                    <Stack.Screen name="CreateAdSecondtSteps" options={{title: 'Étape 2'}} component={CreateAdSecondtSteps}/>
+                    <Stack.Screen name="CreateAdThirdtSteps" options={{title: 'Étape 3'}} component={CreateAdThirdtSteps}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                     {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
                 </Stack.Navigator>
