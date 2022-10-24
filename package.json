@@ -26,6 +26,7 @@
     "react-favicon": "^1.0.0",
     "react-native": "0.64.3",
     "react-native-gesture-handler": "~2.1.0",
+    "react-native-image-picker": "^4.10.0",
     "react-native-maps": "0.29.4",
     "react-native-paper": "^4.12.3",
     "react-native-picker-select": "^8.0.4",
