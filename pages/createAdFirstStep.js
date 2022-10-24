@@ -52,7 +52,7 @@ const createAdFirstStep = ({navigation}) => {
                     />
                 </View>
             </View>
-            <View style={styles.submitButtonContainer} onpress={() => navigation.navigate('CreateAdSecondtSteps')}>
+            <View style={styles.submitButtonContainer} onpress={() => navigation.navigate('CreateAdThirdSteps')}>
                 <Button style={styles.submitButton} title="Continuer" color="#157575"/>
             </View>
         </Stack>
