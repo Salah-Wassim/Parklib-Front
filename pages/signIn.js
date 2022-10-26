@@ -52,7 +52,9 @@ const SignIn = ({navigation}) => {
                     />
                 </View>
                 <View style={styles.submitButtonContainer}>
-                    <Button style={styles.submitButton} title="Connexion" color="#157575"/>
+                    <TouchableOpacity onPress={() => navigation.navigate('DrawerNav')}>
+                        <Button style={styles.submitButton}  title="Connexion" color="#157575"/>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.socialMultiBox}>
