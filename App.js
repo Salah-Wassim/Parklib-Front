@@ -6,7 +6,7 @@ import SignUp from "./pages/signUp";
 import Parameters from "./pages/parameters";
 import Contact from "./pages/contact";
 import ContactForm from "./pages/contactForm";
-import ResetPassword from "./pages/resetPassword";
+import ChangePassword from "./pages/ChangePassword";
 import LandingPage from "./pages/landingPage";
 import PaymentMethod from "./pages/paymentMethod";
 import EditCreditCard from "./pages/editCreditCard";
@@ -31,14 +31,14 @@ export default function App() {
     return (
         <Provider store={store}>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName='DrawerNav'>
+                <Stack.Navigator initialRouteName='ChangePassword'>
                     <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={DrawerNavigation} />
                     <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib', headerShown: false }} component={SignIn}/>
                     <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib', headerShown: false }} component={SignUp}/>
                     <Stack.Screen name="Parameters" options={{ title: 'Paramètres' }} component={Parameters}/>
                     <Stack.Screen name="Contact" options={{ title: 'Contact' }} component={Contact}/>
                     <Stack.Screen name="ContactForm" options={{ title: 'Nous contacter' }} component={ContactForm}/>
-                    <Stack.Screen name="ResetPassword" options={{ title: 'Park\'Lib' }} component={ResetPassword}/>
+                    <Stack.Screen name="ChangePassword" options={{ title: 'Changer le mot de passe' }} component={ChangePassword}/>
                     <Stack.Screen name="LandingPage" options={{ title: 'Bienvenue', headerShown: false }} component={LandingPage}/>
                     <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/>
                     <Stack.Screen name="EditCreditCard" options={{ title: 'Modifier une carte bancaire' }} component={EditCreditCard}/>
