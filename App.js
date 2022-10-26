@@ -24,6 +24,7 @@ import DrawerNavigation from "./components/DrawerNavigation";
 
 import store from './store/store';
 import { Provider } from 'react-redux'
+import ParkingParticulierDetails from './pages/parkingParticulierDetails';
 
 const Stack = createStackNavigator()
 
@@ -50,6 +51,7 @@ export default function App() {
                     <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
                     <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
                     <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
+                    <Stack.Screen name="ParkingParticulierDetails" options={{title: 'En savoir plus'}} component={ParkingParticulierDetails}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                     {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
                 </Stack.Navigator>
