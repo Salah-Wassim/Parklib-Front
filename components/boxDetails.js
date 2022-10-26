@@ -101,7 +101,11 @@ const BoxDetails = () => {
                                     console.log('Click on button "Ajouter/Retirer des Favoris"')
                                 }
                             >
-                        <Ionicons name="heart-outline" size={40} color="#c70000" />
+                        <Ionicons name="heart-outline" size={24} color="#c70000" />
+                        {/* <Ionicons name="heart" size={40} color="#c70000" /> */}
+                        <Text style={styles.gpsTextButton}>
+                            Ajouter aux Favoris
+                        </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
@@ -111,7 +115,7 @@ const BoxDetails = () => {
                         }
                     >
                         
-                        <Ionicons name="map-outline" size={24} color="white" />
+                        <Ionicons name="map-outline" size={24} color="#157575" />
                         <Text style={styles.gpsTextButton}>
                             Ouvrir le GPS
                         </Text>
@@ -196,10 +200,10 @@ const styles = StyleSheet.create({
     },
 
     oneButtonContainer: {
-        backgroundColor: "#157575",
+        backgroundColor: "#fff",
         borderRadius: 10,
-        borderColor: "#157575",
-        borderWidth: 2,
+        // borderColor: "#fff",
+        // borderWidth: 2,
         flexDirection: "row",
         justifyContent: "center" ,
         alignItems: "center",
@@ -207,7 +211,7 @@ const styles = StyleSheet.create({
 
     favoriteButtonContain: {
 
-        minWidth: wp("20%"),
+        minWidth: wp("47%"),
         // height: hp("6%"),
         flexDirection: "row",
         justifyContent: "center",
@@ -220,18 +224,20 @@ const styles = StyleSheet.create({
     },
     gpsButtonContain: {
 
-        minWidth: wp("74%"),
-        backgroundColor: "#157575",
-        borderRadius: 10,
+        minWidth: wp("47%"),
+        // backgroundColor: "#157575",
+        // borderRadius: 10,
         // borderColor: "#157575",
         // borderWidth: 2,
+        borderLeftWidth: 1,
+        borderLeftColor: "#aaa",
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
 
     },
     gpsTextButton: {
-        color: "white",
+        color: "#aaa",
         padding: 10,
         textAlign: "center",
     },
