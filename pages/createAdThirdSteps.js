@@ -6,6 +6,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 const createAdThirdSteps = ({navigation}) => {
 
     const [photo, setPhoto] = React.useState(null);
+    const [error, setError] = React.useState('');
 
     const handleChoosePhoto = () => {
         launchImageLibrary({ noData: true }, (response) => {
@@ -15,6 +16,16 @@ const createAdThirdSteps = ({navigation}) => {
             }
         });
     };
+
+    const handleSubmit = () => {
+        if(photo === null) {
+            setError('Merci d\'ajouter une photo');
+        }
+        else {
+            setError('');
+            navigation.navigate('')
+        }
+    }
 
     return (
         <Stack m={20} spacing={40} style={styles.createAdThirdStepsContainer}>
@@ -31,15 +42,20 @@ const createAdThirdSteps = ({navigation}) => {
                     )}
                 </View>
             </View>
-            <View style={styles.submitButtonContainer} onpress={() => navigation.navigate('')}>
-                <Button style={styles.submitButton} title="Publier" color="#157575"/>
+            <View style={styles.submitButtonContainer}>
+                <Button style={styles.submitButton} title="Publier" color="#157575" onpress={handleSubmit}/>
+                <Text style={styles.error}>{error}</Text>
             </View>
         </Stack>
     )
 }
 
 const styles = StyleSheet.create({
-    createAdThirdStepsContainer: {}
+    createAdThirdStepsContainer: {},
+    error:{
+        color:'red',
+        alignSelf:'center'
+    }
 })
 
 export default createAdThirdSteps;
