@@ -24,18 +24,18 @@ const SideBar=(props)=> {
                     <TouchableOpacity style={{marginLeft: 22, marginTop:11}}>
                         <Text style={{marginBottom: 22, color:"#575DFB"}}>Profil</Text>
                     </TouchableOpacity>
-                    <View style={{marginBottom: 22}}>
+                    <Box mb={12} >
                         <Flex center>
                             <Image style={styles.profileImg}
                                    source={require('../assets/profil.jpg')}
                             />
                         </Flex>
-                    </View>
+                    </Box>
                 <Spacer style={styles.flexBlock}  />
                 </Flex>
                 <Flex fill style={styles.boxContainer}>
                 <Box>
-                    <TouchableOpacity style={{}}>
+                    <TouchableOpacity>
                         <Text style={styles.labels}>Tous les libellés</Text>
                         <Text style={styles.marginItems} onPress={() => {
                             navigation.navigate('SignIn')}}>Se connecter</Text>
@@ -78,19 +78,13 @@ const styles = StyleSheet.create({
     },
     drawer:{
         height: "100%",
-        zIndex: 999
+        zIndex: 999,
     },
     container:{
         backgroundColor: 'white',
         height: "100%",
         borderColor: "#f1f1f1",
         borderWidth: 2
-    },
-    title:{
-        marginLeft: 22, 
-        fontSize: 24, 
-        marginBottom: 8, 
-        marginTop: 8
     },
     closeImg:{
         height: 12,
@@ -144,12 +138,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop:10,
         marginBottom:24,
-    },
-    lastBox:{
-        position: 'absolute',
-        bottom:0,
-        left: 0,
-        right:0
     },
     logoutView: {
         backgroundColor: "#C70000",
