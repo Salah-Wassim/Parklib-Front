@@ -22,6 +22,8 @@ import {createStackNavigator} from "@react-navigation/stack";
 
 import store from './store/store';
 import { Provider } from 'react-redux'
+import VerificationScreen from "./pages/verificationScreen";
+import VerificationCodeScreen from "./pages/verficationCodeScreen";
 
 const Stack = createStackNavigator()
 
@@ -46,6 +48,8 @@ export default function App() {
                     <Stack.Screen name="CGU" options={{ title: 'CGU' }} component={Cgu}/>
                     <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
                     <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
+                    <Stack.Screen name="Verification" options={{title: 'Verification'}} component={VerificationScreen}/>
+                    <Stack.Screen name="VerificationCode" options={{title: 'Validation du code'}} component={VerificationCodeScreen}/>
                     <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                     {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}

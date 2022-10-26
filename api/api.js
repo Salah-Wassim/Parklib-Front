@@ -23,3 +23,31 @@ export const getParkingMap = async () => {
       console.log('Request failed', error)  
     });
 }
+
+export const verifyPhoneNumber = async (phoneNumber) => {
+   return await fetch('http://127.0.0.1:3000', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            phone: phoneNumber
+        })
+    }).then((response) => response.json()).catch((error) => console.error(error));
+}
+
+export const verifyCode = async (code, phoneNumber,report) => {
+    return await fetch('http://127.0.0.1:3000/report', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            phone: phoneNumber,
+            report: report,
+            code: code
+        })
+    }).then((response) => response.json()).catch((error) => console.error(error));
+}
