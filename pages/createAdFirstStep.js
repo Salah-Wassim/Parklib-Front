@@ -4,19 +4,22 @@ import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
 import RNPickerSelect from 'react-native-picker-select';
 
-const createAdFirstStep = ({navigation}) => {
+const CreateAdFirstStep = ({navigation}) => {
 
     const [adr, setAdr] = React.useState('');
     const [prix, setPrix] = React.useState(null);
     const [typePlace, setTypePlace] = React.useState('');
     const [nbrPlace, setNbrPlace] = React.useState(null);
+    const [assured, setAssured] = React.useState('')
     const [error, setError] = React.useState('');
 
     const handleSubmit = () => {
-        if(adr === '' || prix == null || typePlace === '' || nbrPlace === null){
+        console.log('hello')
+        if (adr === '' || prix == null || typePlace === '' || nbrPlace === null || assured === '') {
+            console.log('error')
             setError('Merci de remplir tous les champs s\'il vous plaît')
-        }
-        else{
+        } else {
+            console.log('no error')
             setError('');
             navigation.navigate('CreateAdSecondSteps')
         }
@@ -48,7 +51,7 @@ const createAdFirstStep = ({navigation}) => {
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Type de place</Text>
                     <RNPickerSelect
-                        onValueChange={(value) => console.log(value)}
+                        onValueChange={newTypePlace => setTypePlace(newTypePlace)}
                         items={[
                             {label : "Selectionné un type de place", value: ''},
                             { label: 'Parking privé (sous-sol)', value: 'sous-sol' },
@@ -70,15 +73,17 @@ const createAdFirstStep = ({navigation}) => {
                     <Text style={styles.formText}>Votre place de parking est-elle assurée ?</Text>
                     <RNPickerSelect
                         items={[
+                            {label: 'Selectionnez une valeur', value: ''},
                             { label: 'Oui', value: 'oui' },
                             { label: 'Non', value: 'non' },
                         ]}
-                        onValueChange={(value) => console.log(value)}
+                        onValueChange={newAssured => setAssured(newAssured)}
+                        value={assured}
                     />
                 </View>
             </View>
-            <View style={styles.submitButtonContainer} onpress={() => handleSubmit()}>
-                <Button style={styles.submitButton} title="Continuer" color="#157575"/>
+            <View style={styles.submitButtonContainer}>
+                <Button style={styles.submitButton} title="Continuer" color="#157575" onPress={handleSubmit}/>
                 <Text style={styles.error}>{error}</Text>
             </View>
         </Stack>
@@ -88,8 +93,8 @@ const styles = StyleSheet.create({
     createAdFirstStepContainer: {},
     error:{
         color:'red',
-        alignSelf:'center',
-    }
+    },
+    submitButton: {}
 })
 
-export default createAdFirstStep;
+export default CreateAdFirstStep;

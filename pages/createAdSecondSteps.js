@@ -4,7 +4,7 @@ import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
 import RNPickerSelect from 'react-native-picker-select';
 
-const createAdSecondSteps = ({navigation}) => {
+const CreateAdSecondSteps = ({navigation}) => {
 
     const [titre, setTitre] = React.useState('');
     const [description, setDescription] = React.useState('')
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default createAdSecondSteps;
+export default CreateAdSecondSteps;
