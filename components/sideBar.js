@@ -6,7 +6,7 @@ import { Box, Flex, Spacer } from "@react-native-material/core";
 const SideBar=(props)=> {
     const { navigation } = props
     return (
-        <Flex  {...props} style={styles.drawer}>
+        <Flex {...props} h={"100%"} pt={37} style={styles.drawer}>
             <Flex direction="column" style={styles.container}>
                 <Flex direction="column">
                     <Flex direction="row" justify="between" style={styles.flexBlock}>
@@ -24,7 +24,7 @@ const SideBar=(props)=> {
                     <TouchableOpacity style={{marginLeft: 22, marginTop:11}}>
                         <Text style={{marginBottom: 22, color:"#575DFB"}}>Profil</Text>
                     </TouchableOpacity>
-                    <Box mb={12} >
+                    <Box mb={12}>
                         <Flex center>
                             <Image style={styles.profileImg}
                                    source={require('../assets/profil.jpg')}
@@ -77,8 +77,7 @@ const styles = StyleSheet.create({
         marginLeft: 22,
     },
     drawer:{
-        height: "100%",
-        zIndex: 999,
+        zIndex: 999
     },
     container:{
         backgroundColor: 'white',
