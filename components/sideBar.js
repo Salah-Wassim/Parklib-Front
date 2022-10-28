@@ -1,162 +1,151 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import {Box, Flex} from "@react-native-material/core";
-import {DrawerContentScrollView, DrawerActions} from "@react-navigation/drawer";
-//DrawerItemList
-import { Dimensions } from 'react-native';
+import { Box, Flex, Spacer } from "@react-native-material/core";
 
 
-const winHeight = Dimensions.get('window').height;
-
-const SideBar=({props})=> {
+const SideBar=(props)=> {
+    const { navigation } = props
     return (
-        <DrawerContentScrollView  {...props} style={styles.drawer}> 
-            <Flex fill style={styles.section}>
-                <Flex style={styles.flexContainer}>
-                    <Text style={styles.topTitle}>Park'Lib</Text>
-                        <View style={styles.closeView}>
-                        <Image style={styles.close} label="Close drawer"
-                        onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}
-                        source={require('../assets/close.png')}/>
+        <Flex {...props} h={"100%"} pt={37} style={styles.drawer}>
+            <Flex direction="column" style={styles.container}>
+                <Flex direction="column">
+                    <Flex direction="row" justify="between" style={styles.flexBlock}>
+                    <Flex center>
+                            <Image style={styles.logo}
+                                   source={require('../assets/logoWithoutTextSideBar.png')}
+                            />
+                        </Flex>
+                        <View style={styles.close}>
+                            <TouchableOpacity onPress={() =>navigation.closeDrawer()}>
+                                <Image style={styles.closeImg}  source={require('../assets/close.png')} />
+                            </TouchableOpacity>
                         </View>
-                    <TouchableOpacity style={{marginLeft: 22}}>
-                    <Text onPress={() => { navigation.navigate('Profile') }}>Profil</Text>
+                    </Flex>
+                    <TouchableOpacity style={{marginLeft: 22, marginTop:11}}>
+                        <Text style={{marginBottom: 22, color:"#575DFB"}}>Profil</Text>
                     </TouchableOpacity>
-                    <View>
-                        <Box style={styles.boxImg}>
-                            <Image style={styles.imgProfile}
+                    <Box mb={12}>
+                        <Flex center>
+                            <Image style={styles.profileImg}
                                    source={require('../assets/profil.jpg')}
                             />
-                        </Box>
-                    </View>
+                        </Flex>
+                    </Box>
+                <Spacer style={styles.flexBlock}  />
                 </Flex>
-                <Box style={styles.boxContainer}>
-                    <TouchableOpacity style={{marginBottom: 130}}>
+                <Flex fill style={styles.boxContainer}>
+                <Box>
+                    <TouchableOpacity>
                         <Text style={styles.labels}>Tous les libellés</Text>
                         <Text style={styles.marginItems} onPress={() => {
-                              navigation.navigate('SignIn')}}>Se connecter</Text>
+                            navigation.navigate('SignIn')}}>Se connecter</Text>
                         <Text style={styles.marginItems} onPress={() => {
-                              navigation.navigate('SignUp')}}>S'inscrire</Text>
+                            navigation.navigate('SignUp')}}>S'inscrire</Text>
                         <Text style={styles.marginItems} onPress={() => {
-                              navigation.navigate('Contact')}}>Contactez-nous</Text>
+                            navigation.navigate('Contact')}}>Contactez-nous</Text>
                     </TouchableOpacity>
                 </Box>
-                <Box>
-                    <TouchableOpacity style={styles.lastContainer}>
+                </Flex>
+                    <Flex>
+                    <TouchableOpacity>
                         <Text style={styles.privacyPolicy} onPress={() => {
-                                navigation.navigate('PrivacyPolicy')}} >Mentions légales</Text>
+                            navigation.navigate('PrivacyPolicy')}} >Mentions légales</Text>
                         <Text style={styles.cguV1} onPress={() => {
-                                navigation.navigate('CGU')}}>CGU</Text>
+                            navigation.navigate('CGU')}}>CGU</Text>
                         <Text style={styles.version}>V1.0</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
                         <View style={styles.logoutView}>
                             <Text style={styles.logoutBtn}>Déconnecter</Text>
                         </View>
                     </TouchableOpacity>
-                </Box>
+                </Flex>
             </Flex>
-        </DrawerContentScrollView>
+        </Flex>
     );
 };
 
-
-
 const styles = StyleSheet.create({
-    section:{
-        backgroundColor: 'white'
+    close:{
+        position: 'absolute',
+        right: 10,
+        bottom: 13
+    },
+    logo:{
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 22,
     },
     drawer:{
-        // height: hp('50%'),
-        backgroundColor: 'white',
-        height: winHeight * 1, // 20%
+        zIndex: 999
     },
-    flexContainer:{
-        // height: hp('32%'),
-        borderColor: "black",
+    container:{
+        backgroundColor: 'white',
+        height: "100%",
+        borderColor: "#f1f1f1",
         borderWidth: 2
     },
-    imgProfile: {
+    closeImg:{
+        height: 12,
+        width: 12
+    },
+    profileImg: {
         width: 100,
         height: 100,
         resizeMode: 'stretch',
         alignItems: "center",
         justifyContent: "center",
-        borderColor: "black",
-        borderWidth: 2,
-        borderRadius: 10,
+        borderColor: "#f1f1f1",
+        borderRadius: 150,
         marginTop: -10
     },
+    flexBlock: {
+        borderColor: "#f1f1f1",
+        borderBottomWidth: 2,
+    },
     boxContainer:{
-        // height: hp('35%'),
-        borderColor: "black",
-        borderWidth: 2,
-        borderBottomColor: 'black',
-        borderTopWidth: 0,
-    },
-    topTitle:{
-        fontSize: 30,
-        marginTop: 10,
-        marginBottom: 20,
-        marginLeft: 22
-    },
-    closeView:{
-
-    },
-    close:{
-        position: 'absolute',
-        top: -51,
-        right: 10,
-        display: 'flex',
-        height: 24,
-        width: 24,
-
-    },
-    marginItems: {
-        marginLeft: 22,
-        marginTop: 14
+        borderColor: "#f1f1f1",
+        borderBottomWidth: 2,
     },
     labels: {
         marginLeft: 22,
         marginTop: 14,
         fontStyle: "italic",
+        color:"#575DFB",
+    },
+    marginItems: {
+        marginLeft: 22,
+        marginTop: 14,
+        fontWeight:'normal'
+    },
+    privacyPolicy:{
+        color:"black",
+        textAlign: 'center',
+        marginTop:15,
+        marginBottom:15,
+        textDecorationLine: 'underline',
+        fontSize: 18,
+        fontWeight:'bold'
+    },
+    cguV1:{
+        color:"#575DFB",
+        textAlign: 'center',
+        marginTop:10,
+    },
+    version:{
+        color:"#575DFB",
+        textAlign: 'center',
+        marginTop:10,
+        marginBottom:24,
     },
     logoutView: {
         backgroundColor: "#C70000",
-
         marginBottom: 4
     },
     logoutBtn: {
         textAlign: "center",
         color: "white",
         padding: 10,
-    },
-    lastContainer: {
-        borderWidth: 2,
-        borderBottomColor: 'black',
-        borderTopWidth: 0,
-    },
-    boxImg: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 14,
-        marginBottom: 14
-    },
-    privacyPolicy:{
-        textAlign: 'center',
-        marginTop:15,
-        marginBottom:15,
-        color: 'blue',
-        textDecorationLine: 'underline',
-        fontSize: 18
-    },
-    cguV1:{
-        textAlign: 'center',
-        marginTop:10,
-    },
-    version:{
-        textAlign: 'center',
-        marginTop:10,
-        marginBottom:24,
     }
 });
 
