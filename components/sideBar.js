@@ -6,31 +6,36 @@ import { Box, Flex, Spacer } from "@react-native-material/core";
 const SideBar=(props)=> {
     const { navigation } = props
     return (
-        <Flex fill  {...props} style={styles.drawer}>
+        <Flex {...props} h={"100%"} pt={37} style={styles.drawer}>
             <Flex direction="column" style={styles.container}>
                 <Flex direction="column">
-                    <Flex direction="row" justify="between">
-                        <Text style={styles.title}>Park'Lib</Text>
-                        <View>
+                    <Flex direction="row" justify="between" style={styles.flexBlock}>
+                    <Flex center>
+                            <Image style={styles.logo}
+                                   source={require('../assets/logoWithoutTextSideBar.png')}
+                            />
+                        </Flex>
+                        <View style={styles.close}>
                             <TouchableOpacity onPress={() =>navigation.closeDrawer()}>
                                 <Image style={styles.closeImg}  source={require('../assets/close.png')} />
                             </TouchableOpacity>
                         </View>
                     </Flex>
-                    <TouchableOpacity style={{marginLeft: 22}}>
-                        <Text style={{marginBottom: 22}}>Profil</Text>
+                    <TouchableOpacity style={{marginLeft: 22, marginTop:11}}>
+                        <Text style={{marginBottom: 22, color:"#575DFB"}}>Profil</Text>
                     </TouchableOpacity>
-                    <View style={{marginBottom: 22}}>
+                    <Box mb={12}>
                         <Flex center>
                             <Image style={styles.profileImg}
                                    source={require('../assets/profil.jpg')}
                             />
                         </Flex>
-                    </View>
+                    </Box>
                 <Spacer style={styles.flexBlock}  />
                 </Flex>
-                <Box style={styles.boxContainer}>
-                    <TouchableOpacity style={{marginBottom: 180}}>
+                <Flex fill style={styles.boxContainer}>
+                <Box>
+                    <TouchableOpacity>
                         <Text style={styles.labels}>Tous les libellés</Text>
                         <Text style={styles.marginItems} onPress={() => {
                             navigation.navigate('SignIn')}}>Se connecter</Text>
@@ -40,7 +45,8 @@ const SideBar=(props)=> {
                             navigation.navigate('Contact')}}>Contactez-nous</Text>
                     </TouchableOpacity>
                 </Box>
-                <Box>
+                </Flex>
+                    <Flex>
                     <TouchableOpacity>
                         <Text style={styles.privacyPolicy} onPress={() => {
                             navigation.navigate('PrivacyPolicy')}} >Mentions légales</Text>
@@ -48,42 +54,40 @@ const SideBar=(props)=> {
                             navigation.navigate('CGU')}}>CGU</Text>
                         <Text style={styles.version}>V1.0</Text>
                     </TouchableOpacity>
-                </Box>
-                <Box style={styles.lastBox}>
                     <TouchableOpacity>
                         <View style={styles.logoutView}>
                             <Text style={styles.logoutBtn}>Déconnecter</Text>
                         </View>
                     </TouchableOpacity>
-                </Box>
+                </Flex>
             </Flex>
         </Flex>
     );
 };
 
 const styles = StyleSheet.create({
+    close:{
+        position: 'absolute',
+        right: 10,
+        bottom: 13
+    },
+    logo:{
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 22,
+    },
     drawer:{
-        height: "100%",
-        backgroundColor: 'red',
         zIndex: 999
     },
     container:{
         backgroundColor: 'white',
         height: "100%",
-        borderColor: "black",
+        borderColor: "#f1f1f1",
         borderWidth: 2
     },
-    title:{
-        marginLeft: 22, 
-        fontSize: 24, 
-        marginBottom: 8, 
-        marginTop: 8
-    },
     closeImg:{
-        height: 24,
-        width: 24,
-        marginRight: 10,
-        marginTop: 11
+        height: 12,
+        width: 12
     },
     profileImg: {
         width: 100,
@@ -91,50 +95,48 @@ const styles = StyleSheet.create({
         resizeMode: 'stretch',
         alignItems: "center",
         justifyContent: "center",
-        borderColor: "black",
-        borderWidth: 2,
-        borderRadius: 25,
+        borderColor: "#f1f1f1",
+        borderRadius: 150,
         marginTop: -10
     },
     flexBlock: {
-        borderColor: "black",
+        borderColor: "#f1f1f1",
         borderBottomWidth: 2,
     },
     boxContainer:{
-        borderColor: "black",
+        borderColor: "#f1f1f1",
         borderBottomWidth: 2,
     },
     labels: {
         marginLeft: 22,
         marginTop: 14,
         fontStyle: "italic",
+        color:"#575DFB",
     },
     marginItems: {
         marginLeft: 22,
-        marginTop: 14
+        marginTop: 14,
+        fontWeight:'normal'
     },
     privacyPolicy:{
+        color:"black",
         textAlign: 'center',
         marginTop:15,
         marginBottom:15,
-        color: 'blue',
         textDecorationLine: 'underline',
-        fontSize: 18
+        fontSize: 18,
+        fontWeight:'bold'
     },
     cguV1:{
+        color:"#575DFB",
         textAlign: 'center',
         marginTop:10,
     },
     version:{
+        color:"#575DFB",
         textAlign: 'center',
         marginTop:10,
         marginBottom:24,
-    },
-    lastBox:{
-        position: 'absolute',
-        bottom:0,
-        left: 0,
-        right:0
     },
     logoutView: {
         backgroundColor: "#C70000",
