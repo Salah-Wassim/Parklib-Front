@@ -20,6 +20,11 @@ import Map from "./pages/map";
 import ParkingDetails from './pages/parkingDetails';
 import MenuBurger from "./components/menuBurger";
 import {createStackNavigator} from "@react-navigation/stack";
+import DrawerNavigation from "./components/DrawerNavigation";
+import CreateAdFirstStep from "./pages/createAdFirstStep";
+import CreateAdSecondSteps from "./pages/createAdSecondSteps";
+import CreateAdThirdSteps from "./pages/createAdThirdSteps";
+
 
 import store from './store/store';
 import { Provider } from 'react-redux'
@@ -49,6 +54,9 @@ export default function App() {
                     <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
                     <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
                     <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
+                    <Stack.Screen name="CreateAdFirstStep" options={{title: 'Étape 1'}} component={CreateAdFirstStep}/>
+                    <Stack.Screen name="CreateAdSecondSteps" options={{title: 'Étape 2'}} component={CreateAdSecondSteps}/>
+                    <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Étape 3'}} component={CreateAdThirdSteps}/>
                     <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
                     <Stack.Screen name="ParkingParticulierDetails" options={{title: 'Réservation'}} component={ParkingParticulierDetails}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
