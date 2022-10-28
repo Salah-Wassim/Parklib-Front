@@ -39,7 +39,7 @@ const SignIn = ({navigation}) => {
                 <View style={styles.formContainer}>
                     <View style={styles.pwdContainer}>
                         <Text style={styles.pwdText}>Mot de passe</Text>
-                        <TouchableOpacity style={styles.forgotPwContainer} onPress={() => navigation.navigate('ResetPassword')}>
+                        <TouchableOpacity style={styles.forgotPwContainer} onPress={() => navigation.navigate('Verification')}>
                             <Text style={styles.forgotPwdLink}>Mot de passe oublié ?</Text>
                         </TouchableOpacity>
                     </View>
@@ -52,7 +52,9 @@ const SignIn = ({navigation}) => {
                     />
                 </View>
                 <View style={styles.submitButtonContainer}>
-                    <Button style={styles.submitButton} title="Connexion" color="#157575"/>
+                    <TouchableOpacity onPress={() => navigation.navigate('DrawerNav')}>
+                        <Button style={styles.submitButton}  title="Connexion" color="#157575"/>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.socialMultiBox}>

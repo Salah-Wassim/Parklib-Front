@@ -17,7 +17,9 @@ export default function Home({navigation}) {
                         <Flex fill>
                             <TextInput
                                 label='Rechercher'
-                                onChangeText={onSearchText}
+                                onChangeText={(text)=>{
+                                    onSearchText(text)
+                                }}
                             />
                             <Button title="rechercher" onPress={() => {
                                 navigation.navigate('Map', {

@@ -6,7 +6,7 @@ import SignUp from "./pages/signUp";
 import Parameters from "./pages/parameters";
 import Contact from "./pages/contact";
 import ContactForm from "./pages/contactForm";
-import ResetPassword from "./pages/resetPassword";
+import ChangePassword from "./pages/ChangePassword";
 import LandingPage from "./pages/landingPage";
 import PaymentMethod from "./pages/paymentMethod";
 import EditCreditCard from "./pages/editCreditCard";
@@ -20,7 +20,6 @@ import Map from "./pages/map";
 import ParkingDetails from './pages/parkingDetails';
 import MenuBurger from "./components/menuBurger";
 import {createStackNavigator} from "@react-navigation/stack";
-import DrawerNavigation from "./components/DrawerNavigation";
 import CreateAdFirstStep from "./pages/createAdFirstStep";
 import CreateAdSecondSteps from "./pages/createAdSecondSteps";
 import CreateAdThirdSteps from "./pages/createAdThirdSteps";
@@ -28,6 +27,8 @@ import CreateAdThirdSteps from "./pages/createAdThirdSteps";
 
 import store from './store/store';
 import { Provider } from 'react-redux'
+import VerificationScreen from "./pages/verificationScreen";
+import VerificationCodeScreen from "./pages/verficationCodeScreen";
 import ParkingParticulierDetails from './pages/parkingParticulierDetails';
 
 const Stack = createStackNavigator()
@@ -43,7 +44,7 @@ export default function App() {
                     <Stack.Screen name="Parameters" options={{ title: 'Paramètres' }} component={Parameters}/>
                     <Stack.Screen name="Contact" options={{ title: 'Contact' }} component={Contact}/>
                     <Stack.Screen name="ContactForm" options={{ title: 'Nous contacter' }} component={ContactForm}/>
-                    <Stack.Screen name="ResetPassword" options={{ title: 'Park\'Lib' }} component={ResetPassword}/>
+                    <Stack.Screen name="ChangePassword" options={{ title: 'Changer le mot de passe' }} component={ChangePassword}/>
                     <Stack.Screen name="LandingPage" options={{ title: 'Bienvenue', headerShown: false }} component={LandingPage}/>
                     <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/>
                     <Stack.Screen name="EditCreditCard" options={{ title: 'Modifier une carte bancaire' }} component={EditCreditCard}/>
@@ -53,7 +54,10 @@ export default function App() {
                     <Stack.Screen name="CGU" options={{ title: 'CGU' }} component={Cgu}/>
                     <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
                     <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
+                    <Stack.Screen name="Verification" options={{title: 'Verification'}} component={VerificationScreen}/>
+                    <Stack.Screen name="VerificationCode" options={{title: 'Validation du code'}} component={VerificationCodeScreen}/>
                     <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
+                    <Stack.Screen name="ResetPassword" options={{title: 'Reinitialiser le mot de passe'}} component={Map}/>
                     <Stack.Screen name="CreateAdFirstStep" options={{title: 'Étape 1'}} component={CreateAdFirstStep}/>
                     <Stack.Screen name="CreateAdSecondSteps" options={{title: 'Étape 2'}} component={CreateAdSecondSteps}/>
                     <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Étape 3'}} component={CreateAdThirdSteps}/>
