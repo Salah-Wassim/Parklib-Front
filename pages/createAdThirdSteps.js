@@ -1,21 +1,31 @@
 import React from "react";
-import {View, StyleSheet, Image} from "react-native";
+import {View, StyleSheet, Image,Text} from "react-native";
 import {Button} from "@react-native-material/core";
+import { Stack} from 'react-native-flex-layout';
 import { launchImageLibrary } from 'react-native-image-picker';
+
+import * as ImagePicker from 'expo-image-picker';
 
 const CreateAdThirdSteps = ({navigation}) => {
 
-    const [photo, setPhoto] = React.useState(null);
+    const [photo, setPhoto] = React.useState({});
     const [error, setError] = React.useState('');
 
-    const handleChoosePhoto = () => {
-        console.log('Je passe dans la méthode')
-        launchImageLibrary((response) => {
-            if (response) {
-                console.log(response)
-                setPhoto(response);
-            }
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
         });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setPhoto(result.uri);
+        }
     };
 
     const handleSubmit = () => {
@@ -33,10 +43,10 @@ const CreateAdThirdSteps = ({navigation}) => {
             <View>
                 <View>
                     <Image
-                        source={{ uri: photo.uri }}
+                        source={{ uri: photo.uri}}
                         style={{ width: 300, height: 300 }}
                     />
-                    <Button title="Choose Photo" onPress={handleChoosePhoto} />
+                    <Button title="Choose Photo" onPress={pickImage} />
                 </View>
             </View>
             <View style={styles.submitButtonContainer}>
