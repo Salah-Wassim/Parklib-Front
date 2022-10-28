@@ -1,7 +1,6 @@
 import React from 'react'
 import {NavigationContainer}  from '@react-navigation/native';
 import 'react-native-gesture-handler';
-import BottomNavigationBar from "./components/bottomNavigationBar";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
 import Parameters from "./pages/parameters";
@@ -18,14 +17,18 @@ import Cgu from "./pages/cgu";
 import PaymentScreen from "./pages/paymentScreen";
 import CheckoutScreen from "./pages/checkoutScreen";
 import Map from "./pages/map";
+import ParkingDetails from './pages/parkingDetails';
+import MenuBurger from "./components/menuBurger";
 import {createStackNavigator} from "@react-navigation/stack";
 import DrawerNavigation from "./components/DrawerNavigation";
 import CreateAdFirstStep from "./pages/createAdFirstStep";
 import CreateAdSecondSteps from "./pages/createAdSecondSteps";
 import CreateAdThirdSteps from "./pages/createAdThirdSteps";
 
+
 import store from './store/store';
 import { Provider } from 'react-redux'
+import ParkingParticulierDetails from './pages/parkingParticulierDetails';
 
 const Stack = createStackNavigator()
 
@@ -33,8 +36,8 @@ export default function App() {
     return (
         <Provider store={store}>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName='CreateAdThirdSteps'>
-                    <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={DrawerNavigation} />
+                <Stack.Navigator initialRouteName='DrawerNav'>
+                    <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={MenuBurger} />
                     <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib', headerShown: false }} component={SignIn}/>
                     <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib', headerShown: false }} component={SignUp}/>
                     <Stack.Screen name="Parameters" options={{ title: 'Paramètres' }} component={Parameters}/>
@@ -54,6 +57,8 @@ export default function App() {
                     <Stack.Screen name="CreateAdFirstStep" options={{title: 'Étape 1'}} component={CreateAdFirstStep}/>
                     <Stack.Screen name="CreateAdSecondSteps" options={{title: 'Étape 2'}} component={CreateAdSecondSteps}/>
                     <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Étape 3'}} component={CreateAdThirdSteps}/>
+                    <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
+                    <Stack.Screen name="ParkingParticulierDetails" options={{title: 'Réservation'}} component={ParkingParticulierDetails}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                     {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
                 </Stack.Navigator>

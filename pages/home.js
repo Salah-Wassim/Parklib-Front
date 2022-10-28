@@ -8,9 +8,7 @@ export default function Home({navigation}) {
     const [SearchText, onSearchText] = React.useState('st_park_p');
 
     return (
-        <View style={styles.container} className="App" id="outer-container">
-            {/* <SideBar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> */}
-            <StatusBar barStyle="light-content" backgroundColor="#FFFFFF" />
+        <View style={styles.container} id="outer-container">
             <Stack style={styles.container}>
                 <View style={styles.containerView}>
                     <Text style={styles.textPrimary}>Bonjour !</Text>
