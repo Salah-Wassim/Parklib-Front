@@ -9,10 +9,26 @@ const MapCard = ({isvisible,parkings,setVisible})=>{
 
     const dispatch = useDispatch()
 
+
+    // params to size the map, params to have Bordeaux Area on the map
+    // let {width, height} = Dimensions.get('window');
+    // const ASPECT_RATIO = width / height;
+    // const LATITUDE_DELTA = 0.5; //Increase or decrease the zoom level dynamically
+    // const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
     return (
         <View style={styles.container}>
             <MapView
-                style={styles.map}>
+                style={styles.map}
+
+                // params to zoom on Bordeaux when open the map
+                // region={{
+                //     latitude: 44.837789,
+                //     longitude: -0.57918,
+                //     latitudeDelta: LATITUDE_DELTA,
+                //     longitudeDelta: LONGITUDE_DELTA,
+                //    }}
+            >
                 {
                     parkings.map(parking => (
                         <Marker
@@ -28,6 +44,8 @@ const MapCard = ({isvisible,parkings,setVisible})=>{
                         />
                     ))
                 }
+                
+                
             </MapView>
 
         </View>

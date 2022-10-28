@@ -17,11 +17,13 @@ import Cgu from "./pages/cgu";
 import PaymentScreen from "./pages/paymentScreen";
 import CheckoutScreen from "./pages/checkoutScreen";
 import Map from "./pages/map";
+import ParkingDetails from './pages/parkingDetails';
 import MenuBurger from "./components/menuBurger";
 import {createStackNavigator} from "@react-navigation/stack";
 
 import store from './store/store';
 import { Provider } from 'react-redux'
+import ParkingParticulierDetails from './pages/parkingParticulierDetails';
 
 const Stack = createStackNavigator()
 
@@ -47,6 +49,8 @@ export default function App() {
                     <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
                     <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
                     <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
+                    <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
+                    <Stack.Screen name="ParkingParticulierDetails" options={{title: 'Réservation'}} component={ParkingParticulierDetails}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                     {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
                 </Stack.Navigator>
