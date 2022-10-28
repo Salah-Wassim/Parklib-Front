@@ -35,7 +35,7 @@ const VerificationCodeScreen = ({route,navigation}) => {
                         verifyCode(code,phoneNumber,data._links[0].href).then((res)=>{
                             console.log(res)
                             if (res.status==="SUCCESSFUL"){
-                                navigation.navigate('Profile');
+                                navigation.navigate('ResetPassword');
                             }else{
                                 setInvalidCode(true);
                             }

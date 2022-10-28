@@ -51,6 +51,7 @@ export default function App() {
                     <Stack.Screen name="Verification" options={{title: 'Verification'}} component={VerificationScreen}/>
                     <Stack.Screen name="VerificationCode" options={{title: 'Validation du code'}} component={VerificationCodeScreen}/>
                     <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
+                    <Stack.Screen name="ResetPassword" options={{title: 'Reinitialiser le mot de passe'}} component={Map}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                     {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
                 </Stack.Navigator>

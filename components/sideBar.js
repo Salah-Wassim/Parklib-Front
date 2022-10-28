@@ -38,8 +38,6 @@ const SideBar=(props)=> {
                             navigation.navigate('SignUp')}}>S'inscrire</Text>
                         <Text style={styles.marginItems} onPress={() => {
                             navigation.navigate('Contact')}}>Contactez-nous</Text>
-                        <Text style={styles.marginItems} onPress={() => {
-                            navigation.navigate('Verification')}}>Verification du numéro de téléphone</Text>
                     </TouchableOpacity>
                 </Box>
                 <Box>
