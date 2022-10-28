@@ -1,7 +1,6 @@
 import React from 'react'
 import {NavigationContainer}  from '@react-navigation/native';
 import 'react-native-gesture-handler';
-import BottomNavigationBar from "./components/bottomNavigationBar";
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
 import Parameters from "./pages/parameters";
@@ -19,8 +18,8 @@ import PaymentScreen from "./pages/paymentScreen";
 import CheckoutScreen from "./pages/checkoutScreen";
 import Map from "./pages/map";
 import ParkingDetails from './pages/parkingDetails';
+import MenuBurger from "./components/menuBurger";
 import {createStackNavigator} from "@react-navigation/stack";
-import DrawerNavigation from "./components/DrawerNavigation";
 
 import store from './store/store';
 import { Provider } from 'react-redux'
@@ -33,7 +32,7 @@ export default function App() {
         <Provider store={store}>
             <NavigationContainer>
                 <Stack.Navigator initialRouteName='DrawerNav'>
-                    <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={DrawerNavigation} />
+                    <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={MenuBurger} />
                     <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib', headerShown: false }} component={SignIn}/>
                     <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib', headerShown: false }} component={SignUp}/>
                     <Stack.Screen name="Parameters" options={{ title: 'Paramètres' }} component={Parameters}/>
