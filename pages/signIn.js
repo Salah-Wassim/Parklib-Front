@@ -1,14 +1,54 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {Text, TextInput, Button} from '@react-native-material/core';
-import { Stack, HStack} from 'react-native-flex-layout';
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Text, TextInput, Button } from '@react-native-material/core';
+import { Stack, HStack } from 'react-native-flex-layout';
+import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 
-const SignIn = ({navigation}) => {
 
-    const [email, onChangeEmail] = React.useState('');
-    const [password, onChangePassword] = React.useState('');
+// maps dispatch to props for updating the token in the store
+const mapDispatchToProps = (dispatch) => ({
+    setToken: (token) => dispatch({
+        type: 'SET_TOKEN',
+        token
+    }),
+});
 
+const SignIn = ({ setToken, navigation }) => {
+        const [email, setEmail] = React.useState('');
+        const [password, setPassword] = React.useState('');
+
+        const handleSubmit = async () => {
+            try {
+                const response = await fetch('http://172.26.224.1:3000/auth', {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password
+                    }),
+                });
+
+                const json = await response.json();
+                const token = json.data.accessToken;
+                if (token) {
+                    //store
+                    await AsyncStorage.setItem('token', token);
+                    setToken({
+                        type: 'SET_TOKEN',
+                        token
+                    });
+                    navigation.navigate('DrawerNav');
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
     return (
         <Stack m={20} spacing={20}>
             <View style={styles.logoContainer}>
@@ -33,7 +73,8 @@ const SignIn = ({navigation}) => {
                         style={styles.formInput}
                         placeholder='nom@exemple.com'
                         variant="outlined"
-                        onChangeText={onChangeEmail}
+                        value={email}
+                        onChangeText={setEmail}
                     />
                 </View>
                 <View style={styles.formContainer}>
@@ -48,18 +89,19 @@ const SignIn = ({navigation}) => {
                         placeholder='Entrer votre mot de passe'
                         secureTextEntry={true}
                         variant="outlined"
-                        onChangeText={onChangePassword}
+                        value={password}
+                        onChangeText={setPassword}
                     />
                 </View>
                 <View style={styles.submitButtonContainer}>
-                    <TouchableOpacity onPress={() => navigation.navigate('DrawerNav')}>
-                        <Button style={styles.submitButton}  title="Connexion" color="#157575"/>
+                    <TouchableOpacity>
+                        <Button style={styles.submitButton} onPress={ handleSubmit } title="Connexion" color="#157575"/>
                     </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.socialMultiBox}>
                 <View style={styles.line}></View>
-                <View style={styles.textContainer}>
+                <View>
                     <Text style={styles.text}>ou se connecter avec</Text>
                 </View>
                 <View style={styles.line}></View>
@@ -159,4 +201,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SignIn
+export default connect(null, mapDispatchToProps)(SignIn);
