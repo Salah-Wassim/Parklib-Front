@@ -30,6 +30,7 @@ import { Provider } from 'react-redux'
 import VerificationScreen from "./pages/verificationScreen";
 import VerificationCodeScreen from "./pages/verficationCodeScreen";
 import ParkingParticulierDetails from './pages/parkingParticulierDetails';
+import DisplayPark from "./pages/displayPark";
 
 const Stack = createStackNavigator()
 
@@ -57,12 +58,13 @@ export default function App() {
                     <Stack.Screen name="Verification" options={{title: 'Verification'}} component={VerificationScreen}/>
                     <Stack.Screen name="VerificationCode" options={{title: 'Validation du code'}} component={VerificationCodeScreen}/>
                     <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
+                    <Stack.Screen name="DisplayPark" options={{title: 'Parking particulier'}} component={DisplayPark}/>
                     <Stack.Screen name="ResetPassword" options={{title: 'Reinitialiser le mot de passe'}} component={Map}/>
                     <Stack.Screen name="CreateAdFirstStep" options={{title: 'Étape 1'}} component={CreateAdFirstStep}/>
                     <Stack.Screen name="CreateAdSecondSteps" options={{title: 'Étape 2'}} component={CreateAdSecondSteps}/>
                     <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Étape 3'}} component={CreateAdThirdSteps}/>
                     <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
-                    <Stack.Screen name="ParkingParticulierDetails" options={{title: 'Réservation'}} component={ParkingParticulierDetails}/>
+                    <Stack.Screen name="ParkingParticulierDetails" options={{title: 'En savoir plus'}} component={ParkingParticulierDetails}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                     {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
                 </Stack.Navigator>

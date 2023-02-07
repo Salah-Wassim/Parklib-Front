@@ -1,4 +1,5 @@
 const API_TOKEN = "238HINNOST";
+const BASE_URL = 'http://192.168.0.16:5000'
 
 export const getParkingSearchedText = async (text, page) =>{
     const url  = 'https://data.bordeaux-metropole.fr/geojson?' + 'key=' + API_TOKEN + '&typename=' + text
@@ -25,7 +26,7 @@ export const getParkingMap = async () => {
 }
 
 export const verifyPhoneNumber = async (phoneNumber) => {
-   return await fetch('http://127.0.0.1:3000', {
+   return await fetch(`${BASE_URL}`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -38,7 +39,7 @@ export const verifyPhoneNumber = async (phoneNumber) => {
 }
 
 export const verifyCode = async (code, phoneNumber,report) => {
-    return await fetch('http://127.0.0.1:3000/report', {
+    return await fetch(`${BASE_URL}/report`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -50,4 +51,11 @@ export const verifyCode = async (code, phoneNumber,report) => {
             code: code
         })
     }).then((response) => response.json()).catch((error) => console.error(error));
+}
+
+export const getPrivateParking = async () =>{
+    const url  = `${BASE_URL}/annonce`
+    return await fetch(url)
+        .then(response => response.json())
+        .catch(error => {console.log(error)})
 }

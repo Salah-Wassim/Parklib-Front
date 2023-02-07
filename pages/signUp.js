@@ -7,8 +7,12 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 const SignUp = ({navigation}) => {
 
     const [email, onChangeEmail] = React.useState('');
-    const [pssword, onChangePassword] = React.useState('');
+    const [password, onChangePassword] = React.useState('');
     const [cPassword, onChangeCPassword] = React.useState('');
+
+    const onPressLearnMore = ()=>{
+        console.log(email,password,cPassword)
+    }
 
     return (
         <Stack m={20} spacing={10}>
@@ -35,7 +39,7 @@ const SignUp = ({navigation}) => {
                         placeholder="nom@exemple.com"
                         autoCompleteType="email"
                         variant="outlined"
-                        onChange={onChangeEmail}
+                        onChangeText={onChangeEmail}
                     />
                 </View>
                 <View style={styles.formContainer}>
@@ -45,7 +49,7 @@ const SignUp = ({navigation}) => {
                         placeholder='Enter votre mot de passe'
                         secureTextEntry={true}
                         variant="outlined"
-                        onChange={onChangePassword}
+                        onChangeText={onChangePassword}
                     />
                 </View>
                 <View style={styles.formContainer}>
@@ -56,11 +60,11 @@ const SignUp = ({navigation}) => {
                         secureTextEntry={true}
                         textContentType="password"
                         variant="outlined"
-                        onChange={onChangeCPassword}
+                        onChangeText={onChangeCPassword}
                     />
                 </View>
                 <View style={styles.submitButtonContainer}>
-                    <Button style={styles.submitButton} title="Inscription" color="#157575"/>
+                    <Button style={styles.submitButton} title="Inscription" onPress={onPressLearnMore} color="#157575"/>
                 </View>
             </View>
             <View style={styles.socialMultiBox}>

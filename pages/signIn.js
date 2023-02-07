@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {Text, TextInput, Button} from '@react-native-material/core';
+import {View, StyleSheet, TouchableOpacity, Image,StatusBar,ScrollView} from 'react-native';
+import {Text, TextInput, Button, Flex} from '@react-native-material/core';
 import { Stack, HStack} from 'react-native-flex-layout';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 

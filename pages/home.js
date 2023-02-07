@@ -1,7 +1,6 @@
 import React from "react";
 import {StyleSheet, View, Text, TouchableOpacity, StatusBar} from 'react-native';
-import {TextInput, Button, Flex} from "@react-native-material/core";
-import { Stack } from 'react-native-flex-layout';
+import {TextInput,Stack,FAB, Button, Flex} from "@react-native-material/core";
 
 export default function Home({navigation}) {
 
@@ -9,6 +8,7 @@ export default function Home({navigation}) {
 
     return (
         <View style={styles.container} id="outer-container">
+            <StatusBar/>
             <Stack style={styles.container}>
                 <View style={styles.containerView}>
                     <Text style={styles.textPrimary}>Bonjour !</Text>
@@ -22,7 +22,7 @@ export default function Home({navigation}) {
                                 }}
                             />
                             <Button title="rechercher" onPress={() => {
-                                navigation.navigate('Map', {
+                                navigation.navigate('DisplayPark', {
                                     text : SearchText
                                 })
                             }
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-
+        flexDirection:'column',
         justifyContent: 'center'
     },
     containerView: {

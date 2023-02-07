@@ -1,38 +1,48 @@
 import React from 'react'
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {Box, Flex, Text} from "@react-native-material/core";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
-const ParkingItem = ({item}) => {
-
-    const {properties} = item;
-
+const ParkingItem = ({item,navigation}) => {
     return (
         <TouchableOpacity style={styles.container} 
             onPress={() =>{
-                console.log(`${properties.nom} clicked ==> ${properties.gid}`);
-                console.log(item.geometry.coordinates[0],item.geometry.coordinates[1]);
-               // props.navigation.navigate('parking', {id: item.properties.gid})
+                console.log(item)
+                navigation.navigate('ParkingParticulierDetails', item)
             }
         }>
-            <View>
-                <Text style={styles.paragraphe}>{properties.nom}</Text>
-                <Text style={styles.paragraphe}>{properties.libres}</Text>
-                <Text style={styles.paragraphe}>{properties.adresse}</Text>
-            </View>
+            <Flex direction='row' fill>
+                <Image style={styles.pictureStyle} source={{ uri: 'https://picsum.photos/200'}} />
+                <Flex p={8} justify="around">
+                    <Text variant="h6">{item.title}</Text>
+                    <Text style={styles.paragraphe}>{item.price} € / Jour</Text>
+                    <Text style={styles.paragraphe}>
+                        <MaterialIcons name="location-pin" size={16}/>
+                        {item.adress}
+                    </Text>
+
+                    <Text variant="subtitle2">Description</Text>
+                    <Text variant="body2">{item.description}</Text>
+                </Flex>
+            </Flex>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     container:{
-        padding:10,
         margin:5,
-        backgroundColor:'#68a0cf',
-        borderRadius: 10,
+        backgroundColor:'#fff',
+        borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#fff',
+        borderColor: '#000',
     },
     paragraphe:{
         fontSize:16
+    },
+    pictureStyle:{
+        width: 150,
+        height: 150,
     }
 })
 
