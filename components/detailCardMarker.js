@@ -40,7 +40,7 @@ const DetailCardMarker = ({ isvisible, setVisible, navigation }) => {
             </View>
             <View style={[styles.buttonDetailCard, styles.buttonClose]}>
                 <Button title="En savoir plus" color="#157575" onPress={() => {
-                    navigation.navigate('ParkingDetails')
+                    navigation.navigate('ParkingDetails',{item:parkingClicked})
                 }
                 }/>
             </View>
