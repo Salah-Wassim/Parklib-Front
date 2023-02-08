@@ -8,7 +8,7 @@ export default function Home({navigation}) {
 
     return (
         <View style={styles.container} id="outer-container">
-            <StatusBar/>
+            <StatusBar barStyle="light-content" backgroundColor="#E4CFA9" />
             <Stack style={styles.container}>
                 <View style={styles.containerView}>
                     <Text style={styles.textPrimary}>Bonjour !</Text>

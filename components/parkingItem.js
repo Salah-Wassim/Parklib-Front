@@ -7,8 +7,7 @@ const ParkingItem = ({item,navigation}) => {
     return (
         <TouchableOpacity style={styles.container} 
             onPress={() =>{
-                console.log(item)
-                navigation.navigate('ParkingParticulierDetails', item)
+                navigation.navigate('ParkingParticulierDetails', {item:item})
             }
         }>
             <Flex direction='row' fill>

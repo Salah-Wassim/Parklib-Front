@@ -1,5 +1,5 @@
 import {FlatList, StatusBar, Text} from "react-native";
-import {Flex} from "@react-native-material/core";
+import {ActivityIndicator, Flex} from "@react-native-material/core";
 import ParkingItem from "../components/parkingItem";
 import React, {useEffect, useState} from "react";
 import {getPrivateParking} from "../api/api";
@@ -30,8 +30,11 @@ const DisplayPark = ({navigation})=>{
 
     return(
         <Flex>
-            <StatusBar></StatusBar>
-            <FeatureList data={parkings} navigation={navigation}></FeatureList>
+            <StatusBar barStyle="light-content" backgroundColor="#E4CFA9" />
+            {isLoading ?
+                <ActivityIndicator size="large" color="#E4CFA9"/> :
+                <FeatureList data={parkings} navigation={navigation}></FeatureList>
+            }
         </Flex>
     )
 }
