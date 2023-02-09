@@ -15,8 +15,11 @@ const ParkingParticulierDetails = ({ route, navigation }) => {
 
                 <Flex pl={16} pr={16}>
                     <Flex direction="row" items="center" justify="between" mt={8} mb={8}>
-                        <Avatar image={{ uri: "https://mui.com/static/images/avatar/1.jpg" }} />
-                        <Text variant="subtitle1">Pierre Dupond</Text>
+                        <Flex direction="row" items="center">
+                            <Avatar image={{ uri: "https://mui.com/static/images/avatar/1.jpg" }} />
+                            <Box m={4}></Box>
+                            <Text variant="subtitle1">Pierre Dupond</Text>
+                        </Flex>
                         <Button
                             onPress={()=>console.log("signaler btn")}
                             variant="outlined"
@@ -29,28 +32,33 @@ const ParkingParticulierDetails = ({ route, navigation }) => {
                         <Text variant="subtitle2">{item.adress}</Text>
                     </Flex>
 
-                    <Text variant="subtitle1"  style={styles.center}>Disponible du : 02/02/2023 au 20/02/2023</Text>
+                    <Flex direction="row" items="center" justify="between" mb={8} mt={8} mr={16} ml={16}>
+                        <Text variant="subtitle1"  style={[styles.center,styles.bold]}>Disponible </Text>
+                        <Text variant="subtitle1"  style={styles.center}>du :</Text>
+                        <Text variant="subtitle1"  style={[styles.center,styles.bold]}>02/02/2023</Text>
+                        <Text variant="subtitle1"  style={styles.center}> au </Text>
+                        <Text variant="subtitle1"  style={[styles.center,styles.bold]}>20/02/2023</Text>
+                    </Flex>
 
-                    <Flex justify="center" items="center" mt={8} mb={8} >
-                        <HStack spacing={8} divider={true} style={styles.center}>
-                            <Flex>
-                                <Text variant="h6">Informations</Text>
-                                <Text variant="body2">Parking privé (sous-sol) </Text>
-                                <Text variant="body2">1 place</Text>
-                                <Text variant="body2">Assuré</Text>
-                            </Flex>
 
-                            <Flex>
-                                <Text variant="h6">Coordonnées</Text>
-                                <Text variant="body2">pierredupond@gmail.com</Text>
-                                <Text variant="body2">06 40 56 78 96</Text>
-                            </Flex>
-                        </HStack>
+                    <Flex  direction="row" justify="between" mb={8} mt={8}>
+                        <Flex borderColor="#000" borderRight={1} style={{width:'50%'}} pr={4} justify="between">
+                            <Text variant="h6">Informations</Text>
+                            <Text variant="body2">Parking privé (sous-sol) </Text>
+                            <Text variant="body2">1 place</Text>
+                            <Text variant="body2">Assuré</Text>
+                        </Flex>
+
+                        <Flex borderColor="#000" style={{width:'50%'}} pl={4} items="end" justify="between">
+                            <Text variant="h6">Coordonnées</Text>
+                            <Text variant="body2">pierredupond@gmail.com</Text>
+                            <Text variant="body2">06 40 56 78 96</Text>
+                        </Flex>
                     </Flex>
 
                     <Text variant="h6">Description</Text>
 
-                    <Box borderColor="#000000" border={1} p={8} mt={8} mb={8}>
+                    <Box borderColor="#000000" border={1} p={4} mt={8} mb={8}>
                         <Text variant="body2">Contrary to popular belief, Lorem Ipsum is not simply random
                             text. It has roots in a piece of classical Latin literature from 45
                             BC, making it over 2000 years old. Richard McClintock, a Latin
@@ -64,17 +72,17 @@ const ParkingParticulierDetails = ({ route, navigation }) => {
                     </Box>
 
                     <Flex direction="row" mt={8} mb={8}>
-                        <Box borderColor="#000000" border={1} p={8}>
+                        <Box borderColor="#000000" border={1} p={8} style={{width:'50%'}}>
                             <Button
                                 onPress={()=>console.log("Ajouter aux favoris btn")}
-                                leading={props =>  <MaterialIcons name="favorite" size={16}/>}
+                                leading={props =>  <MaterialIcons name="favorite-border" size={16} color="#C70000"/>}
                                 variant="text"
                                 titleStyle={{fontSize:12}}
                                 color="#000"
                                 title="Ajouter aux favoris"
                             />
                         </Box>
-                        <Box borderColor="#000000" border={1} p={8}>
+                        <Box borderColor="#000000" border={1} p={8} style={{width:'50%'}}>
                             <Button
                                 onPress={()=>console.log("Reserver btn")}
                                 variant="text"
@@ -96,6 +104,9 @@ const ParkingParticulierDetails = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     center:{
         textAlign:"center",
+    },
+    bold:{
+        fontWeight:"bold"
     },
     pictureStyle:{
         width: '100%',

@@ -64,7 +64,7 @@ export default function App() {
                     <Stack.Screen name="CreateAdSecondSteps" options={{title: 'Étape 2'}} component={CreateAdSecondSteps}/>
                     <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Étape 3'}} component={CreateAdThirdSteps}/>
                     <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
-                    <Stack.Screen name="ParkingParticulierDetails" options={{title: 'En savoir plus'}} component={ParkingParticulierDetails}/>
+                    <Stack.Screen name="ParkingParticulierDetails" options={{title: 'Details'}} component={ParkingParticulierDetails}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                     {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
                 </Stack.Navigator>
