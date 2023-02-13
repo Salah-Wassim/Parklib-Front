@@ -7,6 +7,11 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 const ParkingParticulierDetails = ({ route, navigation }) => {
     const { item, otherParam } = route.params;
     console.log(item)
+    const goToReservation=( data = item)=>{
+        console.log("Reserver btn")
+        navigation.navigate('Reservation', {data})
+    }
+
     return (
         <Flex fill>
             <StatusBar barStyle="light-content" backgroundColor="#E4CFA9" />
@@ -84,7 +89,7 @@ const ParkingParticulierDetails = ({ route, navigation }) => {
                         </Box>
                         <Box borderColor="#000000" border={1} p={8} style={{width:'50%'}}>
                             <Button
-                                onPress={()=>console.log("Reserver btn")}
+                                onPress={()=>goToReservation()}
                                 variant="text"
                                 title="Réserver"
                                 color="#000"

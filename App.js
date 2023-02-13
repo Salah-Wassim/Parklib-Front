@@ -23,14 +23,13 @@ import {createStackNavigator} from "@react-navigation/stack";
 import CreateAdFirstStep from "./pages/createAdFirstStep";
 import CreateAdSecondSteps from "./pages/createAdSecondSteps";
 import CreateAdThirdSteps from "./pages/createAdThirdSteps";
-
-
 import store from './store/store';
 import { Provider } from 'react-redux'
 import VerificationScreen from "./pages/verificationScreen";
 import VerificationCodeScreen from "./pages/verficationCodeScreen";
 import ParkingParticulierDetails from './pages/parkingParticulierDetails';
 import DisplayPark from "./pages/displayPark";
+import Reservation from "./pages/reservation";
 
 const Stack = createStackNavigator()
 
@@ -65,6 +64,7 @@ export default function App() {
                     <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Étape 3'}} component={CreateAdThirdSteps}/>
                     <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
                     <Stack.Screen name="ParkingParticulierDetails" options={{title: 'Details'}} component={ParkingParticulierDetails}/>
+                    <Stack.Screen name="Reservation" options={{title: 'Réservation'}} component={Reservation}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                     {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
                 </Stack.Navigator>
