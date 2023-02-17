@@ -25,10 +25,7 @@ const CreateAdFirstStep = ({navigation}) => {
     const [itemsAssured, setItemsAssured] = React.useState([
         { label: 'Non', value: 'non' },
         { label: 'Oui', value: 'oui' },
-    ]);
-
-
-    
+    ]);    
 
     const handleSubmit = () => {
         console.log('submission')
@@ -61,12 +58,6 @@ const CreateAdFirstStep = ({navigation}) => {
                         }} placeholder={"Cherchez une adresse, un lieu..."}/> */}
                     <InputAddressAutocomplete
                         isOpen={false}
-                        onFindAddress={(address) => {
-                            console.log(address)
-                        }}
-                        onSearchError={(e) => {
-                            console.log(e)
-                        }}
                     />
                 </View>
                 <View style={styles.formContainer}>
