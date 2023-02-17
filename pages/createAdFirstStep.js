@@ -31,7 +31,7 @@ const CreateAdFirstStep = ({navigation}) => {
     
 
     const handleSubmit = () => {
-        console.log('hello')
+        console.log('submission')
         if (adr === '' || prix == null || typePlace === '' || nbrPlace === null || assured === '') {
             console.log('error')
             setError('Merci de remplir tous les champs s\'il vous plaît')
@@ -59,9 +59,12 @@ const CreateAdFirstStep = ({navigation}) => {
                         }} onSearchError={(e) => {
                             console.log(e)
                         }} placeholder={"Cherchez une adresse, un lieu..."}/> */}
-                    <InputAddressAutocomplete isOpen={false} onFindAddress={(address) => {
+                    <InputAddressAutocomplete
+                        isOpen={false}
+                        onFindAddress={(address) => {
                             console.log(address)
-                        }} onSearchError={(e) => {
+                        }}
+                        onSearchError={(e) => {
                             console.log(e)
                         }}
                     />

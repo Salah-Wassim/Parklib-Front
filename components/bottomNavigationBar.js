@@ -5,7 +5,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Home from "../pages/home";
 import History from "../pages/history";
 import Contact from "../pages/contact";
-import PrivacyPolicy from "../pages/privacyPolicy";
+import CreateAdFirstStep from "../pages/createAdFirstStep";
 import WhoWeAre from "../pages/whoWeAre.js";
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
 
