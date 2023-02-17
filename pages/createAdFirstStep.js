@@ -1,17 +1,34 @@
 import React from "react";
-import {View , StyleSheet , TouchableOpacity} from "react-native";
+import {View , StyleSheet , TouchableOpacity, Switch} from "react-native";
 import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
-import RNPickerSelect from 'react-native-picker-select';
+import DropDownPicker from 'react-native-dropdown-picker';
+// import AutocompleteAddress from "../components/autocompleteAddress";
+import InputAddressAutocomplete from "../components/inputAddressAutocomplete";
 
 const CreateAdFirstStep = ({navigation}) => {
 
     const [adr, setAdr] = React.useState('');
     const [prix, setPrix] = React.useState(null);
-    const [typePlace, setTypePlace] = React.useState('');
-    const [nbrPlace, setNbrPlace] = React.useState(null);
-    const [assured, setAssured] = React.useState('')
+    const [typePlace, setTypePlace] = React.useState('sous-sol');
+    const [nbrPlace, setNbrPlace] = React.useState(1);
+    const [assured, setAssured] = React.useState('non')
     const [error, setError] = React.useState('');
+
+    const [openTypePlace, setOpenTypePlace] = React.useState(false);
+    const [itemsTypePlace, setItemsTypePlace] = React.useState([
+        { label: 'Parking privé (sous-sol)', value: 'sous-sol' },
+        { label: 'Parking privé (aerien)', value: 'aerien' },
+        { label : "Autre", value: 'autre'},
+    ]);
+    const [openAssured, setOpenAssured] = React.useState(false);
+    const [itemsAssured, setItemsAssured] = React.useState([
+        { label: 'Non', value: 'non' },
+        { label: 'Oui', value: 'oui' },
+    ]);
+
+
+    
 
     const handleSubmit = () => {
         console.log('hello')
@@ -30,19 +47,30 @@ const CreateAdFirstStep = ({navigation}) => {
             <View>
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Adresse complète de votre bien</Text>
-                    <TextInput
+                    {/* <TextInput
                         style={styles.formInput}
                         placeholder='Adresse postale'
                         variant='outlined'
                         onChangeText={newAdr => setAdr(newAdr)}
                         value={adr}
+                    /> */}
+                     {/* <AutocompleteAddress isOpen={true} onFindAddress={(address) => {
+                            console.log(address)
+                        }} onSearchError={(e) => {
+                            console.log(e)
+                        }} placeholder={"Cherchez une adresse, un lieu..."}/> */}
+                    <InputAddressAutocomplete isOpen={false} onFindAddress={(address) => {
+                            console.log(address)
+                        }} onSearchError={(e) => {
+                            console.log(e)
+                        }}
                     />
                 </View>
                 <View style={styles.formContainer}>
-                    <Text style={styles.formText}>Loyer mensuel</Text>
+                    <Text style={styles.formText}>Loyer /jour</Text>
                     <TextInput
                         style={styles.formInput}
-                        placeholder='ex : 1000'
+                        placeholder='ex : 100€'
                         variant="outlined"
                         onChangeText={newPrix => setPrix(newPrix)}
                         defaultValue={prix}
@@ -50,17 +78,17 @@ const CreateAdFirstStep = ({navigation}) => {
                 </View>
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Type de place</Text>
-                    <RNPickerSelect
-                        onValueChange={newTypePlace => setTypePlace(newTypePlace)}
-                        items={[
-                            {label : "Selectionné un type de place", value: ''},
-                            { label: 'Parking privé (sous-sol)', value: 'sous-sol' },
-                            { label: 'Parking privé (aerien)', value: 'aerien' },
-                        ]}
+                    <DropDownPicker
+                    style={styles.dropdownPicker}
+                        open={openTypePlace}
                         value={typePlace}
+                        items={itemsTypePlace}
+                        setOpen={setOpenTypePlace}
+                        setValue={setTypePlace}
+                        setItems={setItemsTypePlace}
                     />
                 </View>
-                <View style={styles.formContainer}>
+                {/* <View style={styles.formContainer}>
                     <Text style={styles.formText}>Nombre de place</Text>
                     <TextInput
                         style={styles.formInput}
@@ -68,17 +96,17 @@ const CreateAdFirstStep = ({navigation}) => {
                         onChangeText={newNbrPlace => setNbrPlace(newNbrPlace)}
                         value={nbrPlace}
                     />
-                </View>
+                </View> */}
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Votre place de parking est-elle assurée ?</Text>
-                    <RNPickerSelect
-                        items={[
-                            {label: 'Selectionnez une valeur', value: ''},
-                            { label: 'Oui', value: 'oui' },
-                            { label: 'Non', value: 'non' },
-                        ]}
-                        onValueChange={newAssured => setAssured(newAssured)}
+                    <DropDownPicker
+                    style={styles.dropdownPicker}
+                        open={openAssured}
                         value={assured}
+                        items={itemsAssured}
+                        setOpen={setOpenAssured}
+                        setValue={setAssured}
+                        setItems={setItemsAssured}
                     />
                 </View>
             </View>
@@ -94,7 +122,13 @@ const styles = StyleSheet.create({
     error:{
         color:'red',
     },
-    submitButton: {}
+    submitButton: {},
+    formText: {
+        marginBottom: 5
+    },
+    dropdownPicker: {
+        zIndex: 10
+    }
 })
 
 export default CreateAdFirstStep;

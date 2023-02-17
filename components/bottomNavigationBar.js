@@ -35,9 +35,9 @@ const BottomNavigationBar = () => {
                             )
                         }}
             />
-            <Tab.Screen name="PrivacyPolicy" component={PrivacyPolicy}
+            <Tab.Screen name="CreateAdFirstStep" component={CreateAdFirstStep}
                         options={{
-                            tabBarLabel: 'PrivacyPolicy',
+                            tabBarLabel: 'CreateAdFirstStep',
                             tabBarIcon: ({color}) => (
                                 <Icon name="add-circle-outline" size={25} color={color} />
                             )
