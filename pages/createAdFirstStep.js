@@ -3,38 +3,60 @@ import {View , StyleSheet , TouchableOpacity, Switch} from "react-native";
 import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
 import DropDownPicker from 'react-native-dropdown-picker';
-// import AutocompleteAddress from "../components/autocompleteAddress";
 import InputAddressAutocomplete from "../components/inputAddressAutocomplete";
 
 const CreateAdFirstStep = ({navigation}) => {
 
     const [adr, setAdr] = React.useState('');
+    const [address, setAddress] = React.useState('');
+    const [zipCode, setZipCode] = React.useState('');
+    const [city, setCity] = React.useState('');
+    const [lattitude, setLattitude] = React.useState(0);
+    const [longitude, setLongitude] = React.useState(0);
     const [prix, setPrix] = React.useState(null);
-    const [typePlace, setTypePlace] = React.useState('sous-sol');
+    const [typePlace, setTypePlace] = React.useState('');
     const [nbrPlace, setNbrPlace] = React.useState(1);
-    const [assured, setAssured] = React.useState('non')
+    const [assured, setAssured] = React.useState('')
     const [error, setError] = React.useState('');
 
     const [openTypePlace, setOpenTypePlace] = React.useState(false);
     const [itemsTypePlace, setItemsTypePlace] = React.useState([
-        { label: 'Parking privé (sous-sol)', value: 'sous-sol' },
-        { label: 'Parking privé (aerien)', value: 'aerien' },
+        { label: 'Choisissez un type', value: '' },
+        { label: 'Sous-sol (Privé)', value: 'sous-sol' },
+        { label: 'Aérien (Privé)', value: 'aerien' },
         { label : "Autre", value: 'autre'},
     ]);
     const [openAssured, setOpenAssured] = React.useState(false);
     const [itemsAssured, setItemsAssured] = React.useState([
+        { label: '', value: '' },
         { label: 'Non', value: 'non' },
         { label: 'Oui', value: 'oui' },
     ]); 
     
-    const chooseAddress = (address) => {
-        setAdr(address.properties.label);
-        console.log(address);
+    const onChooseAddress = (respAddress) => {
+        // console.log(respAddress);
+        setAdr(respAddress.properties.label);
+        setAddress(respAddress.properties.name);
+        setZipCode(respAddress.properties.postcode);
+        setCity(respAddress.properties.city);
+        setLattitude(respAddress.geometry.coordinates[1]);
+        setLongitude(respAddress.geometry.coordinates[0]);
     }
 
     const handleSubmit = () => {
         console.log('submission')
-        if (adr === '' || prix == null || typePlace === '' || nbrPlace === null || assured === '') {
+        if (
+            adr === '' ||
+            prix == null ||
+            typePlace === '' ||
+            nbrPlace === null ||
+            assured === '' ||
+            address === '' ||
+            zipCode === '' ||
+            city === '' ||
+            lattitude === null ||
+            longitude === null
+        ) {
             console.log('error')
             setError('Merci de remplir tous les champs s\'il vous plaît')
         } else {
@@ -51,17 +73,19 @@ const CreateAdFirstStep = ({navigation}) => {
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Adresse complète de votre bien</Text>
                     <InputAddressAutocomplete
+                        style={styles.inputAddressAutocomplete}
                         isOpen={false}
-                        chooseAddress={chooseAddress}
-                        setValue={setAdr}
+                        onChooseAddress={onChooseAddress}
                     />
                 </View>
                 <View style={styles.formContainer}>
-                    <Text style={styles.formText}>Loyer /jour</Text>
+                    <Text style={styles.formText}>Loyer / jour (en €)</Text>
                     <TextInput
                         style={styles.formInput}
                         placeholder='ex : 100€'
                         variant="outlined"
+                        inputMode="numeric"
+                        keyboardType="decimal-pad"
                         onChangeText={newPrix => setPrix(newPrix)}
                         defaultValue={prix}
                     />
@@ -110,14 +134,28 @@ const CreateAdFirstStep = ({navigation}) => {
 const styles = StyleSheet.create({
     createAdFirstStepContainer: {},
     error:{
-        color:'red',
+        color: 'red',
+        fontWeight: "bold"
+    },
+    formContainer: {
+        marginTop: 5,
+        marginBottom: 5,
     },
     submitButton: {},
     formText: {
         marginBottom: 5
     },
     dropdownPicker: {
-        zIndex: 10
+        zIndex: 10,
+        borderRadius: 5,
+        borderColor: "lightgray"
+    },
+    inputAddressAutocomplete: {
+        backgroundColor: "white"
+    },
+    formInput: {
+        borderColor: "lightgray",
+        backgroundColor: "white"
     }
 })
 

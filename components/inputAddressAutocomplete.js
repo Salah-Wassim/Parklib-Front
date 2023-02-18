@@ -5,11 +5,10 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Ionicons } from '@expo/vector-icons';
 
-const InputAddressAutocomplete = ({chooseAddress}) => {
+const InputAddressAutocomplete = ({onChooseAddress}) => {
 
     const [isSearching, setIsSearching] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
@@ -17,43 +16,41 @@ const InputAddressAutocomplete = ({chooseAddress}) => {
     const [search, setSearch] = React.useState([]);
 
     const searchResults = (text) => {
-        axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text) + "&limit=5").then(r => {
+        axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text) + "&limit=6").then(r => {
             setIsLoading(false);
             setSearch(r.data.features);
         }).catch(e => {
             setIsLoading(false);
-            // this.onSearchError(e);
+            // console.log(e);
         })
     }
 
+    const [inputValue, setInputValue] = React.useState("");
+
     return(
         <View style={[styles.containerStyle]}>
-            <View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 10}}>
-                    {/* <TouchableOpacity activeOpacity={0.8} onPress={() => this.props.onCloseModal()}>
-                        <Image source={require('../assets/loupe.png')} style={{width: 28, height: 28}}/>
-                    </TouchableOpacity> */}
-                </View>
-                <TextInput
-                    style={[styles.inputStyle]}
-                    onChangeText={(t) => {
-                        if(t.length === 0){
-                            setQuery(t);
-                            setIsSearching(false);
-                            setIsLoading(false);
-                            return;
-                        }
+            <TextInput
+                variant="outlined"
+                style={[styles.inputStyle]}
+                onChangeText={(t) => {
+                    setInputValue(t)
+                    if(t.length === 0){
                         setQuery(t);
-                        setIsSearching(true);
-                        setIsLoading(true);
-                        searchResults(t);
-                    }}
-                    placeholder={"Rechercher"}
-                    onBlur={() => {
-                        searchResults(query);
-                    }}
-                />
-            </View>
+                        setIsSearching(false);
+                        setIsLoading(false);
+                        return;
+                    }
+                    setQuery(t);
+                    setIsSearching(true);
+                    setIsLoading(true);
+                    searchResults(t);
+                }}
+                placeholder={"Rechercher"}
+                value={inputValue}
+                onBlur={() => {
+                    searchResults(query);
+                }}
+            />
 
             {isSearching && (
                 <View style={[styles.searchBoxContainer]}>
@@ -64,8 +61,8 @@ const InputAddressAutocomplete = ({chooseAddress}) => {
                     ) : search.map((a, i) => (
                         <TouchableOpacity onPress={() => {
                             setIsSearching(false);
-                            chooseAddress(a);
-                            // this.props.onCloseModal();
+                            onChooseAddress(a);
+                            setInputValue(a.properties.label)
                         }} activeOpacity={0.9} key={"search-autocomplete-" + i} style={[styles.rowStyle]}>
                             <Text style={[styles.addressStyle]}>{a.properties.name}</Text>
                             <Text style={[styles.cityStyle]}>{a.properties.city} ({a.properties.postcode})</Text>
@@ -78,66 +75,50 @@ const InputAddressAutocomplete = ({chooseAddress}) => {
 }
 
 const styles = StyleSheet.create({
-    // containerStyle: {
-    //     flex: 1,
-    //     width:wp("100%"),
-    //     height: hp("100%"),
-    //     // padding: 20,
-    //     // zIndex: 1000,
-    //     justifyContent: "flex-start",
-    //     alignItems: "center",
-    //     // backgroundColor: "#f5f5f5"
-    // },
-    // inputStyle: {
-    //     height: 50,
-    //     width:wp("100%"),
-    //     paddingLeft: 20,
-    //     paddingRight: 20,
-    //     borderRadius: 5,
-    //     backgroundColor: "white",
-    //     shadowColor: "#000",
-    //     shadowOffset: {
-    //         width: 0,
-    //         height: 2,
-    //     },
-    //     shadowOpacity: 0.06,
-    //     shadowRadius: 5,
-    //     elevation: 3,
-    // },
-    // searchBoxContainer: {
-    //     zIndex: 1000,
-    //     position: 'relative',
-    //     justifyContent: 'flex-start',
-    //     alignItems: 'flex-start',
-    //     minHeight: 75,
-    //     marginTop: 20,
-    //     width: wp("100%")
-    // },
-    // rowStyle: {
-    //     flexDirection: 'row',
-    //     width:wp("100%"),
-    //     alignItems: 'baseline',
-    //     paddingVertical: 20,
-    //     paddingHorizontal: 30,
-    //     borderBottomWidth: 1,
-    //     borderColor: '#e7e7e7'
-    // },
-    // addressStyle: {
-    //     fontSize: 14,
-    //     fontWeight: "800"
-    // },
-    // placeholderStyle: {
-    //     fontSize: 14,
-    //     fontWeight: "800",
-    //     marginBottom: 10,
-    //     color: "#000",
-    //     marginTop: 10
-    // },
-    // cityStyle: {
-    //     fontSize: 10,
-    //     marginLeft: 5,
-    //     color: '#6b6b6b'
-    // }
+    containerStyle: {
+        position: "relative",
+    },
+    inputStyle: {
+        backgroundColor: "white",
+        borderColor: "lightgray"
+    },
+    searchBoxContainer: {
+        zIndex: 1000,
+        position: 'absolute',
+        top: 30,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        minHeight: 75,
+        marginTop: 20,
+        marginBottom: 20,
+        width: wp("100%"),
+    },
+    rowStyle: {
+        flexDirection: 'row',
+        width:wp("100%"),
+        alignItems: 'baseline',
+        paddingVertical: 20,
+        paddingHorizontal: 30,
+        borderBottomWidth: 1,
+        borderColor: '#e7e7e7',
+        backgroundColor: "white"
+    },
+    addressStyle: {
+        fontSize: 14,
+        fontWeight: "800"
+    },
+    placeholderStyle: {
+        fontSize: 14,
+        fontWeight: "800",
+        marginBottom: 10,
+        color: "#000",
+        marginTop: 10
+    },
+    cityStyle: {
+        fontSize: 10,
+        marginLeft: 5,
+        color: '#6b6b6b'
+    }
 
 });
 
