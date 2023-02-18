@@ -25,7 +25,12 @@ const CreateAdFirstStep = ({navigation}) => {
     const [itemsAssured, setItemsAssured] = React.useState([
         { label: 'Non', value: 'non' },
         { label: 'Oui', value: 'oui' },
-    ]);    
+    ]); 
+    
+    const chooseAddress = (address) => {
+        setAdr(address.properties.label);
+        console.log(address);
+    }
 
     const handleSubmit = () => {
         console.log('submission')
@@ -39,25 +44,16 @@ const CreateAdFirstStep = ({navigation}) => {
         }
     }
 
+
     return (
         <Stack m={20} spacing={40} style={styles.createAdFirstStepContainer}>
             <View>
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Adresse complète de votre bien</Text>
-                    {/* <TextInput
-                        style={styles.formInput}
-                        placeholder='Adresse postale'
-                        variant='outlined'
-                        onChangeText={newAdr => setAdr(newAdr)}
-                        value={adr}
-                    /> */}
-                     {/* <AutocompleteAddress isOpen={true} onFindAddress={(address) => {
-                            console.log(address)
-                        }} onSearchError={(e) => {
-                            console.log(e)
-                        }} placeholder={"Cherchez une adresse, un lieu..."}/> */}
                     <InputAddressAutocomplete
                         isOpen={false}
+                        chooseAddress={chooseAddress}
+                        setValue={setAdr}
                     />
                 </View>
                 <View style={styles.formContainer}>

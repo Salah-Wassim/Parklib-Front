@@ -9,15 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Ionicons } from '@expo/vector-icons';
 
-const InputAddressAutocomplete = () => {
+const InputAddressAutocomplete = ({chooseAddress}) => {
 
     const [isSearching, setIsSearching] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
     const [query, setQuery] = React.useState('');
     const [search, setSearch] = React.useState([]);
-
-    const [addressString, setAddressString] = React.useState("");
-    const [coordinates, setCoordinates] = React.useState([]);
 
     const searchResults = (text) => {
         axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text) + "&limit=5").then(r => {
@@ -67,12 +64,7 @@ const InputAddressAutocomplete = () => {
                     ) : search.map((a, i) => (
                         <TouchableOpacity onPress={() => {
                             setIsSearching(false);
-                            console.log(a);
-                            console.log(a.properties.label);
-                            console.log(a.geometry.coordinates);
-                            setAddressString(a.properties.label);
-                            setCoordinates(a.geometry.coordinates)
-                            // this.props.onFindAddress(a);
+                            chooseAddress(a);
                             // this.props.onCloseModal();
                         }} activeOpacity={0.9} key={"search-autocomplete-" + i} style={[styles.rowStyle]}>
                             <Text style={[styles.addressStyle]}>{a.properties.name}</Text>
