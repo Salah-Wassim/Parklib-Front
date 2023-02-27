@@ -6,7 +6,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 
 import * as ImagePicker from 'expo-image-picker';
 
-const CreateAdThirdSteps = ({navigation}) => {
+const CreateAdThirdSteps = ({route , navigation}) => {
 
     const [photo, setPhoto] = React.useState({});
     const [error, setError] = React.useState('');
@@ -23,8 +23,8 @@ const CreateAdThirdSteps = ({navigation}) => {
 
         console.log(result);
 
-        if (!result.cancelled) {
-            setPhoto(result.uri);
+        if (!result.canceled) {
+            setPhoto(result.assets[0]);
         }
     };
 
@@ -46,7 +46,7 @@ const CreateAdThirdSteps = ({navigation}) => {
                         source={{ uri: photo.uri}}
                         style={{ width: 300, height: 300 }}
                     />
-                    <Button title="Choose Photo" onPress={pickImage} />
+                    <Button title="Choisir une photo" onPress={pickImage} />
                 </View>
             </View>
             <View style={styles.submitButtonContainer}>

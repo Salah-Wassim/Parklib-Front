@@ -4,8 +4,10 @@ import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
 import DropDownPicker from 'react-native-dropdown-picker';
 import InputAddressAutocomplete from "../components/inputAddressAutocomplete";
+import {addParkingParticulier} from "../api/parkingParticulier";
 
-const CreateAdFirstStep = ({navigation}) => {
+
+const CreateAdFirstStep = ({route , navigation}) => {
 
     const [adr, setAdr] = React.useState('');
     const [address, setAddress] = React.useState('');
@@ -13,11 +15,29 @@ const CreateAdFirstStep = ({navigation}) => {
     const [city, setCity] = React.useState('');
     const [lattitude, setLattitude] = React.useState(0);
     const [longitude, setLongitude] = React.useState(0);
-    const [prix, setPrix] = React.useState(null);
+    const [price, setPrice] = React.useState(null);
     const [typePlace, setTypePlace] = React.useState('');
-    const [nbrPlace, setNbrPlace] = React.useState(1);
     const [assured, setAssured] = React.useState('')
     const [error, setError] = React.useState('');
+
+    const [parking, setParking] = React.useState({
+        'address': '',
+        'zipCode': '',
+        'city': '',
+        'lattitude': 0,
+        'longitude': 0,
+        'isActivated': false,
+        'UserId': null,
+    });
+
+    const [partialPost, setPartialPost] = React.useState({
+        'title': '',
+        'description': '',
+        'price': 0,
+        'typeOfPlace': '',
+        'contact': '',
+        'isAssured': false,
+    });
 
     const [openTypePlace, setOpenTypePlace] = React.useState(false);
     const [itemsTypePlace, setItemsTypePlace] = React.useState([
@@ -47,9 +67,8 @@ const CreateAdFirstStep = ({navigation}) => {
         console.log('submission')
         if (
             adr === '' ||
-            prix == null ||
+            price == null ||
             typePlace === '' ||
-            nbrPlace === null ||
             assured === '' ||
             address === '' ||
             zipCode === '' ||
@@ -62,7 +81,38 @@ const CreateAdFirstStep = ({navigation}) => {
         } else {
             console.log('no error')
             setError('');
-            navigation.navigate('CreateAdSecondSteps')
+            setParking({
+                'address': address,
+                'zipCode': zipCode,
+                'city': city,
+                'lattitude': lattitude,
+                'longitude': longitude,
+                'isActivated': true,
+                'UserId': 1, //TODO: retrieve UserId 
+            });
+
+            addParkingParticulier(parking)
+                .then((res) => {
+                    console.log(res);
+
+                    setPartialPost({
+                        'title': '',
+                        'description': '',
+                        'price': price,
+                        'typeOfPlace': typePlace,
+                        'contact': '',
+                        'isAssured': assured,
+                        'ParkingParticulierId': 1 //TODO: retrieve ParkingId, now or next page
+                    })
+        
+        
+                    navigation.navigate('CreateAdSecondSteps', {
+                        parking: parking,
+                        partialPost: partialPost
+                    })
+                })
+            .catch( (err) => { console.log(err) })
+
         }
     }
 
@@ -86,8 +136,8 @@ const CreateAdFirstStep = ({navigation}) => {
                         variant="outlined"
                         inputMode="numeric"
                         keyboardType="decimal-pad"
-                        onChangeText={newPrix => setPrix(newPrix)}
-                        defaultValue={prix}
+                        onChangeText={newprice => setPrice(newprice)}
+                        defaultValue={price}
                     />
                 </View>
                 <View style={styles.formContainer}>
@@ -102,15 +152,6 @@ const CreateAdFirstStep = ({navigation}) => {
                         setItems={setItemsTypePlace}
                     />
                 </View>
-                {/* <View style={styles.formContainer}>
-                    <Text style={styles.formText}>Nombre de place</Text>
-                    <TextInput
-                        style={styles.formInput}
-                        variant="outlined"
-                        onChangeText={newNbrPlace => setNbrPlace(newNbrPlace)}
-                        value={nbrPlace}
-                    />
-                </View> */}
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Votre place de parking est-elle assurée ?</Text>
                     <DropDownPicker
