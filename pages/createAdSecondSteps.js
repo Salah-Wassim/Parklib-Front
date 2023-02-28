@@ -3,6 +3,7 @@ import {View, StyleSheet} from "react-native";
 import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
 import DropDownPicker from 'react-native-dropdown-picker';
+import {addPost} from "../api/post";
 
 const CreateAdSecondSteps = ({ route, navigation }) => {
     
@@ -29,27 +30,42 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
     ]);
 
     const handleSubmit = () => {
-        if(title === '' || description === '' || contact === ''){
+
+        setPost({
+            'title': title,
+            'description': description,
+            'price': partialPost.price ,
+            'typeOfPlace': partialPost.typeOfPlace ,
+            'contact': contact,
+            'isAssured': partialPost.isAssured,
+        })
+
+        if (title === '' || description === '' || contact === '') {
             setError('Merci de remplir tous les champs s\'il vous plaît')
         }
         else{
             setError('');
 
-            setPost({
-                'title': title,
-                'description': description,
-                'price': partialPost.price ,
-                'typeOfPlace': partialPost.typeOfPlace ,
-                'contact': contact,
-                'isAssured': partialPost.isAssured,
-                'ParkingParticulierId': partialPost.ParkingParticulierId 
-            })
 
-            //TODO: send Post to back
+            addPost(
+                {
+                    'title': title,
+                    'description': description,
+                    'price': partialPost.price ,
+                    'typeOfPlace': partialPost.typeOfPlace ,
+                    'contact': contact,
+                    'isAssured': partialPost.isAssured,
+                }
+            )
+            .then((res) => {
+                // console.log(res);
 
-            navigation.navigate('CreateAdThirdSteps', {
-                post: post,
+                navigation.navigate('CreateAdThirdSteps', {
+                    post: post,
+                })
             })
+            .catch( (err) => { console.log(err) })
+
         }
     }
 

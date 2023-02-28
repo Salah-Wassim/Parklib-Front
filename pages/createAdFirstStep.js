@@ -25,9 +25,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
         'zipCode': '',
         'city': '',
         'lattitude': 0,
-        'longitude': 0,
-        'isActivated': false,
-        'UserId': null,
+        'longitude': 0
     });
 
     const [partialPost, setPartialPost] = React.useState({
@@ -49,12 +47,12 @@ const CreateAdFirstStep = ({route , navigation}) => {
     const [openAssured, setOpenAssured] = React.useState(false);
     const [itemsAssured, setItemsAssured] = React.useState([
         { label: '', value: '' },
-        { label: 'Non', value: 'non' },
-        { label: 'Oui', value: 'oui' },
+        { label: 'Non', value: false },
+        { label: 'Oui', value: true },
     ]); 
     
     const onChooseAddress = (respAddress) => {
-        // console.log(respAddress);
+        console.log(respAddress.geometry.coordinates);
         setAdr(respAddress.properties.label);
         setAddress(respAddress.properties.name);
         setZipCode(respAddress.properties.postcode);
@@ -65,6 +63,14 @@ const CreateAdFirstStep = ({route , navigation}) => {
 
     const handleSubmit = () => {
         console.log('submission')
+        setParking({
+            'address': address,
+            'zipCode': zipCode,
+            'city': city,
+            'lattitude': lattitude,
+            'longitude': longitude
+        });
+
         if (
             adr === '' ||
             price == null ||
@@ -81,24 +87,24 @@ const CreateAdFirstStep = ({route , navigation}) => {
         } else {
             console.log('no error')
             setError('');
-            setParking({
-                'address': address,
-                'zipCode': zipCode,
-                'city': city,
-                'lattitude': lattitude,
-                'longitude': longitude,
-                'isActivated': true,
-                'UserId': 1, //TODO: retrieve UserId 
-            });
 
-            addParkingParticulier(parking)
+            addParkingParticulier(
+                {
+                    'address': address,
+                    'zipCode': zipCode,
+                    'city': city,
+                    'lattitude': lattitude,
+                    'longitude': longitude,
+                    'isActivated': true
+                }
+            )
                 .then((res) => {
                     console.log(res);
 
                     setPartialPost({
                         'title': '',
                         'description': '',
-                        'price': price,
+                        'price': parseInt(price),
                         'typeOfPlace': typePlace,
                         'contact': '',
                         'isAssured': assured,
@@ -136,7 +142,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
                         variant="outlined"
                         inputMode="numeric"
                         keyboardType="decimal-pad"
-                        onChangeText={newprice => setPrice(newprice)}
+                        onChangeText={newprice => setPrice(parseInt(newprice))}
                         defaultValue={price}
                     />
                 </View>

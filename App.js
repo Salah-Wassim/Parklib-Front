@@ -58,9 +58,9 @@ export default function App() {
                     <Stack.Screen name="VerificationCode" options={{title: 'Validation du code'}} component={VerificationCodeScreen}/>
                     <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
                     <Stack.Screen name="ResetPassword" options={{title: 'Reinitialiser le mot de passe'}} component={Map}/>
-                    <Stack.Screen name="CreateAdFirstStep" options={{title: 'Étape 1'}} component={CreateAdFirstStep}/>
-                    <Stack.Screen name="CreateAdSecondSteps" options={{title: 'Étape 2'}} component={CreateAdSecondSteps}/>
-                    <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Étape 3'}} component={CreateAdThirdSteps}/>
+                    <Stack.Screen name="CreateAdFirstStep" options={{title: 'Publiez - Étape 1'}} component={CreateAdFirstStep}/>
+                    <Stack.Screen name="CreateAdSecondSteps" options={{title: 'Publiez - Étape 2'}} component={CreateAdSecondSteps}/>
+                    <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Publiez - Étape 3'}} component={CreateAdThirdSteps}/>
                     <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
                     <Stack.Screen name="ParkingParticulierDetails" options={{title: 'Réservation'}} component={ParkingParticulierDetails}/>
                     {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
