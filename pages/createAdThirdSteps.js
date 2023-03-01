@@ -68,7 +68,7 @@ const CreateAdThirdSteps = ({route , navigation}) => {
     }
 
     return (
-        <Stack m={20} spacing={40} style={styles.layoutFlex}>
+        <Stack m={20} spacing={40}  style={styles.layoutFlex}>
             <Text style={styles.title}>Vous pouvez ajouter jusqu'à 3 photos</Text>
             <View style={styles.columnItems} >
                 <View style={styles.columnItems}>
@@ -76,9 +76,9 @@ const CreateAdThirdSteps = ({route , navigation}) => {
                     <View  style={styles.inlineItems}>
                         <Image
                             source={{ uri: photo.uri}}
-                            style={{ width: 100, height: 100 }}
+                            style={styles.image} 
                             />
-                        <Button title="x"  />
+                        <Button title="Supprimer" style={styles.deleteImgBtn}  />
                     </View>
                     )
                     :
@@ -87,39 +87,53 @@ const CreateAdThirdSteps = ({route , navigation}) => {
                     {photo.uri ? 
                     null
                     :
-                    (<Button title="+" onPress={pickImage} />)
+                    <View style={styles.inlineItems}>
+                        <Button style={styles.addImgBtn}  title="+" onPress={pickImage} />
+                    </View> 
                     }
 
                 </View>
                 <View style={styles.columnItems}>
                     {photo2.uri ? (
+                    <View  style={styles.inlineItems}>
                     <Image
                         source={{ uri: photo2.uri}}
-                        style={{ width: 100, height: 100 }}
-                    />)
+                        style={styles.image} 
+                        />
+                    <Button title="Supprimer" style={styles.deleteImgBtn}  />
+                    </View>
+                    )
                     :
                     null
                     }
                     {photo2.uri ? 
                     null
                     :
-                    (<Button title="+" onPress={pickImage2} />)
+                    <View style={styles.inlineItems}>
+                        <Button style={styles.addImgBtn}  title="+" onPress={pickImage2} />
+                    </View>
                     }
                 </View>
 
                 <View style={styles.columnItems}>
                     {photo3.uri ? (
-                    <Image
+                    <View  style={styles.inlineItems}>
+                        <Image
                         source={{ uri: photo3.uri}}
-                        style={{ width: 100, height: 100 }}
-                    />)
+                        style={styles.image} 
+                        />
+                        <Button title="Supprimer" style={styles.deleteImgBtn}  />
+                    </View>
+                    )
                     :
                     null
                 }
                     {photo3.uri ? 
                     null
                     :
-                    (<Button title="+" onPress={pickImage3} />)
+                    <View style={styles.inlineItems}>
+                        <Button style={styles.addImgBtn}  title="+" onPress={pickImage3} />
+                    </View>
                 }
                 </View>   
 
@@ -128,6 +142,8 @@ const CreateAdThirdSteps = ({route , navigation}) => {
                 <Button style={styles.submitButton} title="Publier" color="#157575" onpress={handleSubmit}/>
                 <Text style={styles.error}>{error}</Text>
             </View>
+
+            
         </Stack>
     )
 }
@@ -149,7 +165,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: "space-evenly",
-        alignItems: "center"
+        alignItems: "center",
+        width: "100%"
     },
     title:{
         fontWeight: "bold",
@@ -159,6 +176,20 @@ const styles = StyleSheet.create({
     error:{
         color:'red',
         alignSelf:'center'
+    },
+    image: {
+        width: 110,
+        height: 110,
+        borderRadius: 15
+    },
+    addImgBtn: {
+        backgroundColor: COLOR.vert,
+        color: COLOR.blanc,
+        fontWeight: "bold",
+    },
+    deleteImgBtn: {
+        backgroundColor: COLOR.rouge,
+        color: COLOR.blanc,
     }
 })
 

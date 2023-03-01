@@ -140,7 +140,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
                         style={styles.formInput}
                         placeholder='ex : 100€'
                         variant="outlined"
-                        inputMode="numeric"
+                        inputMode="decimal"
                         keyboardType="decimal-pad"
                         onChangeText={newprice => setPrice(parseInt(newprice))}
                         defaultValue={price}
