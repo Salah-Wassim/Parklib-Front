@@ -7,16 +7,9 @@ import {addPost} from "../api/post";
 
 const CreateAdSecondSteps = ({ route, navigation }) => {
     
-    const { parking, partialPost } = route.params;
-
-    const [post, setPost] = React.useState({
-        'title': '',
-        'description': '',
-        'price': partialPost.price ,
-        'typeOfPlace': partialPost.typeOfPlace ,
-        'contact': '',
-        'isAssured': partialPost.isAssured ,
-    });
+    const { parkingId, tmp_price, tmp_typeOfPlace, tmp_isAssured } = route.params;
+    
+    // console.log('isAssured : ' + tmp_isAssured)
 
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('')
@@ -31,40 +24,32 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
 
     const handleSubmit = () => {
 
-        setPost({
-            'title': title,
-            'description': description,
-            'price': partialPost.price ,
-            'typeOfPlace': partialPost.typeOfPlace ,
-            'contact': contact,
-            'isAssured': partialPost.isAssured,
-        })
-
         if (title === '' || description === '' || contact === '') {
             setError('Merci de remplir tous les champs s\'il vous plaît')
         }
         else{
             setError('');
 
-
-            // addPost(
-            //     {
-            //         'title': title,
-            //         'description': description,
-            //         'price': partialPost.price ,
-            //         'typeOfPlace': partialPost.typeOfPlace ,
-            //         'contact': contact,
-            //         'isAssured': partialPost.isAssured,
-            //     }
-            // )
-            // .then((res) => {
-                // console.log(res);
-
+            addPost(
+                {
+                    'title': title,
+                    'description': description,
+                    'price': tmp_price ,
+                    'typeOfPlace': tmp_typeOfPlace ,
+                    'contact': contact,
+                    'isAssured': tmp_isAssured,
+                    'ParkingParticulierId': parkingId,
+                    'ValidationStatusId': 2 //TODO: deal with ValidationStatus
+                }
+            )
+            .then((res) => {
+                console.log(res);
+                // let postId = res.data.id;
                 navigation.navigate('CreateAdThirdSteps', {
-                    post: post,
+                    postId: 1,
                 })
-            // })
-            // .catch( (err) => { console.log(err) })
+            })
+            .catch( (err) => { console.log(err) })
 
         }
     }

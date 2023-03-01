@@ -28,15 +28,6 @@ const CreateAdFirstStep = ({route , navigation}) => {
         'longitude': 0
     });
 
-    const [partialPost, setPartialPost] = React.useState({
-        'title': '',
-        'description': '',
-        'price': 0,
-        'typeOfPlace': '',
-        'contact': '',
-        'isAssured': false,
-    });
-
     const [openTypePlace, setOpenTypePlace] = React.useState(false);
     const [itemsTypePlace, setItemsTypePlace] = React.useState([
         { label: 'Choisissez un type', value: '' },
@@ -52,7 +43,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
     ]); 
     
     const onChooseAddress = (respAddress) => {
-        console.log(respAddress.geometry.coordinates);
+        // console.log(respAddress.geometry.coordinates);
         setAdr(respAddress.properties.label);
         setAddress(respAddress.properties.name);
         setZipCode(respAddress.properties.postcode);
@@ -63,6 +54,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
 
     const handleSubmit = () => {
         console.log('submission')
+
         setParking({
             'address': address,
             'zipCode': zipCode,
@@ -88,37 +80,34 @@ const CreateAdFirstStep = ({route , navigation}) => {
             console.log('no error')
             setError('');
 
-            // addParkingParticulier(
-            //     {
-            //         'address': address,
-            //         'zipCode': zipCode,
-            //         'city': city,
-            //         'lattitude': lattitude,
-            //         'longitude': longitude,
-            //         'isActivated': true //TODO: delete in future
-            //     }
-            // )
-            //     .then((res) => {
-            //         console.log(res);
-
-            //         setPartialPost({
-            //             'title': '',
-            //             'description': '',
-            //             'price': parseInt(price),
-            //             'typeOfPlace': typePlace,
-            //             'contact': '',
-            //             'isAssured': assured,
-            //             'ParkingParticulierId': 1 //TODO: retrieve ParkingId, now or next page
-            //         })
-        
-        
+            addParkingParticulier(
+                {
+                    'address': address,
+                    'zipCode': zipCode,
+                    'city': city,
+                    'lattitude': lattitude,
+                    'longitude': longitude,
+                    'isActivated': true //TODO: delete in future
+                }
+            )
+                .then((res) => {
+                    // console.log(res);
+                    let parkingId = res.data.id;
                     navigation.navigate('CreateAdSecondSteps', {
-                        parking: parking,
-                        partialPost: partialPost
+                        parkingId: parkingId,
+                        tmp_price: price,
+                        tmp_typeOfPlace: typePlace,
+                        tmp_isAssured: assured
                     })
-            //     })
-            // .catch( (err) => { console.log(err) })
+                })
+                .catch( (err) => { console.log(err) })
 
+            //* ***************************** */
+
+            // navigation.navigate('CreateAdSecondSteps', {
+            //     parking: parking,
+            //     partialPost: partialPost
+            // })
         }
     }
 

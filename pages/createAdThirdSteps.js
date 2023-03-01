@@ -7,7 +7,11 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import * as ImagePicker from 'expo-image-picker';
 import COLOR from "../utils/color.constant";
 
-const CreateAdThirdSteps = ({route , navigation}) => {
+const CreateAdThirdSteps = ({ route, navigation }) => {
+    
+    const { postId } = route.params;
+
+    console.log(postId);
 
     const [photo, setPhoto] = React.useState({});
     const [photo2, setPhoto2] = React.useState({});
