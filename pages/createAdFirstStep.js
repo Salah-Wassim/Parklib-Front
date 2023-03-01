@@ -88,36 +88,36 @@ const CreateAdFirstStep = ({route , navigation}) => {
             console.log('no error')
             setError('');
 
-            addParkingParticulier(
-                {
-                    'address': address,
-                    'zipCode': zipCode,
-                    'city': city,
-                    'lattitude': lattitude,
-                    'longitude': longitude,
-                    'isActivated': true
-                }
-            )
-                .then((res) => {
-                    console.log(res);
+            // addParkingParticulier(
+            //     {
+            //         'address': address,
+            //         'zipCode': zipCode,
+            //         'city': city,
+            //         'lattitude': lattitude,
+            //         'longitude': longitude,
+            //         'isActivated': true //TODO: delete in future
+            //     }
+            // )
+            //     .then((res) => {
+            //         console.log(res);
 
-                    setPartialPost({
-                        'title': '',
-                        'description': '',
-                        'price': parseInt(price),
-                        'typeOfPlace': typePlace,
-                        'contact': '',
-                        'isAssured': assured,
-                        'ParkingParticulierId': 1 //TODO: retrieve ParkingId, now or next page
-                    })
+            //         setPartialPost({
+            //             'title': '',
+            //             'description': '',
+            //             'price': parseInt(price),
+            //             'typeOfPlace': typePlace,
+            //             'contact': '',
+            //             'isAssured': assured,
+            //             'ParkingParticulierId': 1 //TODO: retrieve ParkingId, now or next page
+            //         })
         
         
                     navigation.navigate('CreateAdSecondSteps', {
                         parking: parking,
                         partialPost: partialPost
                     })
-                })
-            .catch( (err) => { console.log(err) })
+            //     })
+            // .catch( (err) => { console.log(err) })
 
         }
     }

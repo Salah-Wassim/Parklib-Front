@@ -47,24 +47,24 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
             setError('');
 
 
-            addPost(
-                {
-                    'title': title,
-                    'description': description,
-                    'price': partialPost.price ,
-                    'typeOfPlace': partialPost.typeOfPlace ,
-                    'contact': contact,
-                    'isAssured': partialPost.isAssured,
-                }
-            )
-            .then((res) => {
+            // addPost(
+            //     {
+            //         'title': title,
+            //         'description': description,
+            //         'price': partialPost.price ,
+            //         'typeOfPlace': partialPost.typeOfPlace ,
+            //         'contact': contact,
+            //         'isAssured': partialPost.isAssured,
+            //     }
+            // )
+            // .then((res) => {
                 // console.log(res);
 
                 navigation.navigate('CreateAdThirdSteps', {
                     post: post,
                 })
-            })
-            .catch( (err) => { console.log(err) })
+            // })
+            // .catch( (err) => { console.log(err) })
 
         }
     }
