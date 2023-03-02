@@ -7,10 +7,8 @@ import {addPost} from "../api/post";
 
 const CreateAdSecondSteps = ({ route, navigation }) => {
     
-    const { parking , parkingId, price, typeOfPlace, isAssured } = route.params;
+    const { parking, price, typeOfPlace, isAssured } = route.params;
     
-    // console.log(route.params)
-
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('')
     const [contact, setContact] = React.useState('email');
@@ -37,32 +35,9 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
                 'typeOfPlace': typeOfPlace ,
                 'contact': contact,
                 'isAssured': isAssured,
-                'ParkingParticulierId': parking, //TODO: retrieve ParkingId 
-                'ValidationStatusId': 2 //TODO: deal with ValidationStatus
+                'ParkingParticulierId': null, 
+                'ValidationStatusId': 2 
             }
-
-            // addPost(
-            //     {
-            //         'title': title,
-            //         'description': description,
-            //         'price': price ,
-            //         'typeOfPlace': typeOfPlace ,
-            //         'contact': contact,
-            //         'isAssured': isAssured,
-            //         'ParkingParticulierId': parkingId,
-            //         'ValidationStatusId': 2 //TODO: deal with ValidationStatus
-            //     }
-            // )
-            // .then((res) => {
-            //     console.log(res);
-            //     // let postId = res.data.id;
-            //     navigation.navigate('CreateAdThirdSteps', {
-            //         postId: 1,
-            //     })
-            // })
-            // .catch( (err) => { console.log(err) })
-
-            //* *************************************/
 
             navigation.navigate('CreateAdThirdSteps', {
                 post: post,

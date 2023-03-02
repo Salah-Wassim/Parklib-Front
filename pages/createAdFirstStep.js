@@ -4,8 +4,6 @@ import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
 import DropDownPicker from 'react-native-dropdown-picker';
 import InputAddressAutocomplete from "../components/inputAddressAutocomplete";
-import {addParkingParticulier} from "../api/parkingParticulier";
-
 
 const CreateAdFirstStep = ({route , navigation}) => {
 
@@ -20,13 +18,6 @@ const CreateAdFirstStep = ({route , navigation}) => {
     const [assured, setAssured] = React.useState('')
     const [error, setError] = React.useState('');
 
-    // const [parking, setParking] = React.useState({
-    //     'address': '',
-    //     'zipCode': '',
-    //     'city': '',
-    //     'lattitude': 0,
-    //     'longitude': 0
-    // });
 
     const [openTypePlace, setOpenTypePlace] = React.useState(false);
     const [itemsTypePlace, setItemsTypePlace] = React.useState([
@@ -43,7 +34,6 @@ const CreateAdFirstStep = ({route , navigation}) => {
     ]); 
     
     const onChooseAddress = (respAddress) => {
-        // console.log(respAddress.geometry.coordinates);
         setAdr(respAddress.properties.label);
         setAddress(respAddress.properties.name);
         setZipCode(respAddress.properties.postcode);
@@ -76,31 +66,6 @@ const CreateAdFirstStep = ({route , navigation}) => {
                 'lattitude': lattitude,
                 'longitude': longitude
             };
-
-            // addParkingParticulier(
-            //     {
-            //         'address': address,
-            //         'zipCode': zipCode,
-            //         'city': city,
-            //         'lattitude': lattitude,
-            //         'longitude': longitude,
-            //         'isActivated': true //TODO: delete in future
-            //     }
-            // )
-            //     .then((res) => {
-            //         // console.log(res);
-            //         let parkingId = res.data.id;
-            //         navigation.navigate('CreateAdSecondSteps', {
-            //             parking: parking,
-            //             parkingId: parkingId,
-            //             price: price,
-            //             typeOfPlace: typePlace,
-            //             isAssured: assured
-            //         })
-            //     })
-            //     .catch( (err) => { console.log(err) })
-
-            //* ***************************** */
 
             navigation.navigate('CreateAdSecondSteps', {
                 parking: parking,

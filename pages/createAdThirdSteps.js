@@ -12,15 +12,12 @@ import {addParkingParticulier} from "../api/parkingParticulier";
 
 const CreateAdThirdSteps = ({ route, navigation }) => {
     
-    const { postId , post , parking } = route.params;
-
-    // console.log(route.params);
+    const { post , parking } = route.params;
 
     const [photo, setPhoto] = React.useState({});
     const [photo2, setPhoto2] = React.useState({});
     const [photo3, setPhoto3] = React.useState({});
     const [error, setError] = React.useState('');
-
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -65,19 +62,12 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
     };
 
     const handleSubmit = async () => {
-        if(photo === null && photo2 === null && photo3 === null) {
+        if(photo === {} && photo2 === {} && photo3 === {}) {
             setError('Merci d\'ajouter au minimum une photo');
             console.log('error')
         }
         else {
             setError('');
-
-            // console.log(parking)
-            // console.log(post)
-            // console.log(photo)
-            // console.log(photo2)
-            // console.log(photo3)
-
             await addParkingParticulier(parking)
                 .then((res) => {
                     console.log(res)
@@ -92,10 +82,8 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                             navigation.navigate('DrawerNav')
                         })
                         .catch( (e) => { console.log(e)})
-
                 }) 
                 .catch( (e) => { console.log(e)})
-
         }
     }
 
