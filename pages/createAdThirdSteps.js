@@ -7,11 +7,14 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import * as ImagePicker from 'expo-image-picker';
 import COLOR from "../utils/color.constant";
 
+import {addPost} from "../api/post";
+import {addParkingParticulier} from "../api/parkingParticulier";
+
 const CreateAdThirdSteps = ({ route, navigation }) => {
     
-    const { postId } = route.params;
+    const { postId , post , parking } = route.params;
 
-    console.log(postId);
+    // console.log(route.params);
 
     const [photo, setPhoto] = React.useState({});
     const [photo2, setPhoto2] = React.useState({});
@@ -27,7 +30,7 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
             aspect: [4, 3],
             quality: 1,
         });
-        console.log(result);
+        // console.log(result);
         if (!result.canceled) {
             setPhoto(result.assets[0]);
         }
@@ -41,7 +44,7 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
             aspect: [4, 3],
             quality: 1,
         });
-        console.log(result);
+        // console.log(result);
         if (!result.canceled) {
             setPhoto2(result.assets[0]);
         }
@@ -55,19 +58,44 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
             aspect: [4, 3],
             quality: 1,
         });
-        console.log(result);
+        // console.log(result);
         if (!result.canceled) {
             setPhoto3(result.assets[0]);
         }
     };
 
-    const handleSubmit = () => {
-        if(photo === null) {
-            setError('Merci d\'ajouter photo');
+    const handleSubmit = async () => {
+        if(photo === null && photo2 === null && photo3 === null) {
+            setError('Merci d\'ajouter au minimum une photo');
+            console.log('error')
         }
         else {
             setError('');
-            navigation.navigate('')
+
+            // console.log(parking)
+            // console.log(post)
+            // console.log(photo)
+            // console.log(photo2)
+            // console.log(photo3)
+
+            await addParkingParticulier(parking)
+                .then((res) => {
+                    console.log(res)
+                    post.ParkingParticulierId = res.data.id;
+                    post.ValidationStatusId = 2;
+                })
+                .then(async (res) => {
+                    await addPost(post)
+                        .then((res) => {
+                            console.log(res);
+        
+                            navigation.navigate('DrawerNav')
+                        })
+                        .catch( (e) => { console.log(e)})
+
+                }) 
+                .catch( (e) => { console.log(e)})
+
         }
     }
 
@@ -143,8 +171,8 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
 
             </View>
             <View style={styles.submitButtonContainer}>
-                <Button style={styles.submitButton} title="Publier" color="#157575" onpress={handleSubmit}/>
                 <Text style={styles.error}>{error}</Text>
+                <Button style={styles.submitButton} title="Publier" color="#157575" onPress={handleSubmit}/>
             </View>
 
             

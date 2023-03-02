@@ -20,13 +20,13 @@ const CreateAdFirstStep = ({route , navigation}) => {
     const [assured, setAssured] = React.useState('')
     const [error, setError] = React.useState('');
 
-    const [parking, setParking] = React.useState({
-        'address': '',
-        'zipCode': '',
-        'city': '',
-        'lattitude': 0,
-        'longitude': 0
-    });
+    // const [parking, setParking] = React.useState({
+    //     'address': '',
+    //     'zipCode': '',
+    //     'city': '',
+    //     'lattitude': 0,
+    //     'longitude': 0
+    // });
 
     const [openTypePlace, setOpenTypePlace] = React.useState(false);
     const [itemsTypePlace, setItemsTypePlace] = React.useState([
@@ -53,16 +53,6 @@ const CreateAdFirstStep = ({route , navigation}) => {
     }
 
     const handleSubmit = () => {
-        console.log('submission')
-
-        setParking({
-            'address': address,
-            'zipCode': zipCode,
-            'city': city,
-            'lattitude': lattitude,
-            'longitude': longitude
-        });
-
         if (
             adr === '' ||
             price == null ||
@@ -77,37 +67,47 @@ const CreateAdFirstStep = ({route , navigation}) => {
             console.log('error')
             setError('Merci de remplir tous les champs s\'il vous plaît')
         } else {
-            console.log('no error')
             setError('');
 
-            addParkingParticulier(
-                {
-                    'address': address,
-                    'zipCode': zipCode,
-                    'city': city,
-                    'lattitude': lattitude,
-                    'longitude': longitude,
-                    'isActivated': true //TODO: delete in future
-                }
-            )
-                .then((res) => {
-                    // console.log(res);
-                    let parkingId = res.data.id;
-                    navigation.navigate('CreateAdSecondSteps', {
-                        parkingId: parkingId,
-                        tmp_price: price,
-                        tmp_typeOfPlace: typePlace,
-                        tmp_isAssured: assured
-                    })
-                })
-                .catch( (err) => { console.log(err) })
+            const parking = {
+                'address': address,
+                'zipCode': zipCode,
+                'city': city,
+                'lattitude': lattitude,
+                'longitude': longitude
+            };
+
+            // addParkingParticulier(
+            //     {
+            //         'address': address,
+            //         'zipCode': zipCode,
+            //         'city': city,
+            //         'lattitude': lattitude,
+            //         'longitude': longitude,
+            //         'isActivated': true //TODO: delete in future
+            //     }
+            // )
+            //     .then((res) => {
+            //         // console.log(res);
+            //         let parkingId = res.data.id;
+            //         navigation.navigate('CreateAdSecondSteps', {
+            //             parking: parking,
+            //             parkingId: parkingId,
+            //             price: price,
+            //             typeOfPlace: typePlace,
+            //             isAssured: assured
+            //         })
+            //     })
+            //     .catch( (err) => { console.log(err) })
 
             //* ***************************** */
 
-            // navigation.navigate('CreateAdSecondSteps', {
-            //     parking: parking,
-            //     partialPost: partialPost
-            // })
+            navigation.navigate('CreateAdSecondSteps', {
+                parking: parking,
+                price: price,
+                typeOfPlace: typePlace,
+                isAssured: assured
+            })
         }
     }
 
