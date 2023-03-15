@@ -62,6 +62,9 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
     };
 
     const handleSubmit = async () => {
+        // console.log(photo)
+        // console.log(photo2)
+        // console.log(photo3)
         if(photo === {} && photo2 === {} && photo3 === {}) {
             setError('Merci d\'ajouter au minimum une photo');
             console.log('error')
@@ -70,27 +73,29 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
             setError('');
             await addParkingParticulier(parking)
                 .then((res) => {
+                    console.log('addParking res : ')
                     console.log(res)
                     post.ParkingParticulierId = res.data.id;
                     post.ValidationStatusId = 2;
-                })
-                .then(async (res) => {
-                    await addPost(post)
+                    addPost(post)
                         .then((res) => {
+                            console.log('addPost res : ')
                             console.log(res);
         
+                            //TODO: redirect somewhere else, user's postList ?
                             navigation.navigate('DrawerNav')
                         })
                         .catch( (e) => { console.log(e)})
-                }) 
+                })
                 .catch( (e) => { console.log(e)})
         }
     }
 
     return (
-        <Stack m={20} spacing={40}  style={styles.layoutFlex}>
+        <Stack m={20} spacing={20}  style={styles.columnItems}>
             <Text style={styles.title}>Vous pouvez ajouter jusqu'à 3 photos</Text>
-            <View style={styles.columnItems} >
+            <Text style={styles.error}>{error}</Text>
+            {/* <View style={styles.columnItems} > */}
                 <View style={styles.columnItems}>
                     {photo.uri ? (
                     <View  style={styles.inlineItems}>
@@ -157,9 +162,8 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                 }
                 </View>   
 
-            </View>
+            {/* </View> */}
             <View style={styles.submitButtonContainer}>
-                <Text style={styles.error}>{error}</Text>
                 <Button style={styles.submitButton} title="Publier" color="#157575" onPress={handleSubmit}/>
             </View>
 
@@ -169,17 +173,18 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    createAdThirdStepsContainer: {},
     layoutFlex: {
             flex: 1,
             flexDirection: 'column',
-            justifyContent: "flex-start",
+            justifyContent: "center",
             alignItems: "stretch"
     },
     columnItems: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: "flex-start",
-        alignItems: "center"
+        alignItems: "stretch"
     },
     inlineItems: {
         flex: 1,

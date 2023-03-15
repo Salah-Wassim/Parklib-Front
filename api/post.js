@@ -1,4 +1,5 @@
 const postUrl = 'http://192.168.1.10:3000/annonce';
+const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJrZW5iOTAyN0BnbWFpbC5jb20iLCJpYXQiOjE2Nzg4NjY2NDYsImV4cCI6MTY3ODk1MzA0Nn0.x2S4tpNfE2YUbpQh8_XGezBKwJooS1-D4IatbSSijwE';
 
 export const addPost = async (post) => {
     try {
@@ -9,7 +10,7 @@ export const addPost = async (post) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJrZW5iOTAyN0BnbWFpbC5jb20iLCJpYXQiOjE2Nzc2Nzg4NjMsImV4cCI6MTY3Nzc2NTI2M30.e9DWcVOl5hrC97iDNteLcq_WGX9lgxlUr1jriVlbzOk',
+                    'Authorization': 'Bearer ' + bearerToken,
                 },
                 body: JSON.stringify(post)
             }
