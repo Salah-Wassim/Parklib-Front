@@ -106,11 +106,11 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                         <Button title="Supprimer" style={styles.deleteImgBtn}  />
                     </View>
                     )
-                    :
-                    null
-                    }
-                    {photo.uri ? 
-                    null
+                    // :
+                    // null
+                    // }
+                    // {photo.uri ? 
+                    // null
                     :
                     <View style={styles.inlineItems}>
                         <Button style={styles.addImgBtn}  title="+" onPress={pickImage} />
@@ -128,11 +128,11 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                     <Button title="Supprimer" style={styles.deleteImgBtn}  />
                     </View>
                     )
-                    :
-                    null
-                    }
-                    {photo2.uri ? 
-                    null
+                    // :
+                    // null
+                    // }
+                    // {photo2.uri ? 
+                    // null
                     :
                     <View style={styles.inlineItems}>
                         <Button style={styles.addImgBtn}  title="+" onPress={pickImage2} />
@@ -150,11 +150,11 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                         <Button title="Supprimer" style={styles.deleteImgBtn}  />
                     </View>
                     )
-                    :
-                    null
-                }
-                    {photo3.uri ? 
-                    null
+                //     :
+                //     null
+                // }
+                //     {photo3.uri ? 
+                //     null
                     :
                     <View style={styles.inlineItems}>
                         <Button style={styles.addImgBtn}  title="+" onPress={pickImage3} />
@@ -200,7 +200,8 @@ const styles = StyleSheet.create({
     },
     error:{
         color:'red',
-        alignSelf:'center'
+        alignSelf: 'center',
+        fontWeight: "bold"
     },
     image: {
         width: 110,

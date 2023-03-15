@@ -93,7 +93,8 @@ const styles = StyleSheet.create({
     createAdSecondStepsContainer: {},
     error: {
         color : 'red',
-        alignSelf : 'center'
+        alignSelf: 'center',
+        fontWeight: "bold"
     },
     dropdownPicker: {
         zIndex: 10
