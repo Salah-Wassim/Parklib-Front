@@ -11,7 +11,7 @@ export const addParkingParticulier = async (parking) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJrZW5iOTAyN0BnbWFpbC5jb20iLCJpYXQiOjE2Nzg3OTQzMjUsImV4cCI6MTY3ODg4MDcyNX0.yDm6aTD_gx4I0vUyALkDlLh2gvNd4PA7YRwmy9PbDCM',
+                    'Authorization': 'Bearer test',
                 },
                 body: JSON.stringify(parking)
             }
