@@ -2,22 +2,47 @@ import React from "react";
 import {View, StyleSheet} from "react-native";
 import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
-import RNPickerSelect from 'react-native-picker-select';
+import DropDownPicker from 'react-native-dropdown-picker';
+import {addPost} from "../api/post";
 
-const CreateAdSecondSteps = ({navigation}) => {
-
-    const [titre, setTitre] = React.useState('');
+const CreateAdSecondSteps = ({ route, navigation }) => {
+    
+    const { parking, price, typeOfPlace, isAssured } = route.params;
+    
+    const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('')
-    const [contact, setContact] = React.useState('');
+    const [contact, setContact] = React.useState('email');
     const [error, setError] = React.useState('');
 
+    const [openContact, setOpenContact] = React.useState(false);
+    const [itemsContact, setItemsContact] = React.useState([
+        { label: 'Email', value: 'email' },
+        { label: 'Téléphone', value: 'telephone' },
+    ]);
+
     const handleSubmit = () => {
-        if(titre === '' || description === '' || contact === ''){
+
+        if (title === '' || description === '' || contact === '') {
             setError('Merci de remplir tous les champs s\'il vous plaît')
         }
         else{
             setError('');
-            navigation.navigate('CreateAdThirdSteps')
+
+            const post = {
+                'title': title,
+                'description': description,
+                'price': price ,
+                'typeOfPlace': typeOfPlace ,
+                'contact': contact,
+                'isAssured': isAssured,
+                'ParkingParticulierId': null, 
+                'ValidationStatusId': 2 
+            }
+
+            navigation.navigate('CreateAdThirdSteps', {
+                post: post,
+                parking: parking,
+            })
         }
     }
 
@@ -30,8 +55,8 @@ const CreateAdSecondSteps = ({navigation}) => {
                         style={styles.formInput}
                         placeholder='ex : Ma super annonce '
                         variant="outlined"
-                        onChangeText={newTitre => setTitre(newTitre)}
-                        value={titre}
+                        onChangeText={newTitre => setTitle(newTitre)}
+                        value={title}
                     />
                 </View>
                 <View style={styles.formContainer}>
@@ -45,14 +70,14 @@ const CreateAdSecondSteps = ({navigation}) => {
                 </View>
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Contact</Text>
-                    <RNPickerSelect
-                        items={[
-                            { label : 'Contact', value:''},
-                            { label: 'Téléphone', value: 'telephone' },
-                            { label: 'Email', value: 'email' },
-                        ]}
-                        onValueChange={newContact => setContact(newContact)}
+                    <DropDownPicker
+                    style={styles.dropdownPicker}
+                        open={openContact}
                         value={contact}
+                        items={itemsContact}
+                        setOpen={setOpenContact}
+                        setValue={setContact}
+                        setItems={setItemsContact}
                     />
                 </View>
             </View>
@@ -68,7 +93,11 @@ const styles = StyleSheet.create({
     createAdSecondStepsContainer: {},
     error: {
         color : 'red',
-        alignSelf : 'center'
+        alignSelf: 'center',
+        fontWeight: "bold"
+    },
+    dropdownPicker: {
+        zIndex: 10
     }
 })
 

@@ -1,84 +1,127 @@
 import React from "react";
-import {View , StyleSheet , TouchableOpacity} from "react-native";
+import {View , StyleSheet , TouchableOpacity, Switch} from "react-native";
 import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
-import RNPickerSelect from 'react-native-picker-select';
+import DropDownPicker from 'react-native-dropdown-picker';
+import InputAddressAutocomplete from "../components/inputAddressAutocomplete";
 
-const CreateAdFirstStep = ({navigation}) => {
+const CreateAdFirstStep = ({route , navigation}) => {
 
     const [adr, setAdr] = React.useState('');
-    const [prix, setPrix] = React.useState(null);
+    const [address, setAddress] = React.useState('');
+    const [zipCode, setZipCode] = React.useState('');
+    const [city, setCity] = React.useState('');
+    const [lattitude, setLattitude] = React.useState(0);
+    const [longitude, setLongitude] = React.useState(0);
+    const [price, setPrice] = React.useState(null);
     const [typePlace, setTypePlace] = React.useState('');
-    const [nbrPlace, setNbrPlace] = React.useState(null);
     const [assured, setAssured] = React.useState('')
     const [error, setError] = React.useState('');
 
+
+    const [openTypePlace, setOpenTypePlace] = React.useState(false);
+    const [itemsTypePlace, setItemsTypePlace] = React.useState([
+        { label: 'Choisissez un type', value: '' },
+        { label: 'Sous-sol (Privé)', value: 'sous-sol' },
+        { label: 'Aérien (Privé)', value: 'aerien' },
+        { label : "Autre", value: 'autre'},
+    ]);
+    const [openAssured, setOpenAssured] = React.useState(false);
+    const [itemsAssured, setItemsAssured] = React.useState([
+        { label: '', value: '' },
+        { label: 'Non', value: false },
+        { label: 'Oui', value: true },
+    ]); 
+    
+    const onChooseAddress = (respAddress) => {
+        setAdr(respAddress.properties.label);
+        setAddress(respAddress.properties.name);
+        setZipCode(respAddress.properties.postcode);
+        setCity(respAddress.properties.city);
+        setLattitude(respAddress.geometry.coordinates[1]);
+        setLongitude(respAddress.geometry.coordinates[0]);
+    }
+
     const handleSubmit = () => {
-        console.log('hello')
-        if (adr === '' || prix == null || typePlace === '' || nbrPlace === null || assured === '') {
+        if (
+            adr === '' ||
+            price == null ||
+            typePlace === '' ||
+            assured === '' ||
+            address === '' ||
+            zipCode === '' ||
+            city === '' ||
+            lattitude === null ||
+            longitude === null
+        ) {
             console.log('error')
             setError('Merci de remplir tous les champs s\'il vous plaît')
         } else {
-            console.log('no error')
             setError('');
-            navigation.navigate('CreateAdSecondSteps')
+
+            const parking = {
+                'address': address,
+                'zipCode': zipCode,
+                'city': city,
+                'lattitude': lattitude,
+                'longitude': longitude
+            };
+
+            navigation.navigate('CreateAdSecondSteps', {
+                parking: parking,
+                price: price,
+                typeOfPlace: typePlace,
+                isAssured: assured
+            })
         }
     }
+
 
     return (
         <Stack m={20} spacing={40} style={styles.createAdFirstStepContainer}>
             <View>
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Adresse complète de votre bien</Text>
-                    <TextInput
-                        style={styles.formInput}
-                        placeholder='Adresse postale'
-                        variant='outlined'
-                        onChangeText={newAdr => setAdr(newAdr)}
-                        value={adr}
+                    <InputAddressAutocomplete
+                        style={styles.inputAddressAutocomplete}
+                        isOpen={false}
+                        onChooseAddress={onChooseAddress}
                     />
                 </View>
                 <View style={styles.formContainer}>
-                    <Text style={styles.formText}>Loyer mensuel</Text>
+                    <Text style={styles.formText}>Loyer / jour (en €)</Text>
                     <TextInput
                         style={styles.formInput}
-                        placeholder='ex : 1000'
+                        placeholder='ex : 100€'
                         variant="outlined"
-                        onChangeText={newPrix => setPrix(newPrix)}
-                        defaultValue={prix}
+                        inputMode="decimal"
+                        keyboardType="decimal-pad"
+                        onChangeText={newprice => setPrice(parseInt(newprice))}
+                        defaultValue={price}
                     />
                 </View>
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Type de place</Text>
-                    <RNPickerSelect
-                        onValueChange={newTypePlace => setTypePlace(newTypePlace)}
-                        items={[
-                            {label : "Selectionné un type de place", value: ''},
-                            { label: 'Parking privé (sous-sol)', value: 'sous-sol' },
-                            { label: 'Parking privé (aerien)', value: 'aerien' },
-                        ]}
+                    <DropDownPicker
+                    style={styles.dropdownPicker}
+                        open={openTypePlace}
                         value={typePlace}
-                    />
-                </View>
-                <View style={styles.formContainer}>
-                    <Text style={styles.formText}>Nombre de place</Text>
-                    <TextInput
-                        style={styles.formInput}
-                        variant="outlined"
-                        onChangeText={newNbrPlace => setNbrPlace(newNbrPlace)}
-                        value={nbrPlace}
+                        items={itemsTypePlace}
+                        setOpen={setOpenTypePlace}
+                        setValue={setTypePlace}
+                        setItems={setItemsTypePlace}
                     />
                 </View>
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Votre place de parking est-elle assurée ?</Text>
-                    <RNPickerSelect
-                        items={[
-                            {label: 'Selectionnez une valeur', value: ''},
-                            { label: 'Oui', value: 'oui' },
-                            { label: 'Non', value: 'non' },
-                        ]}
-                        onValueChange={newAssured => setAssured(newAssured)}
+                    <DropDownPicker
+                    style={styles.dropdownPicker}
+                        open={openAssured}
                         value={assured}
+                        items={itemsAssured}
+                        setOpen={setOpenAssured}
+                        setValue={setAssured}
+                        setItems={setItemsAssured}
                     />
                 </View>
             </View>
@@ -92,9 +135,29 @@ const CreateAdFirstStep = ({navigation}) => {
 const styles = StyleSheet.create({
     createAdFirstStepContainer: {},
     error:{
-        color:'red',
+        color: 'red',
+        fontWeight: "bold"
     },
-    submitButton: {}
+    formContainer: {
+        marginTop: 5,
+        marginBottom: 5,
+    },
+    submitButton: {},
+    formText: {
+        marginBottom: 5
+    },
+    dropdownPicker: {
+        zIndex: 10,
+        borderRadius: 5,
+        borderColor: "lightgray"
+    },
+    inputAddressAutocomplete: {
+        backgroundColor: "white"
+    },
+    formInput: {
+        borderColor: "lightgray",
+        backgroundColor: "white"
+    }
 })
 
 export default CreateAdFirstStep;
