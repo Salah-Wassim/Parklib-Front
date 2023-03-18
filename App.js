@@ -58,7 +58,7 @@ export default function App() {
                     <Stack.Screen name="VerificationCode" options={{title: 'Validation du code'}} component={VerificationCodeScreen}/>
                     <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
                     <Stack.Screen name="ResetPassword" options={{title: 'Reinitialiser le mot de passe'}} component={Map}/>
-                    <Stack.Screen name="CreateAdFirstStep" options={{title: Publier - 'Étape 1'}} component={CreateAdFirstStep}/>
+                    <Stack.Screen name="CreateAdFirstStep" options={{title: 'Publier - Étape 1'}} component={CreateAdFirstStep}/>
                     <Stack.Screen name="CreateAdSecondSteps" options={{title: 'Publier - Étape 2'}} component={CreateAdSecondSteps}/>
                     <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Publier - Étape 3'}} component={CreateAdThirdSteps}/>
                     <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
