@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-
+import { handleSignUp } from '../store/authentification/auth';
+import AuthContext from '../store/authentification/authContext';
 import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack, HStack} from 'react-native-flex-layout';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-
 
 const SignUp = (props) => {
 
@@ -13,51 +13,7 @@ const SignUp = (props) => {
     const [email, onChangeEmail] = React.useState('');
     const [password, onChangePassword] = React.useState('');
     const [cPassword, onChangeCPassword] = React.useState('');
-
-
-
-    const handleSubmit = async() => {
-        //avoid infinite loops
-        const visited = new Set();
-        try {
-            const data = {
-                email: email,
-                password: password,
-                cPassword: cPassword
-            }
-            // Stringifying the data object and handling circular references
-            const dataJson = JSON.stringify(data, (key, value) => {
-                if (typeof value === "object" && value !== null) {
-                    if (visited.has(value)) {
-                        return;
-                    }
-                    visited.add(value);
-                }
-                return value;
-            });
-
-            const response = await fetch(
-                'http://172.26.224.1:3000/auth/register', {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',  
-                    },
-                    
-                    body: dataJson
-                },
-            );
-
-            await response.json();
-
-            return navigation.navigate('Profile');
-
-        } catch (error) {
-            console.error(error)
-        }
-    };
-
-  
+    const { setAuthenticated } = useContext(AuthContext);
 
     return (
         <Stack m={20} spacing={10}>
@@ -112,7 +68,9 @@ const SignUp = (props) => {
                     />
                 </View>
                 <View style={styles.submitButtonContainer}>
-                    <Button style={styles.submitButton} title="Inscription" onPress={handleSubmit}  color="#157575"/>
+                    <Button style={styles.submitButton} title="Inscription" onPress={() =>
+                         handleSignUp(email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated)}  
+                         color="#157575"/>
                 </View>
             </View>
             <View style={styles.socialMultiBox}>
