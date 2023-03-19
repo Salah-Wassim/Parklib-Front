@@ -1,5 +1,5 @@
 const API_TOKEN = "238HINNOST";
-const API_URL = "http://172.21.240.1:3000";
+const API_URL = "http://127.0.0.1:3000";
 
 export const getParkingSearchedText = async (text, page) =>{
     const url  = 'https://data.bordeaux-metropole.fr/geojson?' + 'key=' + API_TOKEN + '&typename=' + text
