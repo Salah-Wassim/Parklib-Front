@@ -65,25 +65,24 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
         // console.log(photo)
         // console.log(photo2)
         // console.log(photo3)
-        if(photo === {} && photo2 === {} && photo3 === {}) {
+        if(photo.uri == undefined && photo2.uri == undefined && photo3.uri == undefined) {
             setError('Merci d\'ajouter au minimum une photo');
             console.log('error')
         }
         else {
             setError('');
             await addParkingParticulier(parking)
-                .then((res) => {
-                    console.log('addParking res : ')
-                    console.log(res)
+                .then( async (res) => {
+                    // console.log('addParking res : ')
+                    // console.log(res)
                     post.ParkingParticulierId = res.data.id;
-                    post.ValidationStatusId = 2;
-                    addPost(post)
+                    // post.ValidationStatusId = 1;
+                    await addPost(post)
                         .then((res) => {
-                            console.log('addPost res : ')
-                            console.log(res);
-        
-                            //TODO: redirect somewhere else, user's postList ?
-                            navigation.navigate('DrawerNav')
+                            // console.log('addPost res : ')
+                            // console.log(res);
+                            //TODO: redirect somewhere else, user's postList when created ?
+                            navigation.navigate('Historique')
                         })
                         .catch( (e) => { console.log(e)})
                 })
@@ -92,13 +91,15 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
     }
 
     return (
-        <Stack m={20} spacing={20}  style={styles.columnItems}>
-            <Text style={styles.title}>Vous pouvez ajouter jusqu'à 3 photos</Text>
-            <Text style={styles.error}>{error}</Text>
-            {/* <View style={styles.columnItems} > */}
+        <Stack m={20} spacing={20} style={styles.createAdThirdStepsContainer}>
+
+            <View>
+
+                <Text style={styles.title}>Vous pouvez ajouter jusqu'à 3 photos</Text>
+
                 <View style={styles.columnItems}>
                     {photo.uri ? (
-                    <View  style={styles.inlineItems}>
+                        <View  style={styles.inlineItems}>
                         <Image
                             source={{ uri: photo.uri}}
                             style={styles.image} 
@@ -106,11 +107,6 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                         <Button title="Supprimer" style={styles.deleteImgBtn}  />
                     </View>
                     )
-                    // :
-                    // null
-                    // }
-                    // {photo.uri ? 
-                    // null
                     :
                     <View style={styles.inlineItems}>
                         <Button style={styles.addImgBtn}  title="+" onPress={pickImage} />
@@ -118,6 +114,7 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                     }
 
                 </View>
+
                 <View style={styles.columnItems}>
                     {photo2.uri ? (
                     <View  style={styles.inlineItems}>
@@ -128,11 +125,6 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                     <Button title="Supprimer" style={styles.deleteImgBtn}  />
                     </View>
                     )
-                    // :
-                    // null
-                    // }
-                    // {photo2.uri ? 
-                    // null
                     :
                     <View style={styles.inlineItems}>
                         <Button style={styles.addImgBtn}  title="+" onPress={pickImage2} />
@@ -150,11 +142,6 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                         <Button title="Supprimer" style={styles.deleteImgBtn}  />
                     </View>
                     )
-                //     :
-                //     null
-                // }
-                //     {photo3.uri ? 
-                //     null
                     :
                     <View style={styles.inlineItems}>
                         <Button style={styles.addImgBtn}  title="+" onPress={pickImage3} />
@@ -162,9 +149,15 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                 }
                 </View>   
 
-            {/* </View> */}
+
+            </View>
+            
+            
+
+            
             <View style={styles.submitButtonContainer}>
-                <Button style={styles.submitButton} title="Publier" color="#157575" onPress={handleSubmit}/>
+                <Button style={styles.submitButton} title="Publier mon annonce" color="#157575" onPress={handleSubmit}/>
+                <Text style={styles.error}>{error}</Text>   
             </View>
 
             
@@ -173,21 +166,15 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
 }
 
 const styles = StyleSheet.create({
-    createAdThirdStepsContainer: {},
-    layoutFlex: {
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: "center",
-            alignItems: "stretch"
+    createAdThirdStepsContainer: {
     },
     columnItems: {
-        flex: 1,
         flexDirection: 'column',
         justifyContent: "flex-start",
-        alignItems: "stretch"
+        alignItems: "stretch",
+        marginVertical: 15
     },
     inlineItems: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: "space-evenly",
         alignItems: "center",
@@ -198,10 +185,11 @@ const styles = StyleSheet.create({
         color: COLOR.vert ,
         alignSelf:'center'
     },
-    error:{
-        color:'red',
+    error: {
+        color : 'red',
         alignSelf: 'center',
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginTop: 5,
     },
     image: {
         width: 110,

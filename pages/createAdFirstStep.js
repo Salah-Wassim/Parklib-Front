@@ -28,7 +28,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
     ]);
     const [openAssured, setOpenAssured] = React.useState(false);
     const [itemsAssured, setItemsAssured] = React.useState([
-        { label: '', value: '' },
+        { label: 'Choisir une réponse', value: '' },
         { label: 'Non', value: false },
         { label: 'Oui', value: true },
     ]); 
@@ -134,9 +134,11 @@ const CreateAdFirstStep = ({route , navigation}) => {
 }
 const styles = StyleSheet.create({
     createAdFirstStepContainer: {},
-    error:{
-        color: 'red',
-        fontWeight: "bold"
+    error: {
+        color : 'red',
+        alignSelf: 'center',
+        fontWeight: "bold",
+        marginTop: 5,
     },
     formContainer: {
         marginTop: 5,

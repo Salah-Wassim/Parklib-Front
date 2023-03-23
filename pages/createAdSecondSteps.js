@@ -36,7 +36,7 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
                 'contact': contact,
                 'isAssured': isAssured,
                 'ParkingParticulierId': null, 
-                'ValidationStatusId': 2 
+                'ValidationStatusId': 1 
             }
 
             navigation.navigate('CreateAdThirdSteps', {
@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
     error: {
         color : 'red',
         alignSelf: 'center',
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginTop: 5,
     },
     dropdownPicker: {
         zIndex: 10
