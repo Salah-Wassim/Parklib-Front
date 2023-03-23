@@ -9,6 +9,7 @@ import COLOR from "../utils/color.constant";
 
 import {addPost} from "../api/post";
 import {addParkingParticulier} from "../api/parkingParticulier";
+import {uploadPicturesForPost} from "../api/picture";
 
 const CreateAdThirdSteps = ({ route, navigation }) => {
     
@@ -73,16 +74,32 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
             setError('');
             await addParkingParticulier(parking)
                 .then( async (res) => {
-                    // console.log('addParking res : ')
-                    // console.log(res)
+                    console.log('addParking res : ')
+                    console.log(res)
                     post.ParkingParticulierId = res.data.id;
                     // post.ValidationStatusId = 1;
                     await addPost(post)
-                        .then((res) => {
-                            // console.log('addPost res : ')
-                            // console.log(res);
-                            //TODO: redirect somewhere else, user's postList when created ?
-                            navigation.navigate('Historique')
+                        .then(async (res) => {
+                            console.log('addPost res : ')
+                            console.log(res);
+
+                            const files = [photo];//TODO: add photo 2 & 3
+                            // console.log('files', files);
+                            const form = new FormData();
+                            for (let i = 0; i < files.length; i++) {
+                              form.append('url', files[i], files[i].name)
+                            }
+                            form.append('postid', res.data.id)
+                            // console.log('form', form)
+
+                            await uploadPicturesForPost(form)
+                                .then((res) => {
+                                    console.log('uploadPictures res : ')
+                                    console.log(res);
+                                    //TODO: redirect somewhere else, user's postList when created ?
+                                    // navigation.navigate('Historique')
+                                })
+                                .catch( (e) => { console.log(e)})
                         })
                         .catch( (e) => { console.log(e)})
                 })
