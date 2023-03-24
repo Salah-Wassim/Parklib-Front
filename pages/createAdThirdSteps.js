@@ -84,14 +84,11 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                             console.log(res);
 
                             const files = [photo];//TODO: add photo 2 & 3
-                            // console.log('files', files);
                             const form = new FormData();
                             for (let i = 0; i < files.length; i++) {
                               form.append('url', files[i], files[i].name)
                             }
                             form.append('postid', res.data.id)
-                            // console.log('form', form)
-
                             await uploadPicturesForPost(form)
                                 .then((res) => {
                                     console.log('uploadPictures res : ')
@@ -99,7 +96,8 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                                     //TODO: redirect somewhere else, user's postList when created ?
                                     // navigation.navigate('Historique')
                                 })
-                                .catch( (e) => { console.log(e)})
+                                .catch((e) => { console.log(e) })
+                            
                         })
                         .catch( (e) => { console.log(e)})
                 })
@@ -121,7 +119,7 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                             source={{ uri: photo.uri}}
                             style={styles.image} 
                             />
-                        <Button title="Supprimer" style={styles.deleteImgBtn}  />
+                        <Button title="Supprimer" style={styles.deleteImgBtn} onPress={ () => { setPhoto({}) }} />
                     </View>
                     )
                     :
@@ -139,7 +137,7 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                         source={{ uri: photo2.uri}}
                         style={styles.image} 
                         />
-                    <Button title="Supprimer" style={styles.deleteImgBtn}  />
+                    <Button title="Supprimer" style={styles.deleteImgBtn} onPress={ () => { setPhoto2({}) }}/>
                     </View>
                     )
                     :
@@ -156,7 +154,7 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                         source={{ uri: photo3.uri}}
                         style={styles.image} 
                         />
-                        <Button title="Supprimer" style={styles.deleteImgBtn}  />
+                        <Button title="Supprimer" style={styles.deleteImgBtn} onPress={ () => { setPhoto3({}) }}/>
                     </View>
                     )
                     :

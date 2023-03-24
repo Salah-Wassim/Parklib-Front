@@ -8,7 +8,7 @@ export const uploadPicturesForPost = async (formPicture) => {
             {
                 method: 'POST',
                 headers: {
-                    'Accept': '*/*',
+                    'Accept': 'application/json',
                     'Content-Type': 'multipart/form-data',
                     'Access-Control-Allow-Origin': '*',
                     'Authorization': 'Bearer test',
