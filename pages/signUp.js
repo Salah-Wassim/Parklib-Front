@@ -15,6 +15,10 @@ const SignUp = (props) => {
     const [cPassword, onChangeCPassword] = React.useState('');
     const { setAuthenticated } = useContext(AuthContext);
 
+    const onPressLearnMore = ()=>{
+        console.log(email,password,cPassword)
+    }
+
     return (
         <Stack m={20} spacing={10}>
             <View style={styles.logoContainer}>

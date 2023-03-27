@@ -1,3 +1,4 @@
+
 import React, { useContext } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { handleSignIn } from '../store/authentification/auth';
@@ -5,6 +6,7 @@ import AuthContext from '../store/authentification/authContext';
 import { Text, TextInput, Button } from '@react-native-material/core';
 import { Stack, HStack } from 'react-native-flex-layout';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
+
 
 const SignIn = (props) => {
    

@@ -31,7 +31,9 @@ import { Provider } from 'react-redux'
 import VerificationScreen from "./pages/verificationScreen";
 import VerificationCodeScreen from "./pages/verficationCodeScreen";
 import ParkingParticulierDetails from './pages/parkingParticulierDetails';
+import DisplayPark from "./pages/displayPark";
 import AuthContext from './store/authentification/authContext'; 
+
 
 const Stack = createStackNavigator()
 
