@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, View, Text, TouchableOpacity, StatusBar} from 'react-native';
-import {TextInput,Stack,FAB, Button, Flex} from "@react-native-material/core";
+import {TextInput,Stack, Button, Flex} from "@react-native-material/core";
 
 export default function Home({navigation}) {
 
