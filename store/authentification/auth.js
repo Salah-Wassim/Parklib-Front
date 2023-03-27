@@ -3,7 +3,7 @@ import { register, login } from "../../api/api";
 
 
 const isInputValid = (email, password, cPassword) => {
-  if (email.trim() === '' || password.trim() === '' || cPassword.trim() === '') {
+  if (!email.trim()  || !password.trim()  || !cPassword.trim()) {
     console.log('Veuillez remplir tous les champs.');
     return false;
   }
@@ -39,7 +39,7 @@ const handleSignUp = async (email, password, cPassword, navigation, onChangeEmai
 
         const storedToken = await SecureStore.getItemAsync(token, config);
 
-        if (storedToken === null) {
+        if (!storedToken) {
           console.log("Une erreur est survenue lors de la récupération du token");
           return;
         }
@@ -66,7 +66,7 @@ const handleSignIn = async (email, password, navigation, onChangeEmail, onChange
         keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
     };
 
-  if (email.trim() === '' || password.trim() === '') {
+  if (!email.trim() || !password.trim()) {
     console.log('Veuillez remplir tous les champs.');
     return;
   }
@@ -81,7 +81,7 @@ const handleSignIn = async (email, password, navigation, onChangeEmail, onChange
         setAuthenticated(true); 
 
         const storedToken = await SecureStore.getItemAsync(token, config);
-        if (storedToken === null) {
+        if (!storedToken) {
           console.log("Une erreur est survenue lors de la récupération du token");
           return;
         }
