@@ -1,4 +1,5 @@
 const API_TOKEN = "238HINNOST";
+const API_URL = "http://127.0.0.1:3000";
 
 export const getParkingSearchedText = async (text, page) =>{
     const url  = 'https://data.bordeaux-metropole.fr/geojson?' + 'key=' + API_TOKEN + '&typename=' + text
@@ -25,7 +26,7 @@ export const getParkingMap = async () => {
 }
 
 export const verifyPhoneNumber = async (phoneNumber) => {
-   return await fetch('http://127.0.0.1:3000', {
+   return await fetch(`http://127.0.0.1:3000`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -38,7 +39,7 @@ export const verifyPhoneNumber = async (phoneNumber) => {
 }
 
 export const verifyCode = async (code, phoneNumber,report) => {
-    return await fetch('http://127.0.0.1:3000/report', {
+    return await fetch(`${API_URL}/report`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -50,4 +51,33 @@ export const verifyCode = async (code, phoneNumber,report) => {
             code: code
         })
     }).then((response) => response.json()).catch((error) => console.error(error));
+}
+
+export const register = async (email,password,cPassword) => {
+    return await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',  
+        },  
+        body: JSON.stringify({
+            email: email,
+            password: password,
+            cPassword: cPassword
+        })
+    },).then((response) => response.json()).catch((error) => console.error(error));
+}
+
+export const login = async (email,password) => {
+    return await fetch(`${API_URL}/auth`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',  
+        },  
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    },).then((response) => response.json()).catch((error) => console.error(error));
 }

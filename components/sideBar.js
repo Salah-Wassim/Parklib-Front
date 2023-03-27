@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { handleLogout } from '../store/authentification/auth';
+import AuthContext from '../store/authentification/authContext';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { Box, Flex, Spacer } from "@react-native-material/core";
 
 
 const SideBar=(props)=> {
     const { navigation } = props
+    const { setAuthenticated } = useContext(AuthContext);
     return (
         <Flex {...props} h={"100%"} pt={37} style={styles.drawer}>
             <Flex direction="column" style={styles.container}>
@@ -54,9 +57,9 @@ const SideBar=(props)=> {
                             navigation.navigate('CGU')}}>CGU</Text>
                         <Text style={styles.version}>V1.0</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleLogout(setAuthenticated)}>
                         <View style={styles.logoutView}>
-                            <Text style={styles.logoutBtn}>Déconnecter</Text>
+                            <Text style={styles.logoutBtn}>Déconnexion</Text>
                         </View>
                     </TouchableOpacity>
                 </Flex>
