@@ -3,7 +3,7 @@ import {View, StyleSheet} from "react-native";
 import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {addPost} from "../api/post";
+import COLOR from "../utils/color.constant";
 
 const CreateAdSecondSteps = ({ route, navigation }) => {
     
@@ -48,7 +48,7 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
 
     return (
         <Stack m={20} spacing={40} style={styles.createAdSecondStepsContainer}>
-            <View>
+            <View style={{zIndex: 2}} >
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Titre de votre annonce</Text>
                     <TextInput
@@ -68,7 +68,7 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
                         value={description}
                     />
                 </View>
-                <View style={styles.formContainer}>
+                <View style={[styles.formContainer, {zIndex: 2}]}>
                     <Text style={styles.formText}>Contact</Text>
                     <DropDownPicker
                     style={styles.dropdownPicker}
@@ -82,7 +82,7 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
                 </View>
             </View>
             <View style={styles.submitButtonContainer}>
-                <Button style={styles.submitButton} title="Dernière étape" color="#157575" onPress={handleSubmit}/>
+                <Button style={styles.submitButton} title="Dernière étape" onPress={handleSubmit}/>
                 <Text style={styles.error}>{error}</Text>
             </View>
         </Stack>
@@ -92,13 +92,16 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     createAdSecondStepsContainer: {},
     error: {
-        color : 'red',
+        color : COLOR.rouge,
         alignSelf: 'center',
         fontWeight: "bold",
         marginTop: 5,
     },
+    submitButton: {
+        backgroundColor: COLOR.vert,
+        color: COLOR.blanc
+    },
     dropdownPicker: {
-        zIndex: 10
     }
 })
 

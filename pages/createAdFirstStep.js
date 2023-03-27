@@ -4,6 +4,7 @@ import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack} from 'react-native-flex-layout';
 import DropDownPicker from 'react-native-dropdown-picker';
 import InputAddressAutocomplete from "../components/inputAddressAutocomplete";
+import COLOR from "../utils/color.constant";
 
 const CreateAdFirstStep = ({route , navigation}) => {
 
@@ -79,8 +80,8 @@ const CreateAdFirstStep = ({route , navigation}) => {
 
     return (
         <Stack m={20} spacing={40} style={styles.createAdFirstStepContainer}>
-            <View>
-                <View style={styles.formContainer}>
+            <View style={{zIndex: 2}} >
+                <View style={[styles.formContainer, {zIndex: 4}]}>
                     <Text style={styles.formText}>Adresse complète de votre bien</Text>
                     <InputAddressAutocomplete
                         style={styles.inputAddressAutocomplete}
@@ -100,7 +101,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
                         defaultValue={price}
                     />
                 </View>
-                <View style={styles.formContainer}>
+                <View style={[styles.formContainer, {zIndex: 3}]}>
                     <Text style={styles.formText}>Type de place</Text>
                     <DropDownPicker
                     style={styles.dropdownPicker}
@@ -112,7 +113,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
                         setItems={setItemsTypePlace}
                     />
                 </View>
-                <View style={styles.formContainer}>
+                <View style={[styles.formContainer, {zIndex: 2}]}>
                     <Text style={styles.formText}>Votre place de parking est-elle assurée ?</Text>
                     <DropDownPicker
                     style={styles.dropdownPicker}
@@ -126,7 +127,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
                 </View>
             </View>
             <View style={styles.submitButtonContainer}>
-                <Button style={styles.submitButton} title="Continuer" color="#157575" onPress={handleSubmit}/>
+                <Button style={styles.submitButton} title="Continuer" onPress={handleSubmit}/>
                 <Text style={styles.error}>{error}</Text>
             </View>
         </Stack>
@@ -135,7 +136,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
 const styles = StyleSheet.create({
     createAdFirstStepContainer: {},
     error: {
-        color : 'red',
+        color : COLOR.rouge,
         alignSelf: 'center',
         fontWeight: "bold",
         marginTop: 5,
@@ -144,21 +145,23 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
     },
-    submitButton: {},
+    submitButton: {
+        backgroundColor: COLOR.vert,
+        color: COLOR.blanc
+    },
     formText: {
         marginBottom: 5
     },
     dropdownPicker: {
-        zIndex: 10,
         borderRadius: 5,
-        borderColor: "lightgray"
+        borderColor: COLOR.grisclair
     },
     inputAddressAutocomplete: {
-        backgroundColor: "white"
+        backgroundColor: COLOR.blanc,
     },
     formInput: {
-        borderColor: "lightgray",
-        backgroundColor: "white"
+        borderColor: COLOR.grisclair,
+        backgroundColor: COLOR.blanc,
     }
 })
 

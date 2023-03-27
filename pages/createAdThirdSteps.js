@@ -171,7 +171,7 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
 
             
             <View style={styles.submitButtonContainer}>
-                <Button style={styles.submitButton} title="Publier mon annonce" color="#157575" onPress={handleSubmit}/>
+                <Button style={styles.submitButton} title="Publier mon annonce" onPress={handleSubmit}/>
                 <Text style={styles.error}>{error}</Text>   
             </View>
 
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
         alignSelf:'center'
     },
     error: {
-        color : 'red',
+        color : COLOR.rouge,
         alignSelf: 'center',
         fontWeight: "bold",
         marginTop: 5,
@@ -219,7 +219,11 @@ const styles = StyleSheet.create({
     deleteImgBtn: {
         backgroundColor: COLOR.rouge,
         color: COLOR.blanc,
-    }
+    },
+    submitButton: {
+        backgroundColor: COLOR.vert,
+        color: COLOR.blanc
+    },
 })
 
 export default CreateAdThirdSteps;

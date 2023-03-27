@@ -7,6 +7,7 @@ import {
 } from "react-native-responsive-screen";
 import axios from "axios";
 import { Ionicons } from '@expo/vector-icons';
+import COLOR from "../utils/color.constant";
 
 const InputAddressAutocomplete = ({onChooseAddress}) => {
 
@@ -16,7 +17,7 @@ const InputAddressAutocomplete = ({onChooseAddress}) => {
     const [search, setSearch] = React.useState([]);
 
     const searchResults = (text) => {
-        axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text) + "&limit=6").then(r => {
+        axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text) + "&limit=8").then(r => {
             setIsLoading(false);
             setSearch(r.data.features);
         }).catch(e => {
@@ -79,11 +80,10 @@ const styles = StyleSheet.create({
         position: "relative",
     },
     inputStyle: {
-        backgroundColor: "white",
-        borderColor: "lightgray"
+        backgroundColor: COLOR.blanc,
+        borderColor: COLOR.grisclair
     },
     searchBoxContainer: {
-        zIndex: 1000,
         position: 'absolute',
         top: 30,
         justifyContent: 'flex-start',
@@ -92,6 +92,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
         width: wp("100%"),
+        // backgroundColor: COLOR.blanc
+
     },
     rowStyle: {
         flexDirection: 'row',
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         borderBottomWidth: 1,
         borderColor: '#e7e7e7',
-        backgroundColor: "white"
+        backgroundColor: COLOR.grisclair
     },
     addressStyle: {
         fontSize: 14,
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
     cityStyle: {
         fontSize: 10,
         marginLeft: 5,
-        color: '#6b6b6b'
+        color: COLOR.grisfonce
     }
 
 });
