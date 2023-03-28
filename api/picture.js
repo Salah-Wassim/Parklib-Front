@@ -1,4 +1,4 @@
-const pictureUrl = 'http://192.168.1.10:3000/bookings';
+const pictureUrl = 'http://192.168.1.10:3000/picture';
 
 export const uploadPicturesForPost = async (formPicture) => {
     const url = pictureUrl + '/upload' 
@@ -10,7 +10,6 @@ export const uploadPicturesForPost = async (formPicture) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'multipart/form-data',
-                    'Access-Control-Allow-Origin': '*',
                     'Authorization': 'Bearer test',
                 },
                 body: formPicture

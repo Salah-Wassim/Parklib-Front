@@ -55,7 +55,6 @@ const CreateAdFirstStep = ({route , navigation}) => {
             lattitude === null ||
             longitude === null
         ) {
-            console.log('error')
             setError('Merci de remplir tous les champs s\'il vous plaît')
         } else {
             setError('');

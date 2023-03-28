@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         paddingHorizontal: 30,
         borderBottomWidth: 1,
-        borderColor: '#e7e7e7',
+        borderColor: COLOR.grisfonce,
         backgroundColor: COLOR.grisclair
     },
     addressStyle: {
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "800",
         marginBottom: 10,
-        color: "#000",
+        color: COLOR.noir,
         marginTop: 10
     },
     cityStyle: {

@@ -1,5 +1,5 @@
 import React from "react";
-import {View, StyleSheet, Image,Text} from "react-native";
+import {View, StyleSheet, Image,Text, Platform} from "react-native";
 import {Button} from "@react-native-material/core";
 import { Stack} from 'react-native-flex-layout';
 import { launchImageLibrary } from 'react-native-image-picker';
@@ -72,6 +72,7 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
         }
         else {
             setError('');
+            console.log('Start sending to BDD')
             await addParkingParticulier(parking)
                 .then( async (res) => {
                     console.log('addParking res : ')
@@ -82,19 +83,37 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                         .then(async (res) => {
                             console.log('addPost res : ')
                             console.log(res);
-
-                            const files = [photo];//TODO: add photo 2 & 3
+                            const photos = [photo, photo2, photo3];
+                            const files = [];
+                            photos.forEach(element => {
+                                // console.log(element)
+                                if (element.uri != undefined ) {
+                                    files.push(element);
+                                }
+                            });
+                            // console.log(files);
                             const form = new FormData();
                             for (let i = 0; i < files.length; i++) {
-                              form.append('url', files[i], files[i].name)
+                                let photoUri = files[i].uri;
+                                // console.log(photoUri)
+                                let type = photoUri.split(".").pop();
+                                let name = photoUri.split("/").pop();
+                                // form.append('url', photoUri, photoUri.name)
+                                form.append('url' , {
+                                    name: name,
+                                    type: `image/${type}`,
+                                    uri: Platform.OS === 'ios' ? photoUri.replace('file://', '') : photoUri,
+                                  })
                             }
                             form.append('postid', res.data.id)
                             await uploadPicturesForPost(form)
                                 .then((res) => {
                                     console.log('uploadPictures res : ')
                                     console.log(res);
-                                    //TODO: redirect somewhere else, user's postList when created ?
+                                    console.log('Ended sending to BDD')
+                                    //TODO: redirect somewhere else when created, user's postList ?
                                     // navigation.navigate('Historique')
+
                                 })
                                 .catch((e) => { console.log(e) })
                             
