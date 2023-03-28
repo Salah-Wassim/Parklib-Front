@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import { handleSignUp } from '../store/authentification/auth';
+import AuthContext from '../store/authentification/authContext';
 import {Text, TextInput, Button} from '@react-native-material/core';
 import { Stack, HStack} from 'react-native-flex-layout';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
-const SignUp = ({navigation}) => {
+const SignUp = (props) => {
+
+    const { navigation } = props
 
     const [email, onChangeEmail] = React.useState('');
     const [password, onChangePassword] = React.useState('');
     const [cPassword, onChangeCPassword] = React.useState('');
+    const { setAuthenticated } = useContext(AuthContext);
 
     const onPressLearnMore = ()=>{
         console.log(email,password,cPassword)
@@ -39,6 +44,7 @@ const SignUp = ({navigation}) => {
                         placeholder="nom@exemple.com"
                         autoCompleteType="email"
                         variant="outlined"
+                        value={email}
                         onChangeText={onChangeEmail}
                     />
                 </View>
@@ -49,6 +55,7 @@ const SignUp = ({navigation}) => {
                         placeholder='Enter votre mot de passe'
                         secureTextEntry={true}
                         variant="outlined"
+                        value={password}
                         onChangeText={onChangePassword}
                     />
                 </View>
@@ -60,16 +67,19 @@ const SignUp = ({navigation}) => {
                         secureTextEntry={true}
                         textContentType="password"
                         variant="outlined"
+                        value={cPassword}
                         onChangeText={onChangeCPassword}
                     />
                 </View>
                 <View style={styles.submitButtonContainer}>
-                    <Button style={styles.submitButton} title="Inscription" onPress={onPressLearnMore} color="#157575"/>
+                    <Button style={styles.submitButton} title="Inscription" onPress={() =>
+                         handleSignUp(email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated)}  
+                         color="#157575"/>
                 </View>
             </View>
             <View style={styles.socialMultiBox}>
                 <View style={styles.line}></View>
-                <View style={styles.textContainer}>
+                <View>
                     <Text style={styles.text}>ou s'inscrire avec</Text>
                 </View>
                 <View style={styles.line}></View>
