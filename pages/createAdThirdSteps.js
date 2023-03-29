@@ -111,8 +111,9 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                                     console.log('uploadPictures res : ')
                                     console.log(res);
                                     console.log('Ended sending to BDD')
-                                    //TODO: redirect somewhere else when created, user's postList ?
-                                    // navigation.navigate('Historique')
+                                    alert('Votre annonce a bien été créée !')
+                                    //TODO: redirect to somewhere else when created, like user's post-list page ?
+                                    // navigation.navigate('DrawerNav')
 
                                 })
                                 .catch((e) => { console.log(e) })
@@ -201,6 +202,11 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
     createAdThirdStepsContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'stretch',
+        marginBottom: 0,
     },
     columnItems: {
         flexDirection: 'column',
@@ -217,7 +223,8 @@ const styles = StyleSheet.create({
     title:{
         fontWeight: "bold",
         color: COLOR.vert ,
-        alignSelf:'center'
+        alignSelf: 'center',
+        marginBottom: 10
     },
     error: {
         color : COLOR.rouge,

@@ -79,7 +79,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
 
     return (
         <Stack m={20} spacing={40} style={styles.createAdFirstStepContainer}>
-            <View style={{zIndex: 2}} >
+            <View style={styles.columnContainer} >
                 <View style={[styles.formContainer, {zIndex: 4}]}>
                     <Text style={styles.formText}>Adresse complète de votre bien</Text>
                     <InputAddressAutocomplete
@@ -133,16 +133,27 @@ const CreateAdFirstStep = ({route , navigation}) => {
     )
 }
 const styles = StyleSheet.create({
-    createAdFirstStepContainer: {},
+    createAdFirstStepContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'stretch',
+        marginBottom: 0,
+    },
     error: {
         color : COLOR.rouge,
         alignSelf: 'center',
         fontWeight: "bold",
         marginTop: 5,
     },
+    columnContainer: {
+        zIndex: 2,
+    },
     formContainer: {
         marginTop: 5,
         marginBottom: 5,
+    },
+    submitButtonContainer: {
     },
     submitButton: {
         backgroundColor: COLOR.vert,

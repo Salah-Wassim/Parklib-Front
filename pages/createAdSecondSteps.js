@@ -48,7 +48,7 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
 
     return (
         <Stack m={20} spacing={40} style={styles.createAdSecondStepsContainer}>
-            <View style={{zIndex: 2}} >
+            <View style={styles.columnContainer} >
                 <View style={styles.formContainer}>
                     <Text style={styles.formText}>Titre de votre annonce</Text>
                     <TextInput
@@ -90,12 +90,24 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
 }
 
 const styles = StyleSheet.create({
-    createAdSecondStepsContainer: {},
+    createAdSecondStepsContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'stretch',
+        marginBottom: 0,
+    },
+    columnContainer: {
+        zIndex: 2,
+    },
     error: {
         color : COLOR.rouge,
         alignSelf: 'center',
         fontWeight: "bold",
         marginTop: 5,
+    },
+    formText: {
+        marginBottom: 5
     },
     submitButton: {
         backgroundColor: COLOR.vert,
