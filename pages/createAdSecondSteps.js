@@ -82,8 +82,8 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
                 </View>
             </View>
             <View style={styles.submitButtonContainer}>
-                <Button style={styles.submitButton} title="Dernière étape" onPress={handleSubmit}/>
                 <Text style={styles.error}>{error}</Text>
+                <Button style={styles.submitButton} title="Dernière étape" onPress={handleSubmit}/>
             </View>
         </Stack>
     )
@@ -103,11 +103,16 @@ const styles = StyleSheet.create({
     error: {
         color : COLOR.rouge,
         alignSelf: 'center',
+        textAlign: "center",
         fontWeight: "bold",
         marginTop: 5,
+        marginBottom: 5,
     },
     formText: {
         marginBottom: 5
+    },
+    submitButtonContainer: {
+        marginBottom: 10,
     },
     submitButton: {
         backgroundColor: COLOR.vert,
