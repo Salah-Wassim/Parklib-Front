@@ -3,18 +3,15 @@ import {View, StyleSheet, Image,Text, Platform} from "react-native";
 import {Button} from "@react-native-material/core";
 import { Stack} from 'react-native-flex-layout';
 import { launchImageLibrary } from 'react-native-image-picker';
-
 import * as ImagePicker from 'expo-image-picker';
 import COLOR from "../utils/color.constant";
-
 import {addPost} from "../api/post";
 import {addParkingParticulier} from "../api/parkingParticulier";
-import {uploadPicturesForPost} from "../api/picture";
+import {uploadPictureForPost} from "../api/picture";
 
 const CreateAdThirdSteps = ({ route, navigation }) => {
     
     const { post , parking } = route.params;
-
     const [photo, setPhoto] = React.useState({});
     const [photo2, setPhoto2] = React.useState({});
     const [photo3, setPhoto3] = React.useState({});
@@ -28,7 +25,6 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
             aspect: [4, 3],
             quality: 1,
         });
-        // console.log(result);
         if (!result.canceled) {
             setPhoto(result.assets[0]);
         }
@@ -42,7 +38,6 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
             aspect: [4, 3],
             quality: 1,
         });
-        // console.log(result);
         if (!result.canceled) {
             setPhoto2(result.assets[0]);
         }
@@ -56,16 +51,12 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
             aspect: [4, 3],
             quality: 1,
         });
-        // console.log(result);
         if (!result.canceled) {
             setPhoto3(result.assets[0]);
         }
     };
 
     const handleSubmit = async () => {
-        // console.log(photo)
-        // console.log(photo2)
-        // console.log(photo3)
         if(photo.uri == undefined && photo2.uri == undefined && photo3.uri == undefined) {
             setError('Merci d\'ajouter au minimum une photo');
             console.log('error')
@@ -78,35 +69,32 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                     console.log('addParking res : ')
                     console.log(res)
                     post.ParkingParticulierId = res.data.id;
-                    // post.ValidationStatusId = 1;
                     await addPost(post)
                         .then(async (res) => {
                             console.log('addPost res : ')
                             console.log(res);
+                            //get only defined pictures
                             const photos = [photo, photo2, photo3];
                             const files = [];
                             photos.forEach(element => {
-                                // console.log(element)
                                 if (element.uri != undefined ) {
                                     files.push(element);
                                 }
                             });
-                            // console.log(files);
+                            //create form, put postId and pictures inside
                             const form = new FormData();
+                            form.append('postid', res.data.id)
                             for (let i = 0; i < files.length; i++) {
                                 let photoUri = files[i].uri;
-                                // console.log(photoUri)
                                 let type = photoUri.split(".").pop();
                                 let name = photoUri.split("/").pop();
-                                // form.append('url', photoUri, photoUri.name)
                                 form.append('url' , {
                                     name: name,
                                     type: `image/${type}`,
                                     uri: Platform.OS === 'ios' ? photoUri.replace('file://', '') : photoUri,
                                   })
                             }
-                            form.append('postid', res.data.id)
-                            await uploadPicturesForPost(form)
+                            await uploadPictureForPost(form)
                                 .then((res) => {
                                     console.log('uploadPictures res : ')
                                     console.log(res);
@@ -114,24 +102,28 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                                     alert('Votre annonce a bien été créée !')
                                     //TODO: redirect to somewhere else when created, like user's post-list page ?
                                     // navigation.navigate('DrawerNav')
-
                                 })
-                                .catch((e) => { console.log(e) })
-                            
+                                .catch((e) => { 
+                                    console.log(e)
+                                    setError('Un problème est survenu lors de l\'envoi des photos. Si le problème persiste, contactez l\'administrateur.');
+                                })
                         })
-                        .catch( (e) => { console.log(e)})
+                        .catch( (e) => { 
+                            console.log(e)
+                            setError('Un problème est survenu lors de la création de l\'annonce. Si le problème persiste, contactez l\'administrateur.');
+                        })
                 })
-                .catch( (e) => { console.log(e)})
+                .catch( (e) => { 
+                    console.log(e)
+                    setError('Un problème est survenu lors de la création du parking. Si le problème persiste, contactez l\'administrateur.');
+                })
         }
     }
 
     return (
         <Stack m={20} spacing={20} style={styles.createAdThirdStepsContainer}>
-
             <View>
-
                 <Text style={styles.title}>Vous pouvez ajouter jusqu'à 3 photos</Text>
-
                 <View style={styles.columnItems}>
                     {photo.uri ? (
                         <View  style={styles.inlineItems}>
@@ -147,9 +139,7 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                         <Button style={styles.addImgBtn}  title="+" onPress={pickImage} />
                     </View> 
                     }
-
                 </View>
-
                 <View style={styles.columnItems}>
                     {photo2.uri ? (
                     <View  style={styles.inlineItems}>
@@ -166,7 +156,6 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                     </View>
                     }
                 </View>
-
                 <View style={styles.columnItems}>
                     {photo3.uri ? (
                     <View  style={styles.inlineItems}>
@@ -183,19 +172,11 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                     </View>
                 }
                 </View>   
-
-
             </View>
-            
-            
-
-            
             <View style={styles.submitButtonContainer}>
                 <Text style={styles.error}>{error}</Text>   
                 <Button style={styles.submitButton} title="Publier mon annonce" onPress={handleSubmit}/>
             </View>
-
-            
         </Stack>
     )
 }

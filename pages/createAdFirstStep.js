@@ -58,7 +58,6 @@ const CreateAdFirstStep = ({route , navigation}) => {
             setError('Merci de remplir tous les champs s\'il vous plaît')
         } else {
             setError('');
-
             const parking = {
                 'address': address,
                 'zipCode': zipCode,
@@ -66,7 +65,6 @@ const CreateAdFirstStep = ({route , navigation}) => {
                 'lattitude': lattitude,
                 'longitude': longitude
             };
-
             navigation.navigate('CreateAdSecondSteps', {
                 parking: parking,
                 price: price,
@@ -75,7 +73,6 @@ const CreateAdFirstStep = ({route , navigation}) => {
             })
         }
     }
-
 
     return (
         <Stack m={20} spacing={40} style={styles.createAdFirstStepContainer}>
@@ -132,6 +129,7 @@ const CreateAdFirstStep = ({route , navigation}) => {
         </Stack>
     )
 }
+
 const styles = StyleSheet.create({
     createAdFirstStepContainer: {
         flex: 1,

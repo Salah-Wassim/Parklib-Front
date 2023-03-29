@@ -1,6 +1,6 @@
 const pictureUrl = 'http://192.168.1.10:3000/picture';
 
-export const uploadPicturesForPost = async (formPicture) => {
+export const uploadPictureForPost = async (formPicture) => {
     const url = pictureUrl + '/upload' 
     try {
         const request = await fetch(
@@ -16,7 +16,6 @@ export const uploadPicturesForPost = async (formPicture) => {
             }
         );
         const response = await request.json();
-        console.log('Response', response);
         return response;
         } catch (err) {
             console.log('Error uploading the files', err)

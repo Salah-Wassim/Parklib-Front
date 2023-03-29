@@ -6,27 +6,26 @@ import {
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import axios from "axios";
-import { Ionicons } from '@expo/vector-icons';
 import COLOR from "../utils/color.constant";
 
 const InputAddressAutocomplete = ({onChooseAddress}) => {
 
-    const [isSearching, setIsSearching] = React.useState(false);
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [query, setQuery] = React.useState('');
-    const [search, setSearch] = React.useState([]);
+    const [isSearching, setIsSearching] = React.useState(false); // used to display or not result list
+    const [isLoading, setIsLoading] = React.useState(false); // used to display or not ActivityIndicator
+    const [query, setQuery] = React.useState(''); // used to store user suery
+    const [search, setSearch] = React.useState([]); // used to store search result
+    const [inputValue, setInputValue] = React.useState(""); // used to display result in input after  search is completed
 
     const searchResults = (text) => {
-        axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text) + "&limit=8").then(r => {
-            setIsLoading(false);
-            setSearch(r.data.features);
-        }).catch(e => {
-            setIsLoading(false);
-            // console.log(e);
-        })
+        axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text) + "&limit=8")
+            .then(r => {
+                setIsLoading(false);
+                setSearch(r.data.features);
+            }).catch(e => {
+                setIsLoading(false);
+                // console.log(e);
+            })
     }
-
-    const [inputValue, setInputValue] = React.useState("");
 
     return(
         <View style={[styles.containerStyle]}>
@@ -52,7 +51,6 @@ const InputAddressAutocomplete = ({onChooseAddress}) => {
                     searchResults(query);
                 }}
             />
-
             {isSearching && (
                 <View style={[styles.searchBoxContainer]}>
                     {isLoading ? (

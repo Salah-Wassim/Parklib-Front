@@ -8,7 +8,6 @@ import COLOR from "../utils/color.constant";
 const CreateAdSecondSteps = ({ route, navigation }) => {
     
     const { parking, price, typeOfPlace, isAssured } = route.params;
-    
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('')
     const [contact, setContact] = React.useState('email');
@@ -21,13 +20,11 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
     ]);
 
     const handleSubmit = () => {
-
         if (title === '' || description === '' || contact === '') {
             setError('Merci de remplir tous les champs s\'il vous plaît')
         }
         else{
             setError('');
-
             const post = {
                 'title': title,
                 'description': description,
@@ -38,7 +35,6 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
                 'ParkingParticulierId': null, 
                 'ValidationStatusId': 1 
             }
-
             navigation.navigate('CreateAdThirdSteps', {
                 post: post,
                 parking: parking,
