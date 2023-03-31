@@ -1,0 +1,6 @@
+.idea
+.vscode
+.git
+.expo
+node_modules
+Dockerfile

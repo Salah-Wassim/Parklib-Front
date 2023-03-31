@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {StyleSheet,FlatList} from 'react-native';
-import { Flex,ActivityIndicator } from "@react-native-material/core";
+import {Flex, ActivityIndicator, FAB} from "@react-native-material/core";
 import {getParkingSearchedText } from '../api/api'
-import ParkingItem from "../components/parkingItem";
 import MapCard from "../components/mapCard"
 import DetailCardMarker from "../components/detailCardMarker";
 
@@ -43,16 +42,6 @@ const Map = ({ route, navigation }) => {
             })
         }
     }, [])
-        
-    const FeatureList = () =>{
-        return (    
-            <FlatList
-                data={parkings}
-                keyExtractor={({ properties }) => properties.gid.toString()}
-                renderItem={({ item }) => <ParkingItem item={item}/>}
-            />
-        )
-    }
     
     return(
         <Flex fill style={styles.page}>

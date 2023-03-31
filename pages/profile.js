@@ -1,9 +1,11 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Text, TextInput, Button,Flex,Spacer,Box} from '@react-native-material/core';
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { StyleSheet } from 'react-native';
+import { TextInput, Button, Flex, Spacer, Box } from '@react-native-material/core';
+import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 
-const Profile = ()=>{
+
+const Profile = () => {
+  
     return (
     <Flex fill>
         <Box  style={{margin:16}}>

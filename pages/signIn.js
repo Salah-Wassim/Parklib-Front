@@ -1,85 +1,98 @@
-import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {Text, TextInput, Button} from '@react-native-material/core';
-import { Stack, HStack} from 'react-native-flex-layout';
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
-const SignIn = ({navigation}) => {
+import React, { useContext } from 'react';
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { handleSignIn } from '../store/authentification/auth';
+import AuthContext from '../store/authentification/authContext';
+import { Text, TextInput, Button } from '@react-native-material/core';
+import { Stack, HStack } from 'react-native-flex-layout';
+import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 
-    const [email, onChangeEmail] = React.useState('');
-    const [password, onChangePassword] = React.useState('');
 
-    return (
-        <Stack m={20} spacing={20}>
-            <View style={styles.logoContainer}>
-                <Image
-                    style={styles.logo}
-                    source={require('../assets/logoWithoutText.png')}
-                />
-            </View>
-            <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Connexion</Text>
-            </View>
-            <HStack style={styles.questionContainer}>
-                <Text>Vous n'avez pas de compte ? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                    <Text style={styles.singUpLink}>S'inscrire</Text>
-                </TouchableOpacity>
-            </HStack>
-            <View>
-                <View style={styles.formContainer}>
-                    <Text style={styles.formText}>Email</Text>
-                    <TextInput
-                        style={styles.formInput}
-                        placeholder='nom@exemple.com'
-                        variant="outlined"
-                        onChangeText={onChangeEmail}
-                    />
-                </View>
-                <View style={styles.formContainer}>
-                    <View style={styles.pwdContainer}>
-                        <Text style={styles.pwdText}>Mot de passe</Text>
-                        <TouchableOpacity style={styles.forgotPwContainer} onPress={() => navigation.navigate('Verification')}>
-                            <Text style={styles.forgotPwdLink}>Mot de passe oublié ?</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <TextInput
-                        style={styles.formInput}
-                        placeholder='Entrer votre mot de passe'
-                        secureTextEntry={true}
-                        variant="outlined"
-                        onChangeText={onChangePassword}
-                    />
-                </View>
-                <View style={styles.submitButtonContainer}>
-                    <TouchableOpacity onPress={() => navigation.navigate('DrawerNav')}>
-                        <Button style={styles.submitButton}  title="Connexion" color="#157575"/>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <View style={styles.socialMultiBox}>
-                <View style={styles.line}></View>
-                <View style={styles.textContainer}>
-                    <Text style={styles.text}>ou se connecter avec</Text>
-                </View>
-                <View style={styles.line}></View>
-            </View>
-            <View style={styles.socialButtonsContainer}>
-                <View style={styles.socialButtonContainer}>
-                    <Button
-                        style={styles.socialButton}
-                        trailing={<Icon style={styles.iconSocialButton} name="gmail"/>}
-                    />
-                </View>
-                <View style={styles.socialButtonContainer}>
-                    <Button
-                        style={styles.socialButton}
-                        trailing={<Icon style={styles.iconSocialButton} name="facebook"/>}
-                    />
-                </View>
-            </View>
-        </Stack>
-    )
+const SignIn = (props) => {
+   
+  const { navigation } = props
+
+  const [email, onChangeEmail] = React.useState('');
+  const [password, onChangePassword] = React.useState('');
+  const { setAuthenticated } = useContext(AuthContext);
+
+  return (
+    <Stack m={20} spacing={20}>
+      <View style={styles.logoContainer}>
+        <Image
+          style={styles.logo}
+          source={require('../assets/logoWithoutText.png')}
+        />
+      </View>
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>Connexion</Text>
+      </View>
+      <HStack style={styles.questionContainer}>
+        <Text>Vous n'avez pas de compte ? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <Text style={styles.singUpLink}>S'inscrire</Text>
+        </TouchableOpacity>
+      </HStack>
+      <View>
+        <View style={styles.formContainer}>
+          <Text style={styles.formText}>Email</Text>
+          <TextInput
+            style={styles.formInput}
+            placeholder='nom@exemple.com'
+            variant="outlined"
+            value={email}
+            onChangeText={onChangeEmail}
+          />
+        </View>
+        <View style={styles.formContainer}>
+          <View style={styles.pwdContainer}>
+            <Text style={styles.pwdText}>Mot de passe</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Verification')}>
+              <Text style={styles.forgotPwdLink}>Mot de passe oublié ?</Text>
+            </TouchableOpacity>
+          </View>
+          <TextInput
+            style={styles.formInput}
+            placeholder='Entrer votre mot de passe'
+            secureTextEntry={true}
+            variant="outlined"
+            value={password}
+            onChangeText={onChangePassword}
+          />
+        </View>
+        <View style={styles.submitButtonContainer}>
+          <TouchableOpacity>
+            <Button style={styles.submitButton} onPress={() => 
+              handleSignIn(email, password, navigation, onChangeEmail, onChangePassword, setAuthenticated)} 
+              title="Connexion" 
+              color="#157575" />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.socialMultiBox}>
+        <View style={styles.line}></View>
+        <View>
+          <Text style={styles.text}>ou se connecter avec</Text>
+        </View>
+        <View style={styles.line}></View>
+      </View>
+      <View style={styles.socialButtonsContainer}>
+        <View style={styles.socialButtonContainer}>
+          <Button
+            style={styles.socialButton}
+            trailing={<Icon style={styles.iconSocialButton} name="gmail" />}
+          />
+        </View>
+        <View style={styles.socialButtonContainer}>
+          <Button
+            style={styles.socialButton}
+            trailing={<Icon style={styles.iconSocialButton} name="facebook" />}
+          />
+        </View>
+      </View>
+    </Stack>
+  );
+  
 }
 
 const styles = StyleSheet.create({
@@ -159,4 +172,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SignIn
+export default SignIn;
