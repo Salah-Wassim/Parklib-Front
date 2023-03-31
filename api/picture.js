@@ -1,7 +1,7 @@
 const pictureUrl = 'http://192.168.1.10:3000/picture';
 
 export const uploadPictureForPost = async (formPicture) => {
-    const url = pictureUrl + '/upload' 
+    const url = pictureUrl + '/post/upload' 
     try {
         const request = await fetch(
             url,
