@@ -22,7 +22,7 @@ export default function Home({navigation}) {
                                 }}
                             />
                             <Button title="rechercher" onPress={() => {
-                                navigation.navigate('DisplayPark', {
+                                navigation.navigate('ParkingList', {
                                     text : SearchText
                                 })
                             }

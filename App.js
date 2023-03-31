@@ -42,7 +42,7 @@ export default function App() {
         <Provider store={store}>
             <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
                 <NavigationContainer>
-                    <Stack.Navigator initialRouteName='Profile'>
+                    <Stack.Navigator initialRouteName='DrawerNav'>
                         <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={MenuBurger} />
                         <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib', headerShown: false }} component={SignIn}/>
                         <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib', headerShown: false }} component={SignUp}/>
@@ -72,8 +72,9 @@ export default function App() {
                         <Stack.Screen name="CreateAdFirstStep" options={{title: 'Étape 1'}} component={CreateAdFirstStep}/>
                         <Stack.Screen name="CreateAdSecondSteps" options={{title: 'Étape 2'}} component={CreateAdSecondSteps}/>
                         <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Étape 3'}} component={CreateAdThirdSteps}/>
+                        <Stack.Screen name="ParkingList" options={{title: 'Parking privées'}} component={DisplayPark}/>
                         <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
-                        <Stack.Screen name="ParkingParticulierDetails" options={{title: 'Réservation'}} component={ParkingParticulierDetails}/>
+                        <Stack.Screen name="ParkingParticulierDetails" options={{title: 'Details'}} component={ParkingParticulierDetails}/>
                         <Stack.Screen name="Reservation" options={{title: 'Réservation'}} component={Reservation}/>
                         {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                         {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}

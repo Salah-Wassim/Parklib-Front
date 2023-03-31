@@ -1,5 +1,5 @@
 const API_TOKEN = "238HINNOST";
-const API_URL = "http://127.0.0.1:3000";
+export const API_URL = "http://10.0.2.2:5000";
 
 
 export const getParkingSearchedText = async (text, page) =>{
@@ -61,6 +61,7 @@ export const getPrivateParking = async () =>{
     return await fetch(url)
         .then(response => response.json())
         .catch(error => {console.log(error)})
+}
 
 export const register = async (email,password,cPassword) => {
     return await fetch(`${API_URL}/auth/register`, {
