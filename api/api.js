@@ -61,6 +61,7 @@ export const getPrivateParking = async () =>{
     return await fetch(url)
         .then(response => response.json())
         .catch(error => {console.log(error)})
+}
 
 export const register = async (email,password,cPassword) => {
     return await fetch(`${API_URL}/auth/register`, {
