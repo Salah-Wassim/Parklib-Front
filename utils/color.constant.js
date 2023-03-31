@@ -5,7 +5,7 @@ const COLOR  = {
         'rouge':'#C70000',
         'indigo':'#575DFB', 
         'blanc':'#FFFFFF',
-        'grisclair': 'lightgray',
+        'grisclair': '#e8e8e8',
         'grisfonce': '#6b6b6b'
 }
 

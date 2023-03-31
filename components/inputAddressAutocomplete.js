@@ -54,8 +54,8 @@ const InputAddressAutocomplete = ({onChooseAddress}) => {
             {isSearching && (
                 <View style={[styles.searchBoxContainer]}>
                     {isLoading ? (
-                        <View style={{marginLeft: 20}}>
-                            <ActivityIndicator/>
+                        <View style={styles.activityIndicatorView}>
+                            <ActivityIndicator  size="large" color="#575DFB"  />
                         </View>
                     ) : search.map((a, i) => (
                         <TouchableOpacity onPress={() => {
@@ -89,13 +89,24 @@ const styles = StyleSheet.create({
         minHeight: 75,
         marginTop: 20,
         marginBottom: 20,
-        width: wp("100%"),
         // backgroundColor: COLOR.blanc
+        width:wp("90%"),
+
+    },
+    activityIndicatorView: {
+        paddingRight: 10,
+        width: wp("90%"),
+        position: "relative",
+        top: -55,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
 
     },
     rowStyle: {
         flexDirection: 'row',
-        width:wp("100%"),
+        width:wp("90%"),
         alignItems: 'baseline',
         paddingVertical: 20,
         paddingHorizontal: 30,
