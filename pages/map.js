@@ -4,17 +4,20 @@ import {Flex, ActivityIndicator, FAB} from "@react-native-material/core";
 import {getParkingSearchedText } from '../api/api'
 import MapCard from "../components/mapCard"
 import DetailCardMarker from "../components/detailCardMarker";
+import InputAddressAutocomplete from "../components/inputAddressAutocomplete";
 
 const Map = ({ route, navigation }) => {
     
-    const {text} = route.params;
+    const {text} = route.params ? route.params : '';
+    const [defaultText, setDefaultText] = useState('st_park_p');
     const [parkings, setParkings ] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [visible, setVisible] = useState(false);
+    
 
     useEffect(() => {
-        if(text.length > 0){
-            getParkingSearchedText(text).then(data => {
+        if(defaultText.length > 0){
+            getParkingSearchedText(defaultText).then(data => {
                 setLoading(false);
                 data.features.map(_feature => {
                     const feature =   {
@@ -47,6 +50,11 @@ const Map = ({ route, navigation }) => {
         <Flex fill style={styles.page}>
             {/*<Text style={styles.header}>Résultat de votre recherche : {parkings.length} {parkings.length>1?  'Elements trouvés':'Element trouvé' } </--Text>
             */}
+            <InputAddressAutocomplete
+                style={styles.inputAddressAutocomplete}
+                isOpen={false}
+                onChooseAddress={onChooseAddress}
+            />
             {isLoading ? <ActivityIndicator size="large"/> : <MapCard parkings={parkings} isvisible={visible} setVisible={setVisible}/>}
             {visible ? <DetailCardMarker parkings={parkings} isvisible={visible} setVisible={setVisible} navigation={navigation} /> : null}
         </Flex>
