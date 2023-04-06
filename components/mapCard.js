@@ -10,7 +10,7 @@ const MapCard = ({isvisible,parkings,setVisible, latitude, longitude, zoom, sear
 
     const dispatch = useDispatch()
 
-    // params to size the map to have all Bordeaux Area on the map at beggining
+    // params to size the map area
     let {width, height} = Dimensions.get('window');
     const ASPECT_RATIO = width / height;
     const LATITUDE_DELTA = zoom; //Increase or decrease the zoom level dynamically
@@ -21,7 +21,7 @@ const MapCard = ({isvisible,parkings,setVisible, latitude, longitude, zoom, sear
             <MapView
                 style={styles.map}
 
-                // params to zoom on Bordeaux center when open the map
+                // params to center the map area
                 region={{
                     latitude: latitude,
                     longitude: longitude,
