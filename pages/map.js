@@ -31,7 +31,7 @@ const Map = ({ route, navigation }) => {
         setCity(respAddress.properties.city);
         setLatitude(respAddress.geometry.coordinates[1]);
         setLongitude(respAddress.geometry.coordinates[0]);
-        setZoom(0.01);
+        setZoom(0.02);
         setSearchInput(true);
     }
 
