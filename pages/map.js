@@ -16,9 +16,6 @@ const Map = ({ route, navigation }) => {
     const [visible, setVisible] = useState(false);
 
     const [adr, setAdr] = React.useState('');
-    const [address, setAddress] = React.useState('');
-    const [zipCode, setZipCode] = React.useState('');
-    const [city, setCity] = React.useState('');
     const [latitude, setLatitude] = React.useState(44.837789);
     const [longitude, setLongitude] = React.useState(-0.57918);
     const [zoom, setZoom] = React.useState(0.3);
@@ -26,9 +23,6 @@ const Map = ({ route, navigation }) => {
 
     const onChooseAddress = (respAddress) => {
         setAdr(respAddress.properties.label);
-        setAddress(respAddress.properties.name);
-        setZipCode(respAddress.properties.postcode);
-        setCity(respAddress.properties.city);
         setLatitude(respAddress.geometry.coordinates[1]);
         setLongitude(respAddress.geometry.coordinates[0]);
         setZoom(0.02);
