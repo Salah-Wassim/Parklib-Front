@@ -47,7 +47,7 @@ const handleSignUp = async (email, password, cPassword, navigation, onChangeEmai
         onChangeEmail('');
         onChangePassword('');
         onChangeCPassword('');
-        navigation.navigate('Profile');
+        navigation.navigate('CompleteProfile');
       } else {
         console.log("Une erreur est survenue lors de l'inscription");
       }

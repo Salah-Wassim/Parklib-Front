@@ -13,6 +13,7 @@ import EditCreditCard from "./pages/editCreditCard";
 import History from "./pages/history";
 import PrivacyPolicy from "./pages/privacyPolicy";
 import Profile from "./pages/profile";
+import CompleteProfile from "./pages/completeProfile";
 import Cgu from "./pages/cgu";
 import PaymentScreen from "./pages/paymentScreen";
 import CheckoutScreen from "./pages/checkoutScreen";
@@ -62,6 +63,7 @@ export default function App() {
                             </RouteGuard>
                         )}
                         </Stack.Screen>
+                        <Stack.Screen name="CompleteProfile" options={{ title: 'Complètez votre inscription', headerShown: false }} component={CompleteProfile}/>
                         <Stack.Screen name="CGU" options={{ title: 'CGU' }} component={Cgu}/>
                         <Stack.Screen name="PaymentScreen" options={{title: 'Paiement'}} component={PaymentScreen}/>
                         <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
