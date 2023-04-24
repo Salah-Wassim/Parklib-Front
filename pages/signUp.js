@@ -11,7 +11,8 @@ import COLOR from '../utils/color.constant';
 const SignUp = (props) => {
 
     const { navigation } = props
-
+    
+    const [error, setError] = React.useState('');
     const [email, onChangeEmail] = React.useState('');
     const [password, onChangePassword] = React.useState('');
     const [cPassword, onChangeCPassword] = React.useState('');
@@ -89,11 +90,14 @@ const SignUp = (props) => {
                                 En cochant cette case, vous acceptez les termes des CGU qui s'appliquent à Park'Lib
                             </Text>
                         </View>
-                        <View style={styles.submitButtonContainer}>
+                    <View style={styles.submitButtonContainer}>
+                            <Text style={styles.error}>
+                                {error}
+                            </Text>
                             <Button style={styles.submitButton}
                                     title="Inscription"
                                     onPress={() =>
-                                        handleSignUp(email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated)
+                                        handleSignUp(email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated, setError)
                                     }  
                                     color="#157575"
                                     disabled ={(disableButton)}
@@ -201,7 +205,15 @@ const styles = StyleSheet.create({
     },
     iconSocialButton:{
         fontSize:25
-    }
+    },
+    error: {
+        color: COLOR.rouge,
+        alignSelf: "center",
+        textAlign: "center",
+        fontWeight: "bold",
+        marginTop: 5,
+        marginBottom: 5,
+    },
 })
 
 export default SignUp;

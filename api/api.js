@@ -99,7 +99,7 @@ export const completeProfileAfterSignUp = async (lastName, firstName, address) =
         keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
     };
     const bearerToken = await SecureStore.getItemAsync('auth_token', config);
-    return await fetch(`${API_URL}/users/4`, {
+    return await fetch(`${API_URL}/users`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',

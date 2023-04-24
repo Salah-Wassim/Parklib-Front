@@ -2,26 +2,28 @@ import * as SecureStore from 'expo-secure-store';
 import { register, login } from "../../api/api";
 
 
-const isInputValid = (email, password, cPassword) => {
+const isInputValid = (email, password, cPassword, setError) => {
   if (!email.trim()  || !password.trim()  || !cPassword.trim()) {
     console.log('Veuillez remplir tous les champs.');
+    setError('Veuillez remplir tous les champs.');
     return false;
   }
   if (password !== cPassword) {
     console.log('Les mots de passe ne correspondent pas');
+    setError('Les mots de passe ne correspondent pas')
     return false;
   }
   return true;
 };
 
 
-const handleSignUp = async (email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated) => {
+const handleSignUp = async (email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated, setError) => {
     // Set configuration for SecureStore to allow access only when device is unlocked
     const config = {
     keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
     };
 
-  if (!isInputValid(email, password, cPassword)) {
+  if (!isInputValid(email, password, cPassword, setError)) {
     return;
   }
 
@@ -53,6 +55,7 @@ const handleSignUp = async (email, password, cPassword, navigation, onChangeEmai
       }
     } else {
       console.log(res.message);
+      setError(res.message);
     }
   } catch (error) {
     console.log(error);
