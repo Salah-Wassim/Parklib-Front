@@ -34,10 +34,10 @@ const handleSignUp = async (email, password, cPassword, navigation, onChangeEmai
         const token = res.data.accessToken;
 
         // Saving the access token in the secure storage
-        await SecureStore.setItemAsync(token, 'auth_token', config);
+        await SecureStore.setItemAsync('auth_token',token,  config);
         setAuthenticated(true);
 
-        const storedToken = await SecureStore.getItemAsync(token, config);
+        const storedToken = await SecureStore.getItemAsync('auth_token', config);
 
         if (!storedToken) {
           console.log("Une erreur est survenue lors de la récupération du token");
@@ -77,7 +77,7 @@ const handleSignIn = async (email, password, navigation, onChangeEmail, onChange
     if (res.statusCode === 200) {
       if (res.data && res.data.accessToken) {
         const token = res.data.accessToken;
-        await SecureStore.setItemAsync(token, 'auth_token', config);
+        await SecureStore.setItemAsync('auth_token',token, config);
         setAuthenticated(true); 
 
         const storedToken = await SecureStore.getItemAsync(token, config);

@@ -1,6 +1,7 @@
-const API_TOKEN = "238HINNOST";
-const API_URL = "http://127.0.0.1:3000";
+import * as SecureStore from 'expo-secure-store';
 
+const API_TOKEN = "238HINNOST";
+const API_URL = "http://192.168.1.10:5000";
 
 export const getParkingSearchedText = async (text, page) =>{
     const url  = 'https://data.bordeaux-metropole.fr/geojson?' + 'key=' + API_TOKEN + '&typename=' + text
@@ -91,4 +92,24 @@ export const login = async (email,password) => {
         })
     },).then((response) => response.json()).catch((error) => console.error(error));
 
+}
+
+export const completeProfileAfterSignUp = async (lastName, firstName, address) => {
+    const config = {
+        keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+    };
+    const bearerToken = await SecureStore.getItemAsync('auth_token', config);
+    return await fetch(`${API_URL}/users/4`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',  
+            'Authorization': 'Bearer ' + bearerToken,
+        },  
+        body: JSON.stringify({
+            lastName: lastName,
+            firstName: firstName,
+            address: address,
+        })
+    },).then((response) => response.json()).catch((error) => console.error(error));
 }
