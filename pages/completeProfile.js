@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { ActivityIndicator, View, StyleSheet, ScrollView } from "react-native";
 import { Text, TextInput, Button } from "@react-native-material/core";
 import { Stack } from "react-native-flex-layout";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
@@ -8,23 +8,36 @@ import { completeProfileAfterSignUp } from "../api/api";
 
 const CompleteProfile = ({ route, navigation }) => {
     const [error, setError] = React.useState("");
+    const [disableButton, setDisableButton] = React.useState(false)
+    const [isLoading, setIsLoading] = React.useState(false)
     const [firstName, setFirstName] = React.useState("");
     const [lastName, setLastName] = React.useState("");
     const [address, setAddress] = React.useState("");
 
     const handleSubmitProfile = async () => {
+        setDisableButton(true);
+        setIsLoading(true);
         if (firstName === "" || lastName === "" || address === "") {
             setError("Merci de remplir tous les champs s'il vous plaît");
+            setIsLoading(false);
+            setDisableButton(false);
+
         } else {
             setError("");
             await completeProfileAfterSignUp(lastName, firstName, address)
                 .then(
                     (res) => {
                         console.log(res);
-                        navigation.navigate('VerificationScreen')
+                        // navigation.navigate('VerificationScreen')
+                        navigation.navigate('DrawerNav')
                     }             
                 )
-                .catch( (e) => console.log(e))
+                .catch((e) => {
+                    console.log(e);
+                    setDisableButton(false);
+                    setIsLoading(false);
+                    setError("Une erreur est survenue lors de l'enregistrement de votre profil.");
+                })
                 ;
         }
     };
@@ -76,13 +89,24 @@ const CompleteProfile = ({ route, navigation }) => {
                 </View>
 
                 <View style={styles.submitButtonContainer}>
+                    { isLoading ?
+                        (
+                            <ActivityIndicator  size="large" color="#575DFB"  />
+                            )
+                            :
+                            (
+                            null
+                        )
+                    }
                     <Text style={styles.error}>{error}</Text>
                     <Button
                         style={styles.submitButton}
                         title="Valider mon profil"
                         color={COLOR.vert}
+                        disabled ={(disableButton)}
                         onPress={handleSubmitProfile}
                     ></Button>
+                   
                 </View>
             </Stack>
         </ScrollView>
