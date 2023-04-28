@@ -1,4 +1,4 @@
-import {adrIpV4, port} from '../secretFile';
+import {adrIpV4, port, token} from '../secretFile';
 
 const postUrl = `http://${adrIpV4}:${port}/annonce/`;
 const postByParking = `http://${adrIpV4}:${port}/annonce/parkingParticulier/`
@@ -14,7 +14,8 @@ export const getPostByUser = async (userId, token) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
-        }
+        },
+        console.log('test')
     )
     .then(response => {
         console.log("response", response)
@@ -25,7 +26,7 @@ export const getPostByUser = async (userId, token) => {
     });
 }
 
-export const addPost = async (post, token) => {
+export const addPost = async (post) => {
     try {
         const response = await fetch(
             postUrl,

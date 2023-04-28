@@ -1,5 +1,6 @@
+import {adrIpV4, port} from '../secretFile';
 const API_TOKEN = "238HINNOST";
-const API_URL = "http://127.0.0.1:3000";
+const API_URL = `http://${adrIpV4}:3000`;
 
 
 export const getParkingSearchedText = async (text, page) =>{

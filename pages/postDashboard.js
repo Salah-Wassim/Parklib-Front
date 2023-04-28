@@ -5,7 +5,7 @@ import {StyleSheet, View, Text, FlatList} from 'react-native';
 import PostCard from "../components/postCard";
 import {getPostByUser} from '../api/post';
 import jwtDecode from "jwt-decode";
-import { getAuthToken } from '../store/authentification/auth';
+import { getAuthToken } from '../store/authentification/auth'
 
 const PostDashboard = () => {
 
@@ -17,6 +17,7 @@ const PostDashboard = () => {
         try{
             const fetchToken = async () => {
                 const authToken = await getAuthToken();
+                console.log('authtoken', authToken);
                 if(authToken){
                     setToken(authToken)
                     const decodeToken = jwtDecode(authToken);
