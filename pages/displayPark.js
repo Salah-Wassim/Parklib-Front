@@ -22,9 +22,7 @@ const DisplayPark = ({navigation})=>{
 
     useEffect(()=>{
         setLoading(false)
-        getPrivateParking().then(res=>{
-            setParkings(res);
-        })
+        getPrivateParking().then(res=> setParkings(res.data) )
     },[])
 
 
