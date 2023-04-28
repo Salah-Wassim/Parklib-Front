@@ -5,7 +5,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Home from "../pages/home";
 import History from "../pages/history";
 import Contact from "../pages/contact";
-import PrivacyPolicy from "../pages/privacyPolicy";
+import CreateAdFirstStep from "../pages/createAdFirstStep";
 import WhoWeAre from "../pages/whoWeAre.js";
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
 
@@ -35,9 +35,9 @@ const BottomNavigationBar = () => {
                             )
                         }}
             />
-            <Tab.Screen name="PrivacyPolicy" component={PrivacyPolicy}
+            <Tab.Screen name="CreateAdFirstStep" component={CreateAdFirstStep}
                         options={{
-                            tabBarLabel: 'PrivacyPolicy',
+                            tabBarLabel: 'CreateAdFirstStep',
                             tabBarIcon: ({color}) => (
                                 <Icon name="add-circle-outline" size={25} color={color} />
                             )
