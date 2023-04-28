@@ -1,7 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 import { register, login } from "../../api/api";
 
-
 const isInputValid = (email, password, cPassword) => {
   if (!email.trim()  || !password.trim()  || !cPassword.trim()) {
     console.log('Veuillez remplir tous les champs.');
@@ -13,7 +12,6 @@ const isInputValid = (email, password, cPassword) => {
   }
   return true;
 };
-
 
 const handleSignUp = async (email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated) => {
     // Set configuration for SecureStore to allow access only when device is unlocked
@@ -27,17 +25,17 @@ const handleSignUp = async (email, password, cPassword, navigation, onChangeEmai
 
   try {
     const res = await register(email, password, cPassword);
-    console.log(res);
+    console.log('res',res);
 
     if (res.statusCode === 201) {
       if (res.data && res.data.accessToken) {
         const token = res.data.accessToken;
 
         // Saving the access token in the secure storage
-        await SecureStore.setItemAsync(token, 'auth_token', config);
+        await SecureStore.setItemAsync('auth_token', token, config);
         setAuthenticated(true);
 
-        const storedToken = await SecureStore.getItemAsync(token, config);
+        const storedToken = await SecureStore.getItemAsync('auth_token', config);
 
         if (!storedToken) {
           console.log("Une erreur est survenue lors de la récupération du token");
@@ -59,7 +57,6 @@ const handleSignUp = async (email, password, cPassword, navigation, onChangeEmai
   }
 };
 
-
 const handleSignIn = async (email, password, navigation, onChangeEmail, onChangePassword, setAuthenticated) => {
 
     const config = {
@@ -77,10 +74,10 @@ const handleSignIn = async (email, password, navigation, onChangeEmail, onChange
     if (res.statusCode === 200) {
       if (res.data && res.data.accessToken) {
         const token = res.data.accessToken;
-        await SecureStore.setItemAsync(token, 'auth_token', config);
+        await SecureStore.setItemAsync('auth_token', token, config);
         setAuthenticated(true); 
 
-        const storedToken = await SecureStore.getItemAsync(token, config);
+        const storedToken = await SecureStore.getItemAsync('auth_token', config);
         if (!storedToken) {
           console.log("Une erreur est survenue lors de la récupération du token");
           return;
@@ -110,7 +107,23 @@ const handleLogout = async (setAuthenticated) => {
   }
 };
 
+const getAuthToken = async () => {
+  const config = {
+    keychainAccessible : SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+  }
+  try{
+    const storedToken = await SecureStore.getItemAsync('auth_token', config);
+    console.log("storedToken", storedToken);
+    if(storedToken){
+      return storedToken;
+    }
+    else{
+      console.log("Une erreur est survenue lors de la récupération du token d'authentification", storedToken);
+    }
+  }
+  catch(error){
+    console.log("error", error)
+  }
+}
   
-
-
-export { handleSignUp, handleSignIn, handleLogout };
+export { handleSignUp, handleSignIn, handleLogout, getAuthToken};

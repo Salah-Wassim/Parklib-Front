@@ -1,6 +1,6 @@
+import {adrIpV4, port} from '../secretFile';
 const API_TOKEN = "238HINNOST";
-export const API_URL = "http://10.0.2.2:5000";
-
+const API_URL = `http://${adrIpV4}:3000`;
 
 export const getParkingSearchedText = async (text, page) =>{
     const url  = 'https://data.bordeaux-metropole.fr/geojson?' + 'key=' + API_TOKEN + '&typename=' + text
