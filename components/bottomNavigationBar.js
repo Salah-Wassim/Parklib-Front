@@ -8,6 +8,7 @@ import Contact from "../pages/contact";
 import CreateAdFirstStep from "../pages/createAdFirstStep";
 import WhoWeAre from "../pages/whoWeAre.js";
 import MaterialCommunityIcon from "react-native-paper/src/components/MaterialCommunityIcon";
+import Parameters from "../pages/parameters";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -51,7 +52,7 @@ const BottomNavigationBar = () => {
                             )
                         }}
             />
-            <Tab.Screen name="Parametres" component={Contact}
+            <Tab.Screen name="Parametres" component={Parameters}
                         options={{
                             tabBarLabel: 'Parametre',
                             tabBarIcon: ({color}) => (

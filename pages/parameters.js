@@ -24,6 +24,13 @@ const Parameters = ({navigation}) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
+                    <Icon style={styles.logoButton} name="post"></Icon>
+                    <TouchableOpacity style={styles.buttonContent} onPress={() => navigation.navigate('PostDashboard')}>
+                        <Text style={styles.buttonText}>Vos annonces</Text>
+                        <Icon style={styles.iconArrow} name="arrow-right-thick"></Icon>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.buttonContainer}>
                     <Icon style={styles.logoButton} name="comment-question"></Icon>
                     <TouchableOpacity style={styles.buttonContent} onPress={() => navigation.navigate('Contact')}>
                         <Text style={styles.buttonText}>Contact</Text>
