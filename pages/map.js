@@ -1,20 +1,38 @@
 import React, { useEffect, useState } from "react";
-import {StyleSheet,FlatList} from 'react-native';
-import {Flex, ActivityIndicator, FAB} from "@react-native-material/core";
+import {StyleSheet,FlatList, View} from 'react-native';
+import {Flex, ActivityIndicator, FAB, Text} from "@react-native-material/core";
 import {getParkingSearchedText } from '../api/api'
 import MapCard from "../components/mapCard"
 import DetailCardMarker from "../components/detailCardMarker";
+import InputAddressAutocomplete from "../components/inputAddressAutocomplete";
+import COLOR from "../utils/color.constant";
 
 const Map = ({ route, navigation }) => {
     
-    const {text} = route.params;
+    const {text} = route.params ? route.params : '';
+    const [defaultText, setDefaultText] = useState('st_park_p');
     const [parkings, setParkings ] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [visible, setVisible] = useState(false);
 
+    const [adr, setAdr] = React.useState('');
+    const [latitude, setLatitude] = React.useState(44.837789);
+    const [longitude, setLongitude] = React.useState(-0.57918);
+    const [zoom, setZoom] = React.useState(0.3);
+    const [searchInput, setSearchInput] = React.useState(false);
+
+    const onChooseAddress = (respAddress) => {
+        setAdr(respAddress.properties.label);
+        setLatitude(respAddress.geometry.coordinates[1]);
+        setLongitude(respAddress.geometry.coordinates[0]);
+        setZoom(0.02);
+        setSearchInput(true);
+    }
+
     useEffect(() => {
-        if(text.length > 0){
-            getParkingSearchedText(text).then(data => {
+        if (defaultText.length > 0) {
+            setParkings([]);
+            getParkingSearchedText(defaultText).then(data => {
                 setLoading(false);
                 data.features.map(_feature => {
                     const feature =   {
@@ -45,10 +63,22 @@ const Map = ({ route, navigation }) => {
     
     return(
         <Flex fill style={styles.page}>
-            {/*<Text style={styles.header}>Résultat de votre recherche : {parkings.length} {parkings.length>1?  'Elements trouvés':'Element trouvé' } </--Text>
-            */}
-            {isLoading ? <ActivityIndicator size="large"/> : <MapCard parkings={parkings} isvisible={visible} setVisible={setVisible}/>}
-            {visible ? <DetailCardMarker parkings={parkings} isvisible={visible} setVisible={setVisible} navigation={navigation} /> : null}
+
+            <View style={[styles.formContainer, {zIndex: 4}]}>
+                <InputAddressAutocomplete
+                    style={styles.inputAddressAutocomplete}
+                    isOpen={false}
+                    onChooseAddress={onChooseAddress}
+                />
+            </View>
+            {isLoading ?
+                <ActivityIndicator size="large" /> :
+                <MapCard style={{zIndex: 3}} parkings={parkings} isvisible={visible} setVisible={setVisible} latitude={latitude} longitude={longitude} zoom={zoom} searchInput={searchInput} searchLabel={adr} />
+            }
+            {visible ?
+                <DetailCardMarker style={{zIndex: 2}} parkings={parkings} isvisible={visible} setVisible={setVisible} navigation={navigation} /> :
+                null
+            }
         </Flex>
     ) 
 }
@@ -58,6 +88,15 @@ const styles = StyleSheet.create({
         padding:5
     },
     page:{
+    },
+    inputAddressAutocomplete: {
+        backgroundColor: COLOR.belge,
+    },
+    formContainer: {
+        marginTop: 5,
+        marginBottom: 5,
+        marginRight: 15,
+        marginLeft: 15,
     },
 })
 

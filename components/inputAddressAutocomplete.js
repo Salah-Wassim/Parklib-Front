@@ -45,7 +45,7 @@ const InputAddressAutocomplete = ({onChooseAddress}) => {
                     setIsLoading(true);
                     searchResults(t);
                 }}
-                placeholder={"Rechercher"}
+                placeholder={"Rechercher une adresse, une rue, etc..."}
                 value={inputValue}
                 onBlur={() => {
                     searchResults(query);

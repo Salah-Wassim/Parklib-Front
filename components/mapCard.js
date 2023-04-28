@@ -3,31 +3,31 @@ import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 
 import { useSelector ,useDispatch} from 'react-redux'
-import {addParking} from "../store/parking/action";
+import { addParking } from "../store/parking/action";
+import COLOR from "../utils/color.constant";
 
-const MapCard = ({isvisible,parkings,setVisible})=>{
+const MapCard = ({isvisible,parkings,setVisible, latitude, longitude, zoom, searchInput , searchLabel})=>{
 
     const dispatch = useDispatch()
 
-
-    // params to size the map, params to have Bordeaux Area on the map
-    // let {width, height} = Dimensions.get('window');
-    // const ASPECT_RATIO = width / height;
-    // const LATITUDE_DELTA = 0.5; //Increase or decrease the zoom level dynamically
-    // const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+    // params to size the map area
+    let {width, height} = Dimensions.get('window');
+    const ASPECT_RATIO = width / height;
+    const LATITUDE_DELTA = zoom; //Increase or decrease the zoom level dynamically
+    const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
     return (
         <View style={styles.container}>
             <MapView
                 style={styles.map}
 
-                // params to zoom on Bordeaux when open the map
-                // region={{
-                //     latitude: 44.837789,
-                //     longitude: -0.57918,
-                //     latitudeDelta: LATITUDE_DELTA,
-                //     longitudeDelta: LONGITUDE_DELTA,
-                //    }}
+                // params to center the map area
+                region={{
+                    latitude: latitude,
+                    longitude: longitude,
+                    latitudeDelta: LATITUDE_DELTA,
+                    longitudeDelta: LONGITUDE_DELTA,
+                   }}
             >
                 {
                     parkings.map(parking => (
@@ -44,7 +44,21 @@ const MapCard = ({isvisible,parkings,setVisible})=>{
                         />
                     ))
                 }
-                
+                {searchInput ?
+                <Marker
+                // onPress={() => {
+                //     isvisible = true
+                //     setVisible(isvisible)
+                //     dispatch(addParking(parking))
+                // }}
+                key={0}
+                coordinate={{ latitude : latitude , longitude : longitude }}
+                title={searchLabel}
+                pinColor={COLOR.belge}
+                />    
+                :    
+                null
+                }
                 
             </MapView>
 
