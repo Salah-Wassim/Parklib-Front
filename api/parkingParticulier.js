@@ -1,4 +1,5 @@
-const parkingUrl = 'http://192.168.1.10:3000/parking-particulier';
+import {adrIpV4, port} from '../secretFile'
+const parkingUrl = `http://${adrIpV4}:${port}/parking-particulier`;
 
 export const addParkingParticulier = async (parking) => {
     // console.log(parking);
@@ -11,7 +12,7 @@ export const addParkingParticulier = async (parking) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer test',
+                    'Authorization': `Bearer ${token}` ,
                 },
                 body: JSON.stringify(parking)
             }

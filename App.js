@@ -32,7 +32,7 @@ import ParkingParticulierDetails from './pages/parkingParticulierDetails';
 import DisplayPark from "./pages/displayPark";
 import Reservation from "./pages/reservation";
 import AuthContext from './store/authentification/authContext'; 
-
+import PostDashboard from './pages/postDashboard';
 
 const Stack = createStackNavigator()
 
@@ -42,7 +42,8 @@ export default function App() {
         <Provider store={store}>
             <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
                 <NavigationContainer>
-                    <Stack.Navigator initialRouteName='Profile'>
+                    <Stack.Navigator initialRouteName='SignUp'>
+                        <Stack.Screen name="PostDashboard" options={{title: 'Vos annonces'}} component={PostDashboard}/>
                         <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={MenuBurger} />
                         <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib', headerShown: false }} component={SignIn}/>
                         <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib', headerShown: false }} component={SignUp}/>
