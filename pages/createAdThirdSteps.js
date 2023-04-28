@@ -1,5 +1,5 @@
 import React from "react";
-import {View, StyleSheet, Image,Text, Platform} from "react-native";
+import {ActivityIndicator , View, StyleSheet, Image,Text, Platform} from "react-native";
 import {Button} from "@react-native-material/core";
 import { Stack} from 'react-native-flex-layout';
 import { launchImageLibrary } from 'react-native-image-picker';
@@ -10,6 +10,9 @@ import {addParkingParticulier} from "../api/parkingParticulier";
 import {uploadPictureForPost} from "../api/picture";
 
 const CreateAdThirdSteps = ({ route, navigation }) => {
+
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [disableButton, setDisableButton] = React.useState(false);
     
     const { post , parking } = route.params;
     const [photo, setPhoto] = React.useState({});
@@ -57,9 +60,13 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
     };
 
     const handleSubmit = async () => {
+        setDisableButton(true);
+        setIsLoading(true);
         if(photo.uri == undefined && photo2.uri == undefined && photo3.uri == undefined) {
             setError('Merci d\'ajouter au minimum une photo');
             console.log('error')
+            setDisableButton(false);
+            setIsLoading(false);
         }
         else {
             setError('');
@@ -106,16 +113,22 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                                 .catch((e) => { 
                                     console.log(e)
                                     setError('Un problème est survenu lors de l\'envoi des photos. Si le problème persiste, contactez l\'administrateur.');
+                                    setDisableButton(false);
+                                    setIsLoading(false);
                                 })
                         })
                         .catch( (e) => { 
                             console.log(e)
                             setError('Un problème est survenu lors de la création de l\'annonce. Si le problème persiste, contactez l\'administrateur.');
+                            setDisableButton(false);
+                            setIsLoading(false);
                         })
                 })
                 .catch( (e) => { 
                     console.log(e)
                     setError('Un problème est survenu lors de la création du parking. Si le problème persiste, contactez l\'administrateur.');
+                    setDisableButton(false);
+                    setIsLoading(false);
                 })
         }
     }
@@ -174,8 +187,17 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                 </View>   
             </View>
             <View style={styles.submitButtonContainer}>
+                { isLoading ?
+                    (
+                    <ActivityIndicator  size="large" color="#575DFB"  />
+                    )
+                    :
+                    (
+                    null
+                    )
+                }
                 <Text style={styles.error}>{error}</Text>   
-                <Button style={styles.submitButton} title="Publier mon annonce" onPress={handleSubmit}/>
+                <Button style={styles.submitButton} disabled ={(disableButton)} title="Publier mon annonce" onPress={handleSubmit}/>
             </View>
         </Stack>
     )
