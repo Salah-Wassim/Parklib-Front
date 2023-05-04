@@ -64,7 +64,6 @@ const MapCard = ({isvisible,parkings,privateParkings,setVisible, latitude, longi
                 }
                 {
                     privateParkings.map(privateParking => {
-                        //console.log("Map card privateParking", privateParking);
                         return (
                             <Marker
                                 onPress={() => {
