@@ -1,6 +1,6 @@
 import {adrIpV4, port, token} from '../secretFile';
 
-const postUrl = `http://${adrIpV4}:${port}/annonce/`;
+const clearpostUrl = `http://${adrIpV4}:${port}/annonce/`;
 const postByParking = `http://${adrIpV4}:${port}/annonce/parkingParticulier/`
 
 export const getPostByUser = async (userId, token) => {

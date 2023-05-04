@@ -1,6 +1,7 @@
 import React from "react";
 import {StyleSheet, View, Text, TouchableOpacity, StatusBar} from 'react-native';
 import {TextInput,Stack, Button, Flex} from "@react-native-material/core";
+import validator from "validator";
 
 export default function Home({navigation}) {
 
@@ -18,11 +19,13 @@ export default function Home({navigation}) {
                             <TextInput
                                 label='Rechercher'
                                 onChangeText={(text)=>{
-                                    onSearchText(text)
+                                    if(validator.isAlphanumeric(text)){
+                                        onSearchText(encodeURIComponent(text))
+                                    }
                                 }}
                             />
                             <Button title="rechercher" onPress={() => {
-                                navigation.navigate('ParkingList', {
+                                navigation.navigate('Map', {
                                     text : SearchText
                                 })
                             }

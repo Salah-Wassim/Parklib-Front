@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {StyleSheet,FlatList, View} from 'react-native';
 import {Flex, ActivityIndicator, FAB, Text} from "@react-native-material/core";
 import {getParkingSearchedText } from '../api/api'
+import { getAllPrivateParking } from "../api/parkingParticulier";
 import MapCard from "../components/mapCard"
 import DetailCardMarker from "../components/detailCardMarker";
 import InputAddressAutocomplete from "../components/inputAddressAutocomplete";
@@ -12,6 +13,7 @@ const Map = ({ route, navigation }) => {
     const {text} = route.params ? route.params : '';
     const [defaultText, setDefaultText] = useState('st_park_p');
     const [parkings, setParkings ] = useState([]);
+    const [privateParkings, setPrivateParkings] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [visible, setVisible] = useState(false);
 
@@ -32,7 +34,8 @@ const Map = ({ route, navigation }) => {
     useEffect(() => {
         if (defaultText.length > 0) {
             setParkings([]);
-            getParkingSearchedText(defaultText).then(data => {
+            getParkingSearchedText(defaultText)
+            .then(data => {
                 setLoading(false);
                 data.features.map(_feature => {
                     const feature =   {
@@ -58,12 +61,61 @@ const Map = ({ route, navigation }) => {
                     setParkings(parkings =>[...parkings,feature]);
                 })
             })
+            .catch(error => {
+                console.log('getParkingSearchedText error', error)
+            })
         }
+    
+        getAllPrivateParking()
+        .then(response => {
+            console.log("data", response)
+            if(response && response.data && Array.isArray(response.data)){
+                const formatedPrivateParking = response.data.map(_parkingPrivate => {
+                    const parkingPrivate = {
+                        id: _parkingPrivate.id,
+                        address: _parkingPrivate.address,
+                        zipCode: _parkingPrivate.zipCode,
+                        city: _parkingPrivate.city,
+                        lattitude: _parkingPrivate.lattitude,
+                        longitude: _parkingPrivate.longitude,
+                        createdAt: _parkingPrivate.createdAt,
+                        updatedAt: _parkingPrivate.updatedAt,
+                        UserId: _parkingPrivate.UserId,
+                        Post: {
+                            id: _parkingPrivate.Post.id,
+                            title: _parkingPrivate.Post.title,
+                            description: _parkingPrivate.Post.description,
+                            price: _parkingPrivate.Post.price,
+                            typeOfPlace: _parkingPrivate.Post.typeOfPlace,
+                            contact: _parkingPrivate.Post.contact,
+                            isAssured: _parkingPrivate.Post.isAssured,
+                            createdAt: _parkingPrivate.Post.createdAt,
+                            updatedAt: _parkingPrivate.Post.updatedAt,
+                            ParkingParticulierId: _parkingPrivate.Post.ParkingParticulierId,
+                            UserId: _parkingPrivate.Post.UserId
+                        }
+                    }
+                    return parkingPrivate
+                })
+                setPrivateParkings(formatedPrivateParking);
+            }
+            else{
+                console.log("Une erreur c'est produit dans le chargement de la réponse")
+            }
+        })
+        .catch(error => {
+            console.log('getAllPrivateParking1 error', error)
+        })
+    
     }, [])
+
+    useEffect(() => {
+        console.log("PrivateParkings", privateParkings)
+    }, [privateParkings])
+    
     
     return(
         <Flex fill style={styles.page}>
-
             <View style={[styles.formContainer, {zIndex: 4}]}>
                 <InputAddressAutocomplete
                     style={styles.inputAddressAutocomplete}
@@ -73,10 +125,10 @@ const Map = ({ route, navigation }) => {
             </View>
             {isLoading ?
                 <ActivityIndicator size="large" /> :
-                <MapCard style={{zIndex: 3}} parkings={parkings} isvisible={visible} setVisible={setVisible} latitude={latitude} longitude={longitude} zoom={zoom} searchInput={searchInput} searchLabel={adr} />
+                <MapCard style={{zIndex: 3}} parkings={parkings} privateParkings={privateParkings} isvisible={visible} setVisible={setVisible} latitude={latitude} longitude={longitude} zoom={zoom} searchInput={searchInput} searchLabel={adr} />
             }
             {visible ?
-                <DetailCardMarker style={{zIndex: 2}} parkings={parkings} isvisible={visible} setVisible={setVisible} navigation={navigation} /> :
+                <DetailCardMarker style={{zIndex: 2}} parkings={parkings} privateParkings={privateParkings} isvisible={visible} setVisible={setVisible} navigation={navigation} /> :
                 null
             }
         </Flex>

@@ -33,6 +33,7 @@ import DisplayPark from "./pages/displayPark";
 import Reservation from "./pages/reservation";
 import AuthContext from './store/authentification/authContext'; 
 import PostDashboard from './pages/postDashboard';
+import Home from './pages/home'
 
 const Stack = createStackNavigator()
 
@@ -42,8 +43,9 @@ export default function App() {
         <Provider store={store}>
             <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
                 <NavigationContainer>
-                    <Stack.Navigator initialRouteName='DrawerNav'>
+                    <Stack.Navigator initialRouteName='Map'>
                         <Stack.Screen name="PostDashboard" options={{title: 'Vos annonces'}} component={PostDashboard}/>
+                        <Stack.Screen name="Home" options={{ title: 'Park\'Lib', headerShown: false }} component={Home} />
                         <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={MenuBurger} />
                         <Stack.Screen name="SignIn" options={{ title: 'Park\'Lib', headerShown: false }} component={SignIn}/>
                         <Stack.Screen name="SignUp" options={{ title: 'Park\'Lib', headerShown: false }} component={SignUp}/>
@@ -68,8 +70,8 @@ export default function App() {
                         <Stack.Screen name="CheckoutScreen" options={{title: 'Verification'}} component={CheckoutScreen}/>
                         <Stack.Screen name="Verification" options={{title: 'Verification'}} component={VerificationScreen}/>
                         <Stack.Screen name="VerificationCode" options={{title: 'Validation du code'}} component={VerificationCodeScreen}/>
-                        <Stack.Screen name="Map" options={{title: 'Map'}} component={Map}/>
-                        <Stack.Screen name="ResetPassword" options={{title: 'Reinitialiser le mot de passe'}} component={Map}/>
+                        <Stack.Screen name="Map" options={{title: 'Carte'}} component={Map}/>
+                        {/* <Stack.Screen name="ResetPassword" options={{title: 'Reinitialiser le mot de passe'}} component={ResetPassword}/> */}
                         <Stack.Screen name="CreateAdFirstStep" options={{title: 'Étape 1'}} component={CreateAdFirstStep}/>
                         <Stack.Screen name="CreateAdSecondSteps" options={{title: 'Étape 2'}} component={CreateAdSecondSteps}/>
                         <Stack.Screen name="CreateAdThirdSteps" options={{title: 'Étape 3'}} component={CreateAdThirdSteps}/>

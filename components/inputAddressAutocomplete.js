@@ -7,6 +7,7 @@ import {
 } from "react-native-responsive-screen";
 import axios from "axios";
 import COLOR from "../utils/color.constant";
+import validator from "validator";
 
 const InputAddressAutocomplete = ({onChooseAddress}) => {
 
@@ -18,12 +19,17 @@ const InputAddressAutocomplete = ({onChooseAddress}) => {
 
     const searchResults = (text) => {
         axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text) + "&limit=8")
-            .then(r => {
-                setIsLoading(false);
-                setSearch(r.data.features);
+            .then(response => {
+                if(response && response.data && response.data.features){
+                    setIsLoading(false);
+                    setSearch(response.data.features);
+                }
+                else{
+                    console.log("Une erreur s'est produit dans le retour de la réponse")
+                }
             }).catch(e => {
                 setIsLoading(false);
-                // console.log(e);
+                console.log("searchResults error", e);
             })
     }
 
@@ -33,17 +39,20 @@ const InputAddressAutocomplete = ({onChooseAddress}) => {
                 variant="outlined"
                 style={[styles.inputStyle]}
                 onChangeText={(t) => {
-                    setInputValue(t)
-                    if(t.length === 0){
-                        setQuery(t);
-                        setIsSearching(false);
-                        setIsLoading(false);
-                        return;
+                    if(validator.isAlphanumeric(t)){
+                        const encodeText = encodeURIComponent(t)
+                        setInputValue()
+                        if(encodeText.length === 0){
+                            setQuery(encodeText);
+                            setIsSearching(false);
+                            setIsLoading(false);
+                            return;
+                        }
+                        setQuery(encodeText);
+                        setIsSearching(true);
+                        setIsLoading(true);
+                        searchResults(encodeText);
                     }
-                    setQuery(t);
-                    setIsSearching(true);
-                    setIsLoading(true);
-                    searchResults(t);
                 }}
                 placeholder={"Rechercher une adresse, une rue, etc..."}
                 value={inputValue}
