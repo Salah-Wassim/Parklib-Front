@@ -92,3 +92,20 @@ export const login = async (email,password) => {
     },).then((response) => response.json()).catch((error) => console.error(error));
 
 }
+
+export const completeProfileAfterSignUp = async (lastName, firstName, address, userId, token) => {
+    return await fetch(`${API_URL}/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',  
+            'Authorization': 'Bearer ' + token,
+        },  
+        body: JSON.stringify({
+            id: userId,
+            lastName: lastName,
+            firstName: firstName,
+            address: address,
+        })
+    },).then((response) => response.json()).catch((error) => console.error(error));
+}

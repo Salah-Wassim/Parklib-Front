@@ -33,6 +33,7 @@ import DisplayPark from "./pages/displayPark";
 import Reservation from "./pages/reservation";
 import AuthContext from './store/authentification/authContext'; 
 import PostDashboard from './pages/postDashboard';
+import CompleteProfile from "./pages/completeProfile";
 
 const Stack = createStackNavigator()
 
@@ -76,7 +77,8 @@ export default function App() {
                         <Stack.Screen name="ParkingList" options={{title: 'Parking privées'}} component={DisplayPark}/>
                         <Stack.Screen name="ParkingDetails" options={{title: 'En savoir plus'}} component={ParkingDetails}/>
                         <Stack.Screen name="ParkingParticulierDetails" options={{title: 'Details'}} component={ParkingParticulierDetails}/>
-                        <Stack.Screen name="Reservation" options={{title: 'Réservation'}} component={Reservation}/>
+                        <Stack.Screen name="Reservation" options={{ title: 'Réservation' }} component={Reservation} />
+                        <Stack.Screen name="CompleteProfile" options={{ title: 'Complètez votre inscription', headerShown: false }} component={CompleteProfile}/>
                         {/* <Stack.Screen name="PaymentMethod" options={{ title: 'Moyen de paiement' }} component={PaymentMethod}/> */}
                         {/* <Stack.Screen name="NewCreditCardForm" options={{ title: 'Ajouter une carte bancaire' }} component={NewCreditCardForm}/> */}
                     </Stack.Navigator>
