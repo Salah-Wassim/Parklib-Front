@@ -10,8 +10,7 @@ import COLOR from "../utils/color.constant";
 
 const Map = ({ route, navigation }) => {
     
-    const {text} = route.params ? route.params : '';
-    const [defaultText, setDefaultText] = useState('st_park_p');
+    const {text, adrHome, latitudeHome, longitudeHome, zoomHome, searchInputHome} = route.params ? route.params : '';
     const [parkings, setParkings ] = useState([]);
     const [privateParkings, setPrivateParkings] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -23,6 +22,20 @@ const Map = ({ route, navigation }) => {
     const [zoom, setZoom] = React.useState(0.3);
     const [searchInput, setSearchInput] = React.useState(false);
 
+    const initializeMap = () => {
+        if(adrHome && latitudeHome && longitudeHome && zoomHome && searchInputHome){
+            setAdr(adrHome);
+            setLatitude(latitudeHome);
+            setLongitude(longitudeHome);
+            setZoom(zoomHome);
+            setSearchInput(searchInputHome);
+        }
+    }
+
+    useEffect(() => {
+        initializeMap()
+    }, [])
+
     const onChooseAddress = (respAddress) => {
         setAdr(respAddress.properties.label);
         setLatitude(respAddress.geometry.coordinates[1]);
@@ -32,9 +45,9 @@ const Map = ({ route, navigation }) => {
     }
 
     useEffect(() => {
-        if (defaultText.length > 0) {
+        if (text.length > 0) {
             setParkings([]);
-            getParkingSearchedText(defaultText)
+            getParkingSearchedText(text)
             .then(data => {
                 setLoading(false);
                 data.features.map(_feature => {
@@ -65,7 +78,7 @@ const Map = ({ route, navigation }) => {
                 console.log('getParkingSearchedText error', error)
             })
         }
-    
+
         getAllPrivateParking()
         .then(response => {
             console.log("data", response)
@@ -106,14 +119,14 @@ const Map = ({ route, navigation }) => {
         .catch(error => {
             console.log('getAllPrivateParking1 error', error)
         })
-    
+
     }, [])
 
     useEffect(() => {
         console.log("PrivateParkings", privateParkings)
     }, [privateParkings])
     
-    
+
     return(
         <Flex fill style={styles.page}>
             <View style={[styles.formContainer, {zIndex: 4}]}>

@@ -1,32 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import io from 'socket.io-client';
 import { useSelector ,useDispatch} from 'react-redux'
 import { addParking, addPrivateParking } from "../store/parking/action";
 import COLOR from "../utils/color.constant";
-import {adrIpV4,port} from '../secretFile'
 
 const MapCard = ({isvisible,parkings,privateParkings,setVisible, latitude, longitude, zoom, searchInput , searchLabel})=>{
 
     const dispatch = useDispatch()
-
-    const [socket, setSocket] = useState(null);
-
-    useEffect(() => {
-        try{
-            const newSocket = io(`http://${adrIpV4}:${port}/parking-particulier/`);
-            newSocket.on("updatePrivateParkings", (data) => {
-                console.log("Received new private parking data:", data);
-            });
-            setSocket(newSocket);
-            //console.log("socket", socket)
-            return () => newSocket.disconnect();
-        }
-        catch(error){
-            console.log("socket error", error)
-        }
-    }, []);
 
     // params to size the map area
     let {width, height} = Dimensions.get('window');

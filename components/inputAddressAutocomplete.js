@@ -1,37 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {ActivityIndicator, StyleSheet, Text, View, TouchableOpacity, Linking, Image } from "react-native";
 import { Box, TextInput } from "@react-native-material/core";
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import axios from "axios";
 import COLOR from "../utils/color.constant";
-import validator from "validator";
+import axios from "axios";
 
 const InputAddressAutocomplete = ({onChooseAddress}) => {
 
     const [isSearching, setIsSearching] = React.useState(false); // used to display or not result list
     const [isLoading, setIsLoading] = React.useState(false); // used to display or not ActivityIndicator
-    const [query, setQuery] = React.useState(''); // used to store user suery
+    const [query, setQuery] = React.useState(''); // used to store user query
     const [search, setSearch] = React.useState([]); // used to store search result
     const [inputValue, setInputValue] = React.useState(""); // used to display result in input after  search is completed
 
     const searchResults = (text) => {
-        axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text) + "&limit=8")
-            .then(response => {
-                if(response && response.data && response.data.features){
+        if (text) {
+          axios
+            .get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text))
+            .then((response) => {
+                if (response && response.data && response.data.features) {
                     setIsLoading(false);
                     setSearch(response.data.features);
+                } 
+                else {
+                    console.log("Une erreur s'est produite dans le retour de la réponse", response);
                 }
-                else{
-                    console.log("Une erreur s'est produit dans le retour de la réponse")
-                }
-            }).catch(e => {
-                setIsLoading(false);
-                console.log("searchResults error", e);
             })
-    }
+            .catch((error) => {
+                setIsLoading(false);
+                console.log("searchResults error", error);
+            });
+        } 
+        else {
+            console.log("Erreur : l'argument text est undefined ou autre", text);
+        }
+    };
 
     return(
         <View style={[styles.containerStyle]}>
@@ -39,20 +45,17 @@ const InputAddressAutocomplete = ({onChooseAddress}) => {
                 variant="outlined"
                 style={[styles.inputStyle]}
                 onChangeText={(t) => {
-                    if(validator.isAlphanumeric(t)){
-                        const encodeText = encodeURIComponent(t)
-                        setInputValue()
-                        if(encodeText.length === 0){
-                            setQuery(encodeText);
-                            setIsSearching(false);
-                            setIsLoading(false);
-                            return;
-                        }
-                        setQuery(encodeText);
-                        setIsSearching(true);
-                        setIsLoading(true);
-                        searchResults(encodeText);
+                    setInputValue(t)
+                    if(t.length === 0){
+                        setQuery(t);
+                        setIsSearching(false);
+                        setIsLoading(false);
+                        return;
                     }
+                    setQuery(t);
+                    setIsSearching(true);
+                    setIsLoading(true);
+                    searchResults(t);
                 }}
                 placeholder={"Rechercher une adresse, une rue, etc..."}
                 value={inputValue}

@@ -43,7 +43,7 @@ export default function App() {
         <Provider store={store}>
             <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
                 <NavigationContainer>
-                    <Stack.Navigator initialRouteName='Map'>
+                    <Stack.Navigator initialRouteName='Home'>
                         <Stack.Screen name="PostDashboard" options={{title: 'Vos annonces'}} component={PostDashboard}/>
                         <Stack.Screen name="Home" options={{ title: 'Park\'Lib', headerShown: false }} component={Home} />
                         <Stack.Screen name="DrawerNav" options={{ title: 'Park\'Lib', headerShown: false }} component={MenuBurger} />
