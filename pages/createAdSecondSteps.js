@@ -27,6 +27,8 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
 
     const [startDate, onSetStartDate] = React.useState(todayDate);
     const [endDate, onSetEndDate] = React.useState(todayDate);
+    const [stringStartDate, setStringStartDate] = React.useState(todayDate.toString());
+    const [stringEndDate, setStringEndDate] = React.useState(todayDate.toString());
 
     const showDepartureDatepicker = () => {
         const currentMode ="date"
@@ -56,10 +58,7 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
         });
     };
 
-    const handleSubmit = () => {
-        // console.log('today :' + todayDate);
-        // console.log('start :' + startDate);
-        // console.log('end :' + endDate);
+    const handleSubmit = () => {    
         if (title === '' || description === '' || contact === '') {
             setError('Merci de remplir tous les champs s\'il vous plaît')
             return;
@@ -73,8 +72,8 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
             return;
         }
         setError('');
-        // console.log('ok to send')
-        // return;
+        setStringStartDate(startDate.toString());
+        setStringEndDate(endDate.toString());
         const post = {
             'title': title,
             'description': description,
@@ -84,8 +83,8 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
             'isAssured': isAssured,
             'ParkingParticulierId': null, 
             'ValidationStatusId': 1,
-            'startDate': startDate,
-            'endDate': endDate,
+            'startDate': stringStartDate,
+            'endDate': stringEndDate,
         }
         navigation.navigate('CreateAdThirdSteps', {
             post: post,
@@ -113,7 +112,7 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
                         variant="outlined"
                         onChangeText={newDescription => setDescription(newDescription)}
                         value={description}
-                        multiline = {true}
+                        multiline = {false}
                         numberOfLines = {4}
                     />
                 </View>
