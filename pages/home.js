@@ -14,7 +14,6 @@ export default function Home({navigation}) {
     const [searchInputHome, setSearchInputHome] = useState(false);
 
     const onChooseAddress = (respAddress) => {
-        console.log("respAddress", respAddress)
         setAdrHome(respAddress.properties.label);
         setLatitudeHome(respAddress.geometry.coordinates[1]);
         setLongitudeHome(respAddress.geometry.coordinates[0]);
@@ -56,7 +55,7 @@ votre destination ? </Text>
                             />
                         </Flex>
                     </TouchableOpacity>
-                    <Text>Ou</Text>
+                    <Text style={styles.ou}>Ou</Text>
                     <Button 
                         style={[styles.btn]} 
                         title="Acceder directement à la carte" 
@@ -103,22 +102,10 @@ const styles = StyleSheet.create({
         marginTop:25,
         backgroundColor:'#157575'
     },
-    // buttonSearch: {
-    //     backgroundColor: '#007AFF',
-    //     borderRadius: 10,
-    //     padding: 10,
-    //     marginRight: 10,
-    // },
+    ou: {
+        marginTop:25,
+        textAlign: "center",
+        fontWeight: 'bold'
+    }
 });
-
-
-
-
-                           {/* <TextInput
-                                label='Entrez une adresse'
-                                onChangeText={(text)=>{
-                                    if(validator.isAlphanumeric(text)){
-                                        onSearchText(encodeURIComponent(text))
-                                    }
-                                }}
-                            /> */}
+ 

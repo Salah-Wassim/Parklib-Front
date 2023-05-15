@@ -18,14 +18,14 @@ const InputAddressAutocomplete = ({onChooseAddress}) => {
 
     const searchResults = (text) => {
         if (text) {
-          axios
-            .get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text))
+            axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text))
             .then((response) => {
                 if (response && response.data && response.data.features) {
                     setIsLoading(false);
                     setSearch(response.data.features);
                 } 
                 else {
+                    setIsLoading(false);
                     console.log("Une erreur s'est produite dans le retour de la réponse", response);
                 }
             })
