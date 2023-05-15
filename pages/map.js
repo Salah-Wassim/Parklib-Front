@@ -132,7 +132,6 @@ const Map = ({ route, navigation }) => {
             <View style={[styles.formContainer, {zIndex: 4}]}>
                 <InputAddressAutocomplete
                     style={styles.inputAddressAutocomplete}
-                    isOpen={false}
                     onChooseAddress={onChooseAddress}
                 />
             </View>
