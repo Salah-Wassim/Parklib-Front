@@ -1,27 +1,17 @@
-import React, { useContext, useEffect } from 'react';
-import { View, ActivityIndicator } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React ,{ useContext, useEffect } from 'react';
 import AuthContext from '../store/authentification/authContext';
 
-const RouteGuard = ({ children }) => {
-  const { isAuthenticated, loading } = useContext(AuthContext);
-  const navigation = useNavigation();
+const RouteGuard = ({ children, navigation, ...props }) => {
+  const { isAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigation.navigate('SignIn');
+      navigation.replace("SignIn");
     }
-  }, [isAuthenticated, navigation]);
+  }, [isAuthenticated]);
 
-  if (loading) {
-    return (
-      <View>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-
-  return isAuthenticated ? children : null;
+  return React.cloneElement(children, { ...props, navigation });
 };
 
 export default RouteGuard;
+
