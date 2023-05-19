@@ -1,7 +1,7 @@
-import {adrIpV4, port, token} from '../secretFile';
+import {IPV4, PORT, token} from '../secretFile';
 
-const postUrl = `http://${adrIpV4}:${port}/annonce/`;
-const postByParking = `http://${adrIpV4}:${port}/annonce/parkingParticulier/`
+const postUrl = `http://${IPV4}:${PORT}/annonce/`;
+const postByParking = `http://${IPV4}:${PORT}/annonce/parkingParticulier/`
 
 export const getPostByUser = async (userId, token) => {
     return await fetch(

@@ -1,5 +1,5 @@
-import {adrIpV4, port, token} from '../secretFile'
-const parkingUrl = `http://${adrIpV4}:${port}/parking-particulier`;
+import {IPV4, PORT, token} from '../secretFile';
+const parkingUrl = `http://${IPV4}:${PORT}/parking-particulier`;
 
 export const addParkingParticulier = async (parking) => {
     // console.log(parking);

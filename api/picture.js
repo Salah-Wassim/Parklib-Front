@@ -1,4 +1,6 @@
-const pictureUrl = 'http://192.168.1.10:3000/picture';
+import {IPV4, PORT} from '../secretFile';
+
+const pictureUrl = `http://${IPV4}:${PORT}/picture/`;
 
 export const uploadPictureForPost = async (formPicture) => {
     const url = pictureUrl + '/post/upload' 

@@ -1,9 +1,8 @@
-import {adrIpV4, port} from '../secretFile';
-const API_TOKEN = "238HINNOST";
-const API_URL = `http://${adrIpV4}:3000`;
+import { IPV4, PORT, TOKEN_BDX_METROPOLE } from '../secretFile';
+const API_URL = `http://${IPV4}:${PORT}`;
 
 export const getParkingSearchedText = async (text, page) =>{
-    const url  = 'https://data.bordeaux-metropole.fr/geojson?' + 'key=' + API_TOKEN + '&typename=' + text
+    const url  = 'https://data.bordeaux-metropole.fr/geojson?' + 'key=' + TOKEN_BDX_METROPOLE + '&typename=' + text
     return await fetch(url)
     .then(response => response.json())
     .catch(error => {console.log(error)})
@@ -17,7 +16,7 @@ export const getAddress = async (text) =>{
 }
 
 export const getParkingMap = async () => {
-    const url  = 'https://data.bordeaux-metropole.fr/api/cub.xjs?' + 'key=' + API_TOKEN 
+    const url  = 'https://data.bordeaux-metropole.fr/api/cub.xjs?' + 'key=' + TOKEN_BDX_METROPOLE 
     return await fetch(url, {mode: 'no-cors'})
     .then(function(response) {
       console.log(response); 
