@@ -1,7 +1,8 @@
+import {useState, useEffect} from 'react';
 import * as SecureStore from 'expo-secure-store';
 import { register, login } from "../../api/api";
 
-const isInputValid = (email, password, cPassword) => {
+export const isInputValid = (email, password, cPassword) => {
   if (!email.trim()  || !password.trim()  || !cPassword.trim()) {
     console.log('Veuillez remplir tous les champs.');
     return false;
@@ -13,7 +14,7 @@ const isInputValid = (email, password, cPassword) => {
   return true;
 };
 
-const handleSignUp = async (email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated) => {
+export const handleSignUp = async (email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated) => {
     // Set configuration for SecureStore to allow access only when device is unlocked
     const config = {
     keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
@@ -42,10 +43,10 @@ const handleSignUp = async (email, password, cPassword, navigation, onChangeEmai
           return;
         }
 
+        navigation.navigate('Profile');
         onChangeEmail('');
         onChangePassword('');
         onChangeCPassword('');
-        navigation.navigate('Profile');
       } else {
         console.log("Une erreur est survenue lors de l'inscription");
       }
@@ -57,7 +58,7 @@ const handleSignUp = async (email, password, cPassword, navigation, onChangeEmai
   }
 };
 
-const handleSignIn = async (email, password, navigation, onChangeEmail, onChangePassword, setAuthenticated) => {
+export const handleSignIn = async (email, password, navigation, onChangeEmail, onChangePassword, setAuthenticated) => {
 
     const config = {
         keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
@@ -83,9 +84,9 @@ const handleSignIn = async (email, password, navigation, onChangeEmail, onChange
           return;
         }
 
+        navigation.navigate('DrawerNav');
         onChangeEmail('');
         onChangePassword('');
-        navigation.navigate('DrawerNav');
       } else {
         console.log("Une erreur est survenue lors de la connexion");
       }
@@ -97,7 +98,7 @@ const handleSignIn = async (email, password, navigation, onChangeEmail, onChange
   }
 };
 
-const handleLogout = async (setAuthenticated) => {
+export const handleLogout = async (setAuthenticated) => {
   try {
     await SecureStore.deleteItemAsync('auth_token');
     setAuthenticated(false);
@@ -107,7 +108,7 @@ const handleLogout = async (setAuthenticated) => {
   }
 };
 
-const getAuthToken = async () => {
+export const getAuthToken = async () => {
   const config = {
     keychainAccessible : SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
   }
@@ -125,5 +126,11 @@ const getAuthToken = async () => {
     console.log("error", error)
   }
 }
-  
-export { handleSignUp, handleSignIn, handleLogout, getAuthToken};
+
+export const fetchToken = async (setAuthenticated) => {
+  const token = await SecureStore.getItemAsync('auth_token');
+  if (token) {
+      setAuthenticated(true);
+  }
+}
+
