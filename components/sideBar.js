@@ -7,7 +7,7 @@ import { Box, Flex, Spacer } from "@react-native-material/core";
 
 const SideBar=(props)=> {
     const { navigation } = props
-    const { setAuthenticated } = useContext(AuthContext);
+    const { setAuthenticated, isAuthenticated } = useContext(AuthContext);
     return (
         <Flex {...props} h={"100%"} pt={37} style={styles.drawer}>
             <Flex direction="column" style={styles.container}>
@@ -37,31 +37,51 @@ const SideBar=(props)=> {
                 <Spacer style={styles.flexBlock}  />
                 </Flex>
                 <Flex fill style={styles.boxContainer}>
-                <Box>
-                    <TouchableOpacity>
-                        <Text style={styles.labels}>Tous les libellés</Text>
-                        <Text style={styles.marginItems} onPress={() => {
-                            navigation.navigate('SignIn')}}>Se connecter</Text>
-                        <Text style={styles.marginItems} onPress={() => {
-                            navigation.navigate('SignUp')}}>S'inscrire</Text>
-                        <Text style={styles.marginItems} onPress={() => {
-                            navigation.navigate('Contact')}}>Contactez-nous</Text>
-                    </TouchableOpacity>
-                </Box>
+                    <Box>
+                        <View>
+                            <Text style={styles.labels}>Tous les libellés</Text>
+                            {isAuthenticated && 
+                                <TouchableOpacity onPress={() => { navigation.navigate('Profile')}}>
+                                    <Text style={styles.marginItems}>Profil</Text>
+                                </TouchableOpacity>
+                            }
+                            {!isAuthenticated && 
+                            // React Fragment. This is used to group multiple elements together without adding an extra node to the DOM.
+                            // It's like a lightweight version of a <div> or other block element, but it doesn't actually render anything itself.
+                            // It's useful when you need to return multiple elements from a component.
+                                <>
+                                    <TouchableOpacity onPress={() => { navigation.navigate('SignUp')}}>
+                                        <Text style={styles.marginItems}>S'inscrire</Text>
+                                    </TouchableOpacity>
+                                </>
+                            }
+                            <TouchableOpacity onPress={() => { navigation.navigate('Contact')}}>
+                                <Text style={styles.marginItems}>Contactez-nous</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Box>
                 </Flex>
-                    <Flex>
+                <Flex>
                     <TouchableOpacity>
                         <Text style={styles.privacyPolicy} onPress={() => {
                             navigation.navigate('PrivacyPolicy')}} >Mentions légales</Text>
                         <Text style={styles.cguV1} onPress={() => {
                             navigation.navigate('CGU')}}>CGU</Text>
-                        <Text style={styles.version}>V1.0</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleLogout(setAuthenticated)}>
-                        <View style={styles.logoutView}>
-                            <Text style={styles.logoutBtn}>Déconnexion</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <Text style={styles.version}>V1.0</Text>
+                    {isAuthenticated ? (
+                        <TouchableOpacity onPress={() => handleLogout(setAuthenticated)}>
+                            <View style={styles.logoutView}>
+                                <Text style={styles.logoutBtn}>Déconnexion</Text>
+                            </View>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+                            <View style={{...styles.logoutView, backgroundColor: 'green'}}>
+                                <Text style={styles.logoutBtn}>Se connecter</Text>
+                            </View>
+                        </TouchableOpacity>
+                    )}
                 </Flex>
             </Flex>
         </Flex>
