@@ -16,16 +16,6 @@ export const getAddress = async (text) =>{
     .catch(error => {console.log(error)})
 }
 
-export const getParkingMap = async () => {
-    const url  = 'https://data.bordeaux-metropole.fr/api/cub.xjs?' + 'key=' + API_TOKEN 
-    return await fetch(url, {mode: 'no-cors'})
-    .then(function(response) {
-      console.log(response); 
-    }).catch(function(error) {  
-      console.log('Request failed', error)  
-    });
-}
-
 export const verifyPhoneNumber = async (phoneNumber) => {
    return await fetch(`${API_URL}`, {
         method: 'POST',
@@ -93,7 +83,7 @@ export const login = async (email,password) => {
 
 }
 
-export const completeProfileAfterSignUp = async (lastName, firstName, address, userId, token) => {
+export const completeProfileAfterSignUp = async (lastName, firstName, address, phone, userId, token) => {
     return await fetch(`${API_URL}/users/${userId}`, {
         method: 'PUT',
         headers: {
@@ -106,6 +96,7 @@ export const completeProfileAfterSignUp = async (lastName, firstName, address, u
             lastName: lastName,
             firstName: firstName,
             address: address,
+            phone: phone
         })
     },).then((response) => response.json()).catch((error) => console.error(error));
 }

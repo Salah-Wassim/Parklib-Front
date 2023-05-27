@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { ActivityIndicator, View, StyleSheet, ScrollView } from "react-native";
 import { Text, TextInput, Button } from "@react-native-material/core";
 import { Stack } from "react-native-flex-layout";
@@ -7,6 +7,7 @@ import COLOR from "../utils/color.constant";
 import { completeProfileAfterSignUp } from "../api/api";
 import jwtDecode from "jwt-decode";
 import { getAuthToken } from '../store/authentification/auth'
+import PhoneInput from "react-native-phone-number-input";
 
 
 const CompleteProfile = ({ route, navigation }) => {
@@ -19,6 +20,12 @@ const CompleteProfile = ({ route, navigation }) => {
     const [token, setToken] = React.useState()
     const [userId, setUserId] = React.useState(null);
 
+    const [phone, setPhone] = useState("");
+    const [formattedPhone, setFormattedPhone] = useState("");
+    const phoneInput = useRef(null);
+    const validatePhone = (value) => {
+        return phoneInput.current?.isValidNumber(value);
+    }
     useEffect(() => {
         try{
             const fetchToken = async () => {
@@ -49,17 +56,24 @@ const CompleteProfile = ({ route, navigation }) => {
         setError("");
         setDisableButton(true);
         setIsLoading(true);
-        if (firstName === "" || lastName === "" || address === "") {
+
+        if (firstName === "" || lastName === "" || address === "" || phone === "" || formattedPhone === "") {
             setError("Merci de remplir tous les champs s'il vous plaît");
             setIsLoading(false);
             setDisableButton(false);
 
-        } else {
-            await completeProfileAfterSignUp(lastName, firstName, address, userId, token)
+        }
+        else if (!validatePhone(phone)) {
+            setError("Votre numéro de téléphone n'est pas valide");
+            setIsLoading(false);
+            setDisableButton(false);
+        }
+        
+        else {
+            await completeProfileAfterSignUp(lastName, firstName, address, formattedPhone, userId, token)
                 .then(
                     (res) => {
                         console.log(res);
-                        // navigation.navigate('Verification')
                         setIsLoading(false);
                         setDisableButton(false);
                         navigation.navigate('DrawerNav')
@@ -119,6 +133,27 @@ const CompleteProfile = ({ route, navigation }) => {
                             }}
                         />
                     </View>
+
+                    <View style={styles.formContainer}>
+                        <Icon name="phone" style={styles.formIcon} />
+                        <PhoneInput
+                            containerStyle={styles.phoneInputContainer}
+                            textContainerStyle={styles.phoneInputTextContainer}
+                            style={styles.phoneInput}
+                            ref={phoneInput}
+                            defaultValue={phone}
+                            placeholder="Votre téléphone"
+                            defaultCode="FR"
+                            layout="second"
+                            flagButtonStyle={{display: "none"}}
+                            onChangeText={(text) => {
+                                setPhone(text);
+                            }}
+                            onChangeFormattedText={(text) => {
+                                setFormattedPhone(text);
+                            }}
+                        />
+                    </View>
                 </View>
 
                 <View style={styles.submitButtonContainer}>
@@ -173,13 +208,23 @@ const styles = StyleSheet.create({
     },
     formInput: {
         borderColor: COLOR.grisclair,
-        // backgroundColor: COLOR.blanc,
         width: "85%",
     },
     formIcon: {
         fontSize: 36,
         color: COLOR.vert,
     },
+    phoneInput: {
+        backgroundColor: COLOR.grisclair2,
+        width: '85%',
+    },
+    phoneInputTextContainer: {
+        borderBottomColor: COLOR.grisfonce,
+        borderBottomWidth: 1
+    },
+    phoneInputContainer: {
+        width: '85%',
+      },
     submitButtonContainer: {
         margin: 0,
         marginBottom: 10,
