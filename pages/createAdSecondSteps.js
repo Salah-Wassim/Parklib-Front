@@ -25,16 +25,15 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
         { label: 'Téléphone', value: 'telephone' },
     ]);
 
-    const [startDate, onSetStartDate] = React.useState(todayDate);
-    const [endDate, onSetEndDate] = React.useState(todayDate);
-    const [stringStartDate, setStringStartDate] = React.useState(todayDate.toString());
-    const [stringEndDate, setStringEndDate] = React.useState(todayDate.toString());
+    const [startDate, setStartDate] = React.useState(todayDate);
+    const [endDate, setEndDate] = React.useState(todayDate);
 
     const showDepartureDatepicker = () => {
         const currentMode ="date"
         const onChange = (event, selectedDate) => {
             selectedDate.setHours(0, 0, 0, 0);
-            onSetStartDate(selectedDate);
+            console.log(selectedDate);
+            setStartDate(selectedDate);
         };
         DateTimePickerAndroid.open({
             value: startDate,
@@ -48,7 +47,8 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
         const currentMode ="date"
         const onChange = (event, selectedDate) => {
             selectedDate.setHours(0, 0, 0, 0);
-            onSetEndDate(selectedDate);
+            console.log(selectedDate);
+            setEndDate(selectedDate);
         };
         DateTimePickerAndroid.open({
             value: startDate,
@@ -72,8 +72,6 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
             return;
         }
         setError('');
-        setStringStartDate(startDate.toString());
-        setStringEndDate(endDate.toString());
         const post = {
             'title': title,
             'description': description,
@@ -83,8 +81,8 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
             'isAssured': isAssured,
             'ParkingParticulierId': null, 
             'ValidationStatusId': 1,
-            'startDate': stringStartDate,
-            'endDate': stringEndDate,
+            'startDate': startDate,
+            'endDate': endDate,
         }
         navigation.navigate('CreateAdThirdSteps', {
             post: post,
@@ -126,8 +124,8 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
                                 placeholder='Début'
                                 variant="outlined"
                                 editable={false}
-                                onChangeText={onSetStartDate}
-                                value={moment(startDate.toLocaleDateString()).format("DD/MM/YYYY")}
+                                onChangeText={setStartDate}
+                                value={moment(startDate.toDateString()).format("DD/MM/YYYY")}
                             />
                         </TouchableOpacity>
                         <Text style={styles.dateFormText}>au</Text>
@@ -137,8 +135,8 @@ const CreateAdSecondSteps = ({ route, navigation }) => {
                                 placeholder='Fin'
                                 variant="outlined"
                                 editable={false}
-                                onChangeText={onSetEndDate}
-                                value={ moment(endDate.toLocaleDateString()).format("DD/MM/YYYY")}
+                                onChangeText={setEndDate}
+                                value={ moment(endDate.toDateString()).format("DD/MM/YYYY")}
                             />
                         </TouchableOpacity>
                     </Flex>
