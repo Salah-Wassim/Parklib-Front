@@ -1,31 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {ActivityIndicator, StyleSheet, Text, View, TouchableOpacity, Linking, Image } from "react-native";
 import { Box, TextInput } from "@react-native-material/core";
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import axios from "axios";
 import COLOR from "../utils/color.constant";
+import axios from "axios";
 
 const InputAddressAutocomplete = ({onChooseAddress}) => {
 
     const [isSearching, setIsSearching] = React.useState(false); // used to display or not result list
     const [isLoading, setIsLoading] = React.useState(false); // used to display or not ActivityIndicator
-    const [query, setQuery] = React.useState(''); // used to store user suery
+    const [query, setQuery] = React.useState(''); // used to store user query
     const [search, setSearch] = React.useState([]); // used to store search result
     const [inputValue, setInputValue] = React.useState(""); // used to display result in input after  search is completed
 
     const searchResults = (text) => {
-        axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text) + "&limit=8")
-            .then(r => {
-                setIsLoading(false);
-                setSearch(r.data.features);
-            }).catch(e => {
-                setIsLoading(false);
-                // console.log(e);
+        if (text) {
+            axios.get("https://api-adresse.data.gouv.fr/search/?q=" + encodeURI(text))
+            .then((response) => {
+                if (response && response.data && response.data.features) {
+                    setIsLoading(false);
+                    setSearch(response.data.features);
+                } 
+                else {
+                    setIsLoading(false);
+                    console.log("Une erreur s'est produite dans le retour de la réponse", response);
+                }
             })
-    }
+            .catch((error) => {
+                setIsLoading(false);
+                console.log("searchResults error", error);
+            });
+        } 
+        else {
+            console.log("Erreur : l'argument text est undefined ou autre", text);
+        }
+    };
 
     return(
         <View style={[styles.containerStyle]}>

@@ -108,7 +108,7 @@ const CreateAdThirdSteps = ({ route, navigation }) => {
                                     console.log('Ended sending to BDD')
                                     alert('Votre annonce a bien été créée !')
                                     //TODO: redirect to somewhere else when created, like user's post-list page ?
-                                    navigation.navigate('DrawerNav')
+                                    navigation.navigate('Map')
                                 })
                                 .catch((e) => { 
                                     console.log(e)

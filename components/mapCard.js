@@ -1,12 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-
 import { useSelector ,useDispatch} from 'react-redux'
-import { addParking } from "../store/parking/action";
+import { addParking, addPrivateParking } from "../store/parking/action";
 import COLOR from "../utils/color.constant";
 
-const MapCard = ({isvisible,parkings,setVisible, latitude, longitude, zoom, searchInput , searchLabel})=>{
+const MapCard = ({isvisible,parkings,privateParkings,setVisible, latitude, longitude, zoom, searchInput , searchLabel})=>{
 
     const dispatch = useDispatch()
 
@@ -27,7 +26,7 @@ const MapCard = ({isvisible,parkings,setVisible, latitude, longitude, zoom, sear
                     longitude: longitude,
                     latitudeDelta: LATITUDE_DELTA,
                     longitudeDelta: LONGITUDE_DELTA,
-                   }}
+                }}
             >
                 {
                     parkings.map(parking => (
@@ -44,13 +43,25 @@ const MapCard = ({isvisible,parkings,setVisible, latitude, longitude, zoom, sear
                         />
                     ))
                 }
+                {
+                    privateParkings.map(privateParking => {
+                        return (
+                            <Marker
+                                onPress={() => {
+                                    isvisible = true
+                                    setVisible(isvisible)
+                                    dispatch(addPrivateParking(privateParking))
+                                }}
+                                key={privateParking.id}
+                                coordinate={{latitude : privateParking.lattitude, longitude: privateParking.longitude}}
+                                title={privateParking.Post.title}
+                                pinColor={COLOR.indigo}
+                            />
+                        )
+                    })
+                }
                 {searchInput ?
                 <Marker
-                // onPress={() => {
-                //     isvisible = true
-                //     setVisible(isvisible)
-                //     dispatch(addParking(parking))
-                // }}
                 key={0}
                 coordinate={{ latitude : latitude , longitude : longitude }}
                 title={searchLabel}
@@ -61,7 +72,6 @@ const MapCard = ({isvisible,parkings,setVisible, latitude, longitude, zoom, sear
                 }
                 
             </MapView>
-
         </View>
     );
 }

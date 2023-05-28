@@ -19,7 +19,22 @@ export const addParkingParticulier = async (parking) => {
         );
         const json = await response.json();
         return json;
-      } catch (error) {
+    } catch (error) {
         console.error(error);
-      }
+    }
+}
+
+export const getAllPrivateParking = async () => {
+    try {
+        const response = await fetch(parkingUrl, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.json();
+    } catch (error) {
+        console.log('fetch getAllPrivateParking error', error);
+    }
 }
