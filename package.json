@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test" : "jest"
   },
   "dependencies": {
     "@datadog/mobile-react-native": "^1.5.2",
@@ -62,6 +63,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "jest": "^27.5.1",
     "react-error-overlay": "^6.0.9"
   },
   "private": true
