@@ -1,25 +1,29 @@
 import * as SecureStore from 'expo-secure-store';
 import { register, login } from "../../api/api";
 
-const isInputValid = (email, password, cPassword) => {
+const isInputValid = (email, password, cPassword, setError) => {
   if (!email.trim()  || !password.trim()  || !cPassword.trim()) {
     console.log('Veuillez remplir tous les champs.');
+    setError('Veuillez remplir tous les champs.');
     return false;
   }
   if (password !== cPassword) {
     console.log('Les mots de passe ne correspondent pas');
+    setError('Les mots de passe ne correspondent pas')
     return false;
   }
   return true;
 };
 
-const handleSignUp = async (email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated) => {
+const handleSignUp = async (email, password, cPassword, navigation, onChangeEmail, onChangePassword, onChangeCPassword, setAuthenticated, setError, setIsLoading, setDisableButton) => {
     // Set configuration for SecureStore to allow access only when device is unlocked
     const config = {
     keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
     };
 
-  if (!isInputValid(email, password, cPassword)) {
+  if (!isInputValid(email, password, cPassword, setError)) {
+    setIsLoading(false);
+    setDisableButton(false);
     return;
   }
 
@@ -38,6 +42,8 @@ const handleSignUp = async (email, password, cPassword, navigation, onChangeEmai
         const storedToken = await SecureStore.getItemAsync('auth_token', config);
 
         if (!storedToken) {
+          setIsLoading(false);
+          setDisableButton(false);
           console.log("Une erreur est survenue lors de la récupération du token");
           return;
         }
@@ -45,14 +51,23 @@ const handleSignUp = async (email, password, cPassword, navigation, onChangeEmai
         onChangeEmail('');
         onChangePassword('');
         onChangeCPassword('');
-        navigation.navigate('Profile');
+        setIsLoading(false);
+        setDisableButton(false);
+        // navigation.navigate('Profile');
+        navigation.navigate('CompleteProfile');
       } else {
+        setIsLoading(false);
+        setDisableButton(false);
         console.log("Une erreur est survenue lors de l'inscription");
       }
     } else {
+      setIsLoading(false);
+      setDisableButton(false);
       console.log(res.message);
     }
   } catch (error) {
+    setIsLoading(false);
+    setDisableButton(false);
     console.log(error);
   }
 };
