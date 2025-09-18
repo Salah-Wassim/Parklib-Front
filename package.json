@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
-    "@expo/webpack-config": "^0.17.2",
+    "@expo/webpack-config": "^18.0.0",
     "@react-native-async-storage/async-storage": "~1.17.3",
     "@react-native-clipboard/clipboard": "^1.11.1",
     "@react-native-community/datetimepicker": "6.5.2",
@@ -37,7 +37,7 @@
     "react-burger-menu": "^3.0.8",
     "react-dom": "18.1.0",
     "react-favicon": "^1.0.0",
-    "react-native": "0.70.8",
+    "react-native": "0.71.0",
     "react-native-dropdown-picker": "^5.4.4",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-image-picker": "^4.10.0",
